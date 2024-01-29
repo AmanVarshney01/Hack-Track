@@ -10,12 +10,12 @@ export default function Step({
       <input type="checkbox" id={title} className={`mr-2 peer`} />
       <label
         htmlFor={title}
-        className={`text-lg text-foreground/90 peer-checked:line-through font-semibold hover:cursor-pointer`}
+        className={`text-lg peer-checked:line-through font-semibold hover:cursor-pointer`}
       >
         {title}
       </label>
       <div
-        className={`mx-6 text-foreground/80 text-sm peer-checked:line-through`}
+        className={`mx-6 text-sm peer-checked:line-through`}
       >
         {children}
       </div>

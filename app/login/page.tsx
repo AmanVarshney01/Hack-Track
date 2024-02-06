@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 
 import { createClient } from "@/utils/supabase/client";
 import { useRouter } from "next/navigation";
+import googleLogo from "@/public/googleLogo.svg";
+import Image from "next/image";
 
 export default function Login({
   searchParams,
@@ -37,10 +39,11 @@ export default function Login({
   };
 
   return (
-    <section className="flex min-h-svh items-center justify-center">
-      <div className="flex w-full flex-1 flex-col justify-center gap-2 px-8 sm:max-w-md">
-        <button onClick={signInWithGoogle}>Sign with google</button>
-      </div>
+    <section className="absolute flex min-h-svh w-full items-center justify-center bg-background/80">
+      <Button onClick={signInWithGoogle} className="text-lg">
+        <Image className="mr-2" src={googleLogo} alt="Google Logo" />
+        Sign in with Google
+      </Button>
     </section>
   );
 }

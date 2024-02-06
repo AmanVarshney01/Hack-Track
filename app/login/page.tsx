@@ -25,18 +25,17 @@ export default function Login({
     });
 
     if (error) {
-      // return router.push("/login?message=Could not authenticate user");
-      console.log("error", error);
+      return router.push("/login?message=Could not authenticate user");
     }
 
     // return router.push("/");
   };
 
-  const signOut = async () => {
-    const supabase = createClient();
-    await supabase.auth.signOut();
-    // return router.push("/login");
-  };
+  // const signOut = async () => {
+  //   const supabase = createClient();
+  //   await supabase.auth.signOut();
+  //   return router.push("/login");
+  // };
 
   return (
     <section className="absolute flex min-h-svh w-full items-center justify-center bg-background/80">

@@ -9,8 +9,8 @@ export default function Sidebar() {
         <h2>Your Project</h2>
         {/* <Button variant="link">Project</Button> */}
       </div>
-      <div className=" h-32 w-full border-t p-2">
-
+      <div className=" h-40 w-full border-t p-2">
+        <AuthButton />
       </div>
     </nav>
   );

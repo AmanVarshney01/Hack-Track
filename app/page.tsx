@@ -7,7 +7,8 @@ export default async function Index() {
 
   return (
     <div>
-      {<AuthButton />}
+      <h1>Project Dashboard</h1>
+      <AuthButton />
     </div>
   );
 }

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { headers, cookies } from "next/headers";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
+import { Button } from "@/components/ui/button";
 
 export default function Login({
   searchParams,
@@ -52,11 +53,32 @@ export default function Login({
     return redirect("/login?message=Check email to continue sign in process");
   };
 
+  const googleSignIn = async () => {
+    "use server";
+    const cookieStore = cookies();
+    const supabase = createClient(cookieStore);
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        queryParams: {
+          access_type: "offline",
+          prompt: "consent",
+        },
+      },
+    });
+
+    if (error) {
+      return redirect("/login?message=Could not authenticate user");
+    }
+
+    return redirect("/");
+  };
+
   return (
-    <div className="flex-1 flex flex-col w-full px-8 sm:max-w-md justify-center gap-2">
+    <section className="flex min-h-svh items-center justify-center">
       <Link
         href="/"
-        className="absolute left-8 top-8 py-2 px-4 rounded-md no-underline flex items-center group text-sm"
+        className="group absolute left-8 top-8 flex items-center rounded-md px-4 py-2 text-sm no-underline"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -74,45 +96,45 @@ export default function Login({
         </svg>{" "}
         Back
       </Link>
-
-      <form
-        className="animate-in flex-1 flex flex-col w-full justify-center gap-2"
-        action={signIn}
-      >
-        <label className="text-md" htmlFor="email">
-          Email
-        </label>
-        <input
-          className="rounded-md px-4 py-2 border mb-6"
-          name="email"
-          placeholder="you@example.com"
-          required
-        />
-        <label className="text-md" htmlFor="password">
-          Password
-        </label>
-        <input
-          className="rounded-md px-4 py-2 border mb-6"
-          type="password"
-          name="password"
-          placeholder="••••••••"
-          required
-        />
-        <button className="bg-green-700 rounded-md px-4 py-2 mb-2">
-          Sign In
-        </button>
-        <button
-          formAction={signUp}
-          className="border rounded-md px-4 py-2  mb-2"
+      <div className="flex w-full flex-1 flex-col justify-center gap-2 px-8 sm:max-w-md">
+        <form
+          className="flex w-full flex-1 flex-col justify-center gap-2 animate-in"
+          action={signIn}
         >
-          Sign Up
-        </button>
-        {searchParams?.message && (
-          <p className="mt-4 p-4  text-center">
-            {searchParams.message}
-          </p>
-        )}
-      </form>
-    </div>
+          <label className="text-md" htmlFor="email">
+            Email
+          </label>
+          <input
+            className="mb-6 rounded-md border px-4 py-2"
+            name="email"
+            placeholder="you@example.com"
+            required
+          />
+          <label className="text-md" htmlFor="password">
+            Password
+          </label>
+          <input
+            className="mb-6 rounded-md border px-4 py-2"
+            type="password"
+            name="password"
+            placeholder="••••••••"
+            required
+          />
+          <button className="mb-2 rounded-md bg-green-700 px-4 py-2">
+            Sign In
+          </button>
+          <button
+            formAction={signUp}
+            className="mb-2 rounded-md border px-4  py-2"
+          >
+            Sign Up
+          </button>
+          {searchParams?.message && (
+            <p className="mt-4 p-4  text-center">{searchParams.message}</p>
+          )}
+        </form>
+        <Button onClick={googleSignIn}>Sign with google</Button>
+      </div>
+    </section>
   );
 }

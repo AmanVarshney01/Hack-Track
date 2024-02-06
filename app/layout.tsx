@@ -1,9 +1,10 @@
-import { Inter } from "next/font/google";
+import { Inter as FontSans } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 
 import { cn } from "@/lib/utils";
 import type { Viewport } from "next";
+import Sidebar from "@/components/Sidebar";
 
 export const viewport: Viewport = {
   themeColor: [
@@ -12,7 +13,7 @@ export const viewport: Viewport = {
   ],
 };
 
-const fontSans = Inter({
+const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
 });
@@ -24,7 +25,7 @@ const defaultUrl = process.env.VERCEL_URL
 export const metadata = {
   metadataBase: new URL(defaultUrl),
   title: "Project Tracker",
-  description: "A project tracker for GLA Students",
+  description: "A project tracker for GLA students",
 };
 
 export default function RootLayout({
@@ -35,7 +36,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={cn("bg-background font-sans antialiased min-h-svh", fontSans.variable)}
+        className={cn(
+          "min-h-svh bg-background font-sans antialiased",
+          fontSans.variable
+        )}
       >
         <ThemeProvider
           attribute="class"
@@ -43,7 +47,10 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <main className="min-h-svh">{children}</main>
+          <main className="min-h-svh font-sans flex flex-row">
+            <Sidebar />
+            {children}
+          </main>
         </ThemeProvider>
       </body>
     </html>

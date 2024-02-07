@@ -1,48 +1,52 @@
-"use client";
+import SignInWithGoogle from "@/components/SignInWithGoogle";
+import { createClient } from "@/utils/supabase/server";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
-import { Button } from "@/components/ui/button";
-
-import { createClient } from "@/utils/supabase/client";
-import { useRouter } from "next/navigation";
-import googleLogo from "@/public/googleLogo.svg";
-import Image from "next/image";
-
-export default function Login({
+export default async function Login({
   searchParams,
 }: {
   searchParams: { message: string };
 }) {
-  const router = useRouter();
+  const cookieStore = cookies();
+  const supabase = createClient(cookieStore);
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
 
-  const signInWithGoogle = async () => {
-    // const origin = headers().get("origin");
-    const supabase = createClient();
-    const { error } = await supabase.auth.signInWithOAuth({
-      provider: "google",
-      options: {
-        redirectTo: `${location.origin}/auth/callback`,
-      },
-    });
-
-    if (error) {
-      return router.push("/login?message=Could not authenticate user");
-    }
-
-    // return router.push("/");
-  };
-
-  // const signOut = async () => {
-  //   const supabase = createClient();
-  //   await supabase.auth.signOut();
-  //   return router.push("/login");
-  // };
+  if (session) {
+    redirect("/");
+  }
 
   return (
-    <section className="absolute flex min-h-svh w-full items-center justify-center bg-background/80">
-      <Button onClick={signInWithGoogle} className="text-lg">
-        <Image className="mr-2" src={googleLogo} alt="Google Logo" />
-        Sign in with Google
-      </Button>
+    <section className="absolute flex min-h-svh w-full items-center justify-center bg-background">
+      <Card>
+        <CardHeader>
+          <CardTitle className=" text-xl">GLA Project Tracker</CardTitle>
+          <CardDescription className=" max-w-80">
+            Streamlining project collaboration for students and mentors at GLA
+            University.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <p>
+            {searchParams.message
+              ? searchParams.message
+              : "Sign in with Google to get started."}
+          </p>
+        </CardContent>
+        <CardFooter className="">
+          <SignInWithGoogle />
+        </CardFooter>
+      </Card>
     </section>
   );
 }

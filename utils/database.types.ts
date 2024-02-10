@@ -10,127 +10,25 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      project: {
+      mentor: {
         Row: {
-          created_at: string
-          description: string
-          id: number
-          mentor_id: number
-          name: string
+          id: string
         }
         Insert: {
-          created_at?: string
-          description: string
-          id?: number
-          mentor_id: number
-          name: string
+          id: string
         }
         Update: {
-          created_at?: string
-          description?: string
-          id?: number
-          mentor_id?: number
-          name?: string
+          id?: string
         }
         Relationships: [
           {
-            foreignKeyName: "project_mentor_id_fkey"
-            columns: ["mentor_id"]
-            isOneToOne: false
-            referencedRelation: "user"
-            referencedColumns: ["id"]
-          }
-        ]
-      }
-      team: {
-        Row: {
-          created_at: string
-          id: number
-          mentor_id: number
-          project_id: number
-        }
-        Insert: {
-          created_at?: string
-          id?: number
-          mentor_id: number
-          project_id: number
-        }
-        Update: {
-          created_at?: string
-          id?: number
-          mentor_id?: number
-          project_id?: number
-        }
-        Relationships: [
-          {
-            foreignKeyName: "team_mentor_id_fkey"
-            columns: ["mentor_id"]
-            isOneToOne: false
-            referencedRelation: "user"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "team_project_id_fkey"
-            columns: ["project_id"]
-            isOneToOne: false
-            referencedRelation: "project"
-            referencedColumns: ["id"]
-          }
-        ]
-      }
-      team_member: {
-        Row: {
-          team_id: number
-          user_id: number | null
-        }
-        Insert: {
-          team_id?: number
-          user_id?: number | null
-        }
-        Update: {
-          team_id?: number
-          user_id?: number | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "team_member_team_id_fkey"
-            columns: ["team_id"]
+            foreignKeyName: "mentor_id_fkey"
+            columns: ["id"]
             isOneToOne: true
-            referencedRelation: "team"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "team_member_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "user"
+            referencedRelation: "users"
             referencedColumns: ["id"]
           }
         ]
-      }
-      user: {
-        Row: {
-          created_at: string
-          email: string
-          id: number
-          is_student: boolean
-          name: string
-        }
-        Insert: {
-          created_at?: string
-          email: string
-          id?: number
-          is_student?: boolean
-          name: string
-        }
-        Update: {
-          created_at?: string
-          email?: string
-          id?: number
-          is_student?: boolean
-          name?: string
-        }
-        Relationships: []
       }
     }
     Views: {

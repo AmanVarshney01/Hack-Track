@@ -12,7 +12,7 @@
     "@radix-ui/react-slot": "^1.0.2",
     "@supabase/ssr": "^0.1.0",
     "@supabase/supabase-js": "^2.39.3",
-    "@tanstack/react-query": "^5.18.1",
+    "@tanstack/react-query": "^5.20.1",
     "autoprefixer": "10.4.17",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
@@ -28,14 +28,14 @@
     "typescript": "5.3.3"
   },
   "devDependencies": {
-    "@tanstack/eslint-plugin-query": "^5.18.1",
-    "@tanstack/react-query-devtools": "^5.18.1",
-    "@types/node": "20.11.16",
+    "@tanstack/eslint-plugin-query": "^5.20.1",
+    "@tanstack/react-query-devtools": "^5.20.1",
+    "@types/node": "20.11.17",
     "@types/react": "18.2.55",
     "@types/react-dom": "18.2.19",
     "encoding": "^0.1.13",
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.5.11",
-    "supabase": "^1.142.1"
+    "supabase": "^1.142.2"
   }
 }

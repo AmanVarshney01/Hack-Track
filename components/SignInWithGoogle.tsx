@@ -10,27 +10,22 @@ export default function SignInWithGoogle() {
   const router = useRouter();
 
   const signInWithGoogle = async () => {
-    // const origin = headers().get("origin");
     const supabase = createClient();
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
         redirectTo: `${location.origin}/auth/callback`,
+        queryParams: {
+          access_type: "offline",
+          prompt: "consent",
+        },
       },
     });
 
     if (error) {
       return router.push("/login?message=Could not authenticate user");
     }
-
-    // return router.push("/");
   };
-
-  // const signOut = async () => {
-  //   const supabase = createClient();
-  //   await supabase.auth.signOut();
-  //   return router.push("/login");
-  // };
 
   return (
     <Button onClick={signInWithGoogle} className="w-full">

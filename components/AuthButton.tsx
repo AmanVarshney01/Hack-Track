@@ -52,22 +52,13 @@ export default async function AuthButton() {
               <span className=" truncate text-sm">{user.email}</span>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            <DropdownMenuItem asChild>
               <form action={signOut}>
-                <button className="">Logout</button>
+                <button className="w-full text-left">Logout</button>
               </form>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-        {/* <Avatar>
-          <AvatarImage src={user.user_metadata.avatar_url} />
-          <AvatarFallback>DP</AvatarFallback>
-        </Avatar>
-        <span>{user.user_metadata.full_name}</span>
-        <span className=" truncate text-sm">{user.email}</span> */}
-        {/* <form action={signOut}>
-        <button className="">Logout</button>
-      </form> */}
       </div>
     )
   );

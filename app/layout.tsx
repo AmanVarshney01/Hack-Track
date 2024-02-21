@@ -2,6 +2,8 @@ import { Inter as FontSans } from "next/font/google";
 import "@/app/globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { ReactQueryClientProvider } from "@/components/ReactQueryClientProvider";
+import { createClient } from "@/utils/supabase/server";
+import { cookies } from "next/headers";
 
 import { cn } from "@/lib/utils";
 import type { Viewport } from "next";
@@ -30,11 +32,16 @@ export const metadata = {
   description: "A project tracker for GLA students",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const cookieStore = cookies();
+  const supabase = createClient(cookieStore);
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
   return (
     <html lang="en">
       <body
@@ -50,13 +57,17 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <main className="min-h-svh font-sans">
-              <Navbar />
-              <section className="flex flex-row">
-                <Sidebar />
-                {children}
-              </section>
-            </main>
+            {session ? (
+              <main className="min-h-svh font-sans">
+                <Navbar />
+                <section className="flex flex-row">
+                  <Sidebar />
+                  {children}
+                </section>
+              </main>
+            ) : (
+              <main className="min-h-svh font-sans">{children}</main>
+            )}
           </ThemeProvider>
         </ReactQueryClientProvider>
       </body>

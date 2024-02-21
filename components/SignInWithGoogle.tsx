@@ -22,6 +22,8 @@ export default function SignInWithGoogle() {
       },
     });
 
+    console.log("error", error);
+
     if (error) {
       return router.push("/login?message=Could not authenticate user");
     }

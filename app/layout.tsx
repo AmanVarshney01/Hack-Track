@@ -6,6 +6,7 @@ import { ReactQueryClientProvider } from "@/components/ReactQueryClientProvider"
 import { cn } from "@/lib/utils";
 import type { Viewport } from "next";
 import Sidebar from "@/components/Sidebar";
+import Navbar from "@/components/Navbar";
 
 export const viewport: Viewport = {
   themeColor: [
@@ -49,9 +50,12 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <main className="flex min-h-svh flex-row font-sans">
-              <Sidebar />
-              {children}
+            <main className="min-h-svh font-sans">
+              <Navbar />
+              <section className="flex flex-row">
+                <Sidebar />
+                {children}
+              </section>
             </main>
           </ThemeProvider>
         </ReactQueryClientProvider>

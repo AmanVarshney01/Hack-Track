@@ -1,5 +1,5 @@
 import { Inter as FontSans } from "next/font/google";
-import "./globals.css";
+import "@/app/globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { ReactQueryClientProvider } from "@/components/ReactQueryClientProvider";
 

@@ -3,10 +3,12 @@ import {
   Sheet,
   SheetContent,
   SheetDescription,
+  SheetFooter,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
 } from "./ui/sheet";
+import AuthButton from "./AuthButton";
 
 export default function MobileSidebar() {
   return (
@@ -18,6 +20,9 @@ export default function MobileSidebar() {
         <SheetHeader>
           <SheetTitle>Project</SheetTitle>
         </SheetHeader>
+        <SheetFooter>
+          <AuthButton />
+        </SheetFooter>
       </SheetContent>
     </Sheet>
   );

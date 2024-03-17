@@ -11,11 +11,13 @@ import {
 export default function MobileSidebar() {
   return (
     <Sheet>
-      <SheetTrigger className=" block md:hidden">
+      <SheetTrigger>
         <HamburgerMenuIcon />
       </SheetTrigger>
       <SheetContent className="w-52" side={"left"}>
-        <SheetHeader>Project</SheetHeader>
+        <SheetHeader>
+          <SheetTitle>Project</SheetTitle>
+        </SheetHeader>
       </SheetContent>
     </Sheet>
   );

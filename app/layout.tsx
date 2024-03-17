@@ -2,8 +2,6 @@ import { Inter as FontSans } from "next/font/google";
 import "@/app/globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { ReactQueryClientProvider } from "@/components/ReactQueryClientProvider";
-import { createClient } from "@/utils/supabase/server";
-import { cookies } from "next/headers";
 
 import { cn } from "@/lib/utils";
 import type { Viewport } from "next";
@@ -32,21 +30,16 @@ export const metadata = {
   description: "A project tracker for GLA students",
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const cookieStore = cookies();
-  const supabase = createClient(cookieStore);
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
-          "min-h-svh bg-background font-sans antialiased",
+          " bg-background font-sans antialiased",
           fontSans.variable,
         )}
       >
@@ -57,17 +50,13 @@ export default async function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            {session ? (
-              <main className="min-h-svh font-sans">
-                <Navbar />
-                <section className="flex flex-row">
-                  <Sidebar />
-                  {children}
-                </section>
-              </main>
-            ) : (
-              <main className="min-h-svh font-sans">{children}</main>
-            )}
+            <main className="flex h-svh flex-col md:flex-row">
+              <Navbar />
+              <Sidebar />
+              <section className="h-svh w-full overflow-y-auto">
+                {children}
+              </section>
+            </main>
           </ThemeProvider>
         </ReactQueryClientProvider>
       </body>

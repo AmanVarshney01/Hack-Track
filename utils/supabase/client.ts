@@ -5,7 +5,7 @@ import type { TypedSupabaseClient } from "@/utils/types";
 
 let client: TypedSupabaseClient | undefined;
 
-export const createClient = () => {
+const createSupabaseClient = () => {
   if (client) return client;
 
   client = createBrowserClient<Database>(
@@ -15,3 +15,9 @@ export const createClient = () => {
 
   return client;
 };
+
+function createClient() {
+  return useMemo(createSupabaseClient, []);
+}
+
+export default createClient;

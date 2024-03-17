@@ -31,7 +31,7 @@ export default async function AuthButton() {
 
   return (
     user && (
-      <div className="flex items-center justify-center">
+      <div className="flex items-center justify-center ">
         <DropdownMenu>
           <DropdownMenuTrigger className="flex items-center justify-center">
             <div className="flex flex-row items-center justify-between gap-2 ">

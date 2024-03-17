@@ -11,6 +11,7 @@ export async function middleware(request: NextRequest) {
     data: { session },
   } = await supabase.auth.getSession();
 
+  // FIXME - unprotected routes
   if (!session && pathname === "/") {
     return NextResponse.redirect(new URL("/login", request.url));
   }

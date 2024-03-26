@@ -43,7 +43,7 @@ export default async function Login({
               : "Sign in with Google to get started."}
           </p>
         </CardContent>
-        <CardFooter className="">
+        <CardFooter>
           <SignInWithGoogle />
         </CardFooter>
       </Card>

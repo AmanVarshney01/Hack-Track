@@ -1,5 +1,4 @@
 import { createClient } from "@/utils/supabase/server";
-import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -12,19 +11,16 @@ import {
 import { ChevronDownIcon } from "@radix-ui/react-icons";
 
 export default async function AuthButton() {
-  const cookieStore = cookies();
-  const supabase = createClient(cookieStore);
+  const supabase = createClient();
 
   const {
     data: { user },
   } = await supabase.auth.getUser();
 
-  // console.log("user", user);
   const signOut = async () => {
     "use server";
 
-    const cookieStore = cookies();
-    const supabase = createClient(cookieStore);
+    const supabase = createClient();
     await supabase.auth.signOut();
     return redirect("/login");
   };

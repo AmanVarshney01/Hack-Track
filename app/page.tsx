@@ -1,17 +1,22 @@
 import { createClient } from "@/utils/supabase/server";
-import { cookies } from "next/headers";
 
 export default async function Index() {
-  const cookieStore = cookies();
-  const supabase = createClient(cookieStore);
-  // const { data, error } = await supabase.from("users").select("email");
-  // console.log("� ~ Index ~ data:", data);
-  // console.log("� ~ Index ~ error:", error);
-
+  const supabase = createClient();
+  const { data } = await supabase.from("users").select("email, name");
+  console.log("data", data);
+  
   return (
     <div>
       <h1>Project Dashboard</h1>
-      
+      <p>Users:</p>
+      <ul>
+        {data?.map((user) => (
+          <li key={user.email}>
+            {user.email}
+            {user.name}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

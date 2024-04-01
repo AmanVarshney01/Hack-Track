@@ -2,7 +2,6 @@ import { Inter as FontSans } from "next/font/google";
 import "@/app/globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { ReactQueryClientProvider } from "@/components/ReactQueryClientProvider";
-
 import { cn } from "@/lib/utils";
 import type { Viewport } from "next";
 import Sidebar from "@/components/Sidebar";

@@ -1,6 +1,5 @@
 import SignInWithGoogle from "@/components/SignInWithGoogle";
 import { createClient } from "@/utils/supabase/server";
-import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import {
   Card,
@@ -16,13 +15,12 @@ export default async function Login({
 }: {
   searchParams: { message: string };
 }) {
-  const cookieStore = cookies();
-  const supabase = createClient(cookieStore);
+  const supabase = createClient();
   const {
-    data: { session },
-  } = await supabase.auth.getSession();
+    data: { user },
+  } = await supabase.auth.getUser();
 
-  if (session) {
+  if (user) {
     redirect("/");
   }
 

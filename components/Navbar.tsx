@@ -1,3 +1,4 @@
+import AuthButton from "./AuthButton";
 import MobileSidebar from "./MobileSidebar";
 
 export default function Navbar() {
@@ -7,6 +8,7 @@ export default function Navbar() {
         <MobileSidebar />
         <h1 className=" font-medium">GLA Project Tracker</h1>
       </div>
+      <AuthButton />
     </nav>
   );
 }

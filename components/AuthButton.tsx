@@ -35,10 +35,10 @@ export default async function AuthButton() {
                 <AvatarImage src={user.user_metadata.avatar_url} />
                 <AvatarFallback>DP</AvatarFallback>
               </Avatar>
-              <span className=" truncate text-sm">
+              <span className=" hidden truncate text-sm md:block">
                 {user.user_metadata.full_name}
               </span>
-              <ChevronDownIcon className="h-4 w-4" />
+              <ChevronDownIcon className="hidden h-4 w-4 md:block" />
             </div>
           </DropdownMenuTrigger>
           <DropdownMenuContent>

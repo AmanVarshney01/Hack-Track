@@ -1,7 +1,6 @@
 import { Inter as FontSans } from "next/font/google";
 import "@/app/globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
-import { ReactQueryClientProvider } from "@/components/ReactQueryClientProvider";
 import { cn } from "@/lib/utils";
 import type { Viewport } from "next";
 import Sidebar from "@/components/Sidebar";
@@ -42,7 +41,6 @@ export default function RootLayout({
           fontSans.variable,
         )}
       >
-        <ReactQueryClientProvider>
           <ThemeProvider
             attribute="class"
             defaultTheme="system"
@@ -57,7 +55,6 @@ export default function RootLayout({
               </section>
             </main>
           </ThemeProvider>
-        </ReactQueryClientProvider>
       </body>
     </html>
   );

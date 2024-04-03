@@ -1,11 +1,10 @@
 import { Inter as FontSans } from "next/font/google";
 import "@/app/globals.css";
-import { ThemeProvider } from "@/components/ThemeProvider";
 import { cn } from "@/lib/utils";
 import type { Viewport } from "next";
 import Sidebar from "@/components/Sidebar";
 import Navbar from "@/components/Navbar";
-import { ReactQueryClientProvider } from "@/components/ReactQueryClientProvider";
+import Providers from "@/lib/providers";
 
 export const viewport: Viewport = {
   themeColor: [
@@ -42,22 +41,15 @@ export default function RootLayout({
           fontSans.variable,
         )}
       >
-        <ReactQueryClientProvider>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <main className="flex h-svh flex-col md:flex-row">
-              <Navbar />
-              <Sidebar />
-              <section className="h-svh w-full overflow-y-auto">
-                {children}
-              </section>
-            </main>
-          </ThemeProvider>
-        </ReactQueryClientProvider>
+        <Providers>
+          <main className="flex h-svh flex-col md:flex-row">
+            <Navbar />
+            <Sidebar />
+            <section className="h-svh w-full overflow-y-auto">
+              {children}
+            </section>
+          </main>
+        </Providers>
       </body>
     </html>
   );

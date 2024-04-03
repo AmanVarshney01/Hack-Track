@@ -23,9 +23,9 @@ export default async function Login({
   if (user) {
     redirect("/");
   }
-
+  
   return (
-    <section className="fixed left-0 top-0 flex min-h-svh w-full items-center justify-center bg-background/90">
+    <section className="fixed left-0 top-0 flex min-h-svh w-full items-center justify-center bg-background">
       <Card>
         <CardHeader>
           <CardTitle className=" text-xl">GLA Project Tracker</CardTitle>

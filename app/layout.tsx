@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import type { Viewport } from "next";
 import Sidebar from "@/components/Sidebar";
 import Navbar from "@/components/Navbar";
+import { ReactQueryClientProvider } from "@/components/ReactQueryClientProvider";
 
 export const viewport: Viewport = {
   themeColor: [
@@ -41,6 +42,7 @@ export default function RootLayout({
           fontSans.variable,
         )}
       >
+        <ReactQueryClientProvider>
           <ThemeProvider
             attribute="class"
             defaultTheme="system"
@@ -55,6 +57,7 @@ export default function RootLayout({
               </section>
             </main>
           </ThemeProvider>
+        </ReactQueryClientProvider>
       </body>
     </html>
   );

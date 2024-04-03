@@ -1,22 +1,8 @@
-import { NextResponse, type NextRequest } from "next/server";
-import { createClient } from "@/utils/supabase/middleware";
+import { type NextRequest } from "next/server";
+import { updateSession } from "@/utils/supabase/middleware";
 
 export async function middleware(request: NextRequest) {
-  const { supabase, response } = createClient(request);
-  const pathname = request.nextUrl.pathname;
-
-  // Refresh session if expired - required for Server Components
-  // https://supabase.com/docs/guides/auth/auth-helpers/nextjs#managing-session-with-middleware
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  // FIXME - unprotected routes
-  if (!user && pathname === "/") {
-    return NextResponse.redirect(new URL("/login", request.url));
-  }
-
-  return response;
+    return await updateSession(request);
 }
 
 export const config = {
@@ -27,6 +13,6 @@ export const config = {
      * - _next/image (image optimization files)
      * - favicon.ico (favicon file)
      */
-    "/((?!_next/static|_next/image|favicon.ico).*)",
+    '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
   ],
 };

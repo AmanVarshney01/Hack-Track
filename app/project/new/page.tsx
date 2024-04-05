@@ -12,8 +12,9 @@ export default async function NewProject() {
   if (!user) {
     return redirect("/login");
   }
+
   return (
-    <div className=" flex justify-center items-center h-full">
+    <div className=" flex h-full items-center justify-center">
       <CreateProject />
     </div>
   );

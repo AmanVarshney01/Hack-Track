@@ -2,7 +2,7 @@ import { createServerClient, type CookieOptions } from "@supabase/ssr";
 import { type NextRequest, NextResponse } from "next/server";
 import { Database } from "../database.types";
 
-export const updateSession = async (request: NextRequest) => {
+export const createClient = async (request: NextRequest) => {
   // Create an unmodified response
   let response = NextResponse.next({
     request: {
@@ -58,7 +58,5 @@ export const updateSession = async (request: NextRequest) => {
     },
   );
 
-  await supabase.auth.getUser();
-
-  return response;
+  return { supabase, response };
 };

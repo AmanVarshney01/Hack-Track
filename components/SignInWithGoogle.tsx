@@ -1,14 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { createClient } from "@/utils/supabase/server";
-// import { useRouter } from "next/navigation";
 import googleLogo from "@/public/googleLogo.svg";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 import { headers } from "next/headers";
 
 export default async function SignInWithGoogle() {
-  // const router = useRouter();
-
   // const getURL = () => {
   //   let url =
   //     process?.env?.NEXT_PUBLIC_SITE_URL ??
@@ -20,10 +17,10 @@ export default async function SignInWithGoogle() {
   // };
 
   const signInWithGoogle = async () => {
-    "use server"
-    
+    "use server";
+
     const supabase = createClient();
-    const origin = headers().get("origin")
+    const origin = headers().get("origin");
     const { error, data } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
@@ -37,9 +34,9 @@ export default async function SignInWithGoogle() {
 
     if (error) {
       return redirect("/login?message=Could not authenticate user");
-    } 
+    }
 
-    return redirect(data.url);    
+    return redirect(data.url);
   };
 
   return (

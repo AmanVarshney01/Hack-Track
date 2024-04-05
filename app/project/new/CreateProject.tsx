@@ -38,7 +38,7 @@ export default function CreateProject() {
       data: { user },
     } = await supabase.auth.getUser();
 
-    const { error } = await supabase.from("projects").insert({
+    const { error, status } = await supabase.from("projects").insert({
       name: values.name,
       description: values.description,
       created_by: user?.id,
@@ -46,11 +46,9 @@ export default function CreateProject() {
 
     console.log(error);
 
-    if (!error) {
+    if (status === 201 && !error) {
       form.reset();
     }
-
-    
   }
 
   return (

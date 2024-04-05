@@ -4,16 +4,14 @@ import { Separator } from "./ui/separator";
 
 export default function Sidebar() {
   return (
-    <aside className=" hidden h-full min-w-52 flex-col items-start border-r p-2 md:flex">
-      <h1 className=" self-center text-lg font-medium">GLA Project Tracker</h1>
-      <Separator />
-      <div className=" flex h-full w-full flex-col">
+    <aside className=" hidden h-full min-w-60 flex-col items-center justify-center md:flex py-4">
+      <h1 className=" text-lg font-medium pb-2">GLA Project Tracker</h1>
+      <div className=" flex w-full items-center justify-center py-2">
         <AuthButton />
-        <Separator />
-        <div className="">
-          <NavButton name="Home" href="/" />
-          <NavButton name="Projects" href="" />
-        </div>
+      </div>
+      <div className=" flex h-full w-full flex-col gap-1 py-4">
+        <NavButton name="Home" href="/" />
+        <NavButton name="Projects" href="" />
       </div>
     </aside>
   );

@@ -27,9 +27,9 @@ export default async function AuthButton() {
 
   return (
     user && (
-      <div className="flex items-center justify-center ">
+      <div className="flex items-center justify-center">
         <DropdownMenu>
-          <DropdownMenuTrigger className="flex items-center justify-center">
+          <DropdownMenuTrigger className="flex items-center justify-center border p-2 rounded-lg">
             <div className="flex max-w-48 min-w-0 flex-row items-center justify-between gap-2 ">
               <Avatar className="h-6 w-6">
                 <AvatarImage src={user.user_metadata.avatar_url} />

@@ -13,7 +13,7 @@ export default async function NewProject() {
     return redirect("/login");
   }
   return (
-    <div className=" flex justify-center items-center min-h-svh">
+    <div className=" flex justify-center items-center h-full">
       <CreateProject />
     </div>
   );

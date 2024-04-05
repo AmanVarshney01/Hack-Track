@@ -10,50 +10,36 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      mentors: {
+      project_members: {
         Row: {
-          id: string
+          created_at: string
+          id: number
+          project_id: number | null
+          user_id: string | null
         }
         Insert: {
-          id: string
+          created_at?: string
+          id?: number
+          project_id?: number | null
+          user_id?: string | null
         }
         Update: {
-          id?: string
+          created_at?: string
+          id?: number
+          project_id?: number | null
+          user_id?: string | null
         }
         Relationships: [
           {
-            foreignKeyName: "mentors_id_fkey"
-            columns: ["id"]
-            isOneToOne: true
-            referencedRelation: "users"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      project_team: {
-        Row: {
-          project_id: number
-          student_id: string
-        }
-        Insert: {
-          project_id?: number
-          student_id: string
-        }
-        Update: {
-          project_id?: number
-          student_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "project_team_project_id_fkey"
+            foreignKeyName: "public_project_members_project_id_fkey"
             columns: ["project_id"]
             isOneToOne: false
             referencedRelation: "projects"
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "project_team_student_id_fkey"
-            columns: ["student_id"]
+            foreignKeyName: "public_project_members_user_id_fkey"
+            columns: ["user_id"]
             isOneToOne: false
             referencedRelation: "users"
             referencedColumns: ["id"]
@@ -63,31 +49,31 @@ export type Database = {
       projects: {
         Row: {
           created_at: string
+          created_by: string | null
           description: string
           id: number
-          mentor_id: string
           name: string
         }
         Insert: {
           created_at?: string
+          created_by?: string | null
           description: string
           id?: number
-          mentor_id: string
           name: string
         }
         Update: {
           created_at?: string
+          created_by?: string | null
           description?: string
           id?: number
-          mentor_id?: string
           name?: string
         }
         Relationships: [
           {
-            foreignKeyName: "projects_mentor_id_fkey"
-            columns: ["mentor_id"]
+            foreignKeyName: "public_projects_created_by_fkey"
+            columns: ["created_by"]
             isOneToOne: false
-            referencedRelation: "mentors"
+            referencedRelation: "users"
             referencedColumns: ["id"]
           },
         ]

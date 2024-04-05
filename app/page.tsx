@@ -1,16 +1,7 @@
 import { createClient } from "@/utils/supabase/server";
-import {
-  dehydrate,
-  HydrationBoundary,
-  QueryClient,
-} from "@tanstack/react-query";
-import { prefetchQuery } from "@supabase-cache-helpers/postgrest-react-query";
-import { getUsers } from "@/queries/get-users";
-import Users from "@/components/users";
 import { redirect } from "next/navigation";
 
 export default async function Index() {
-  const queryClient = new QueryClient();
   const supabase = createClient();
 
   const {
@@ -21,14 +12,12 @@ export default async function Index() {
     return redirect("/login");
   }
 
-  await prefetchQuery(queryClient, getUsers(supabase));
+  const {data, error} = await supabase.from("users").select("*").eq("id", user.id);
 
   return (
     <div>
       <h1>Project Dashboard</h1>
-      <HydrationBoundary state={dehydrate(queryClient)}>
-        <Users />
-      </HydrationBoundary>
+      <p>Welcome, {JSON.stringify(data)}</p>
     </div>
   );
 }

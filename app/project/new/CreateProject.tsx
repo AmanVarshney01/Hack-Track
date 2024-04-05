@@ -15,12 +15,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { createClient } from "@/utils/supabase/client";
 
 const formSchema = z.object({
   name: z.string().min(2).max(50),
@@ -36,10 +32,25 @@ export default function CreateProject() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    const supabase = createClient();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    const { error } = await supabase.from("projects").insert({
+      name: values.name,
+      description: values.description,
+      created_by: user?.id,
+    });
+
+    console.log(error);
+
+    if (!error) {
+      form.reset();
+    }
+
+    
   }
 
   return (

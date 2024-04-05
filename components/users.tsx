@@ -1,4 +1,5 @@
 "use client";
+
 import { createClient } from "@/utils/supabase/client";
 import { getUsers } from "@/queries/get-users";
 import { useQuery } from "@supabase-cache-helpers/postgrest-react-query";
@@ -18,5 +19,5 @@ export default function Users() {
         ))}
       </ul>
     </div>
-  )
+  );
 }

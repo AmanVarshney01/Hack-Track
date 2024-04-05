@@ -17,10 +17,9 @@ export default function MobileSidebar() {
       </SheetTrigger>
       <SheetContent className="w-52" side={"left"}>
         <SheetHeader>
-          <SheetTitle>Project</SheetTitle>
+          <SheetTitle>GLA Project Tracker</SheetTitle>
         </SheetHeader>
-        <SheetFooter>
-        </SheetFooter>
+        
       </SheetContent>
     </Sheet>
   );

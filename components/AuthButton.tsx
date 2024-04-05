@@ -30,12 +30,12 @@ export default async function AuthButton() {
       <div className="flex items-center justify-center ">
         <DropdownMenu>
           <DropdownMenuTrigger className="flex items-center justify-center">
-            <div className="flex flex-row items-center justify-between gap-2 ">
+            <div className="flex max-w-48 min-w-0 flex-row items-center justify-between gap-2 ">
               <Avatar className="h-6 w-6">
                 <AvatarImage src={user.user_metadata.avatar_url} />
                 <AvatarFallback>DP</AvatarFallback>
               </Avatar>
-              <span className=" hidden truncate text-sm md:block">
+              <span className=" line-clamp-1 hidden truncate text-sm md:block">
                 {user.user_metadata.full_name}
               </span>
               <ChevronDownIcon className="hidden h-4 w-4 md:block" />

@@ -1,8 +1,10 @@
 "use server";
 
 import { createClient } from "@/utils/supabase/server";
+import { formSchema } from "./project/new/CreateProject";
+import { z } from "zod";
 
-export async function createNewProject(values: any) {
+export async function createNewProject(values: z.infer<typeof formSchema>) {
 
   const supabase = createClient();
   const {

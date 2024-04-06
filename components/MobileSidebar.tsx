@@ -15,11 +15,10 @@ export default function MobileSidebar() {
       <SheetTrigger>
         <HamburgerMenuIcon />
       </SheetTrigger>
-      <SheetContent className="w-52" side={"left"}>
+      <SheetContent className="w-60" side={"left"}>
         <SheetHeader>
           <SheetTitle>GLA Project Tracker</SheetTitle>
         </SheetHeader>
-        
       </SheetContent>
     </Sheet>
   );

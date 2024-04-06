@@ -1,6 +1,5 @@
 import AuthButton from "./AuthButton";
 import NavButton from "./NavButton";
-import { Separator } from "./ui/separator";
 
 export default function Sidebar() {
   return (
@@ -11,7 +10,7 @@ export default function Sidebar() {
       </div>
       <div className=" flex h-full w-full flex-col gap-1 py-4">
         <NavButton name="Home" href="/" />
-        <NavButton name="Projects" href="" />
+        <NavButton name="Projects" href="/project/new" />
       </div>
     </aside>
   );

@@ -16,10 +16,9 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { createClient } from "@/utils/supabase/client";
 import { createNewProject } from "@/app/actions";
 
-const formSchema = z.object({
+export const formSchema = z.object({
   name: z.string().min(2).max(50),
   description: z.string().min(2).max(100),
   tech_stack: z.string().min(2).max(100),
@@ -68,12 +67,12 @@ export default function CreateProject() {
 
     // console.log("insertProjectDetails", insertProjectDetails);
 
-    const {insertProjectDetails, insertProjects} = await createNewProject(values);
+    const { insertProjectDetails, insertProjects } =
+      await createNewProject(values);
 
     if (insertProjects.error || insertProjectDetails.error) {
       console.error(insertProjects.error || insertProjectDetails.error);
     }
-
 
     form.reset();
   }

@@ -45,7 +45,7 @@ export default function RootLayout({
           <main className="flex h-svh flex-col md:flex-row">
             <Navbar />
             <Sidebar />
-            <section className="w-full overflow-y-auto m-2 ml-0 border rounded-lg">
+            <section className="w-full overflow-y-auto md:m-2 md:ml-0 md:border rounded-lg h-auto">
               {children}
             </section>
           </main>

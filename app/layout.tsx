@@ -5,6 +5,7 @@ import type { Viewport } from "next";
 import Sidebar from "@/components/Sidebar";
 import Navbar from "@/components/Navbar";
 import Providers from "@/lib/providers";
+import { Analytics } from "@vercel/analytics/react"
 
 export const viewport: Viewport = {
   themeColor: [
@@ -47,6 +48,7 @@ export default function RootLayout({
             <Sidebar />
             <section className="w-full overflow-y-auto md:m-2 md:ml-0 md:border rounded-lg h-auto">
               {children}
+              <Analytics />
             </section>
           </main>
         </Providers>

@@ -17,10 +17,13 @@ import {
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { createClient } from "@/utils/supabase/client";
+import { createNewProject } from "@/app/actions";
 
 const formSchema = z.object({
   name: z.string().min(2).max(50),
   description: z.string().min(2).max(100),
+  tech_stack: z.string().min(2).max(100),
+  mentor_email: z.string().email(),
 });
 
 export default function CreateProject() {
@@ -29,26 +32,50 @@ export default function CreateProject() {
     defaultValues: {
       name: "",
       description: "",
+      tech_stack: "",
+      mentor_email: "",
     },
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    const supabase = createClient();
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
+    // const supabase = createClient();
+    // const {
+    //   data: { user },
+    // } = await supabase.auth.getUser();
 
-    const { error, status } = await supabase.from("projects").insert({
-      name: values.name,
-      description: values.description,
-      created_by: user?.id,
-    });
+    // const getMentorEmail = await supabase
+    //   .from("mentors")
+    //   .select("id")
+    //   .eq("email", values.mentor_email);
 
-    console.log(error);
+    // const insertProjects = await supabase
+    //   .from("projects")
+    //   .insert({
+    //     name: values.name,
+    //     created_by: user?.id,
+    //     mentor_id: getMentorEmail.data?.[0]?.id,
+    //   })
+    //   .select("id");
 
-    if (status === 201 && !error) {
-      form.reset();
+    // console.log("insertProjects", insertProjects);
+    // console.log(insertProjects.error);
+
+    // const insertProjectDetails = await supabase.from("project_details").insert({
+    //   project_id: insertProjects.data?.[0]?.id,
+    //   description: values.description,
+    //   tech_stack: values.tech_stack,
+    // });
+
+    // console.log("insertProjectDetails", insertProjectDetails);
+
+    const {insertProjectDetails, insertProjects} = await createNewProject(values);
+
+    if (insertProjects.error || insertProjectDetails.error) {
+      console.error(insertProjects.error || insertProjectDetails.error);
     }
+
+
+    form.reset();
   }
 
   return (
@@ -83,6 +110,35 @@ export default function CreateProject() {
                   <FormLabel>Description</FormLabel>
                   <FormControl>
                     <Input placeholder="Project Description" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="tech_stack"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Tech Stack</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Next.js, Supabase, Tailwind ..."
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="mentor_email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Mentor Email</FormLabel>
+                  <FormControl>
+                    <Input placeholder="mentor@gla.ac.in" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

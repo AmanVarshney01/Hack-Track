@@ -10,6 +10,64 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      mentors: {
+        Row: {
+          created_at: string
+          email: string | null
+          id: number
+        }
+        Insert: {
+          created_at?: string
+          email?: string | null
+          id?: number
+        }
+        Update: {
+          created_at?: string
+          email?: string | null
+          id?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "public_mentors_email_fkey"
+            columns: ["email"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["email"]
+          },
+        ]
+      }
+      project_details: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: number
+          project_id: number | null
+          tech_stack: string | null
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: number
+          project_id?: number | null
+          tech_stack?: string | null
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: number
+          project_id?: number | null
+          tech_stack?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "public_project_details_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       project_members: {
         Row: {
           created_at: string
@@ -50,22 +108,22 @@ export type Database = {
         Row: {
           created_at: string
           created_by: string | null
-          description: string
           id: number
+          mentor_id: number | null
           name: string
         }
         Insert: {
           created_at?: string
           created_by?: string | null
-          description: string
           id?: number
+          mentor_id?: number | null
           name: string
         }
         Update: {
           created_at?: string
           created_by?: string | null
-          description?: string
           id?: number
+          mentor_id?: number | null
           name?: string
         }
         Relationships: [
@@ -74,6 +132,13 @@ export type Database = {
             columns: ["created_by"]
             isOneToOne: false
             referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "public_projects_mentor_id_fkey"
+            columns: ["mentor_id"]
+            isOneToOne: false
+            referencedRelation: "mentors"
             referencedColumns: ["id"]
           },
         ]

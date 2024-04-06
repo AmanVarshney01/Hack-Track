@@ -5,8 +5,8 @@ import type { Viewport } from "next";
 import Sidebar from "@/components/Sidebar";
 import Navbar from "@/components/Navbar";
 import Providers from "@/components/providers";
-import { Analytics } from "@vercel/analytics/react"
-import { SpeedInsights } from "@vercel/speed-insights/next"
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const viewport: Viewport = {
   themeColor: [
@@ -44,10 +44,10 @@ export default function RootLayout({
         )}
       >
         <Providers>
-          <main className="flex h-svh flex-col md:flex-row">
+          <main className="flex h-svh flex-col bg-muted/10 md:flex-row">
             <Navbar />
             <Sidebar />
-            <section className="w-full overflow-y-auto md:m-2 md:ml-0 md:border rounded-lg h-auto">
+            <section className="h-auto w-full overflow-y-auto rounded-lg bg-background p-4 md:m-2 md:ml-0 md:border">
               {children}
               <Analytics />
               <SpeedInsights />

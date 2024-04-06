@@ -37,36 +37,6 @@ export default function CreateProject() {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    // const supabase = createClient();
-    // const {
-    //   data: { user },
-    // } = await supabase.auth.getUser();
-
-    // const getMentorEmail = await supabase
-    //   .from("mentors")
-    //   .select("id")
-    //   .eq("email", values.mentor_email);
-
-    // const insertProjects = await supabase
-    //   .from("projects")
-    //   .insert({
-    //     name: values.name,
-    //     created_by: user?.id,
-    //     mentor_id: getMentorEmail.data?.[0]?.id,
-    //   })
-    //   .select("id");
-
-    // console.log("insertProjects", insertProjects);
-    // console.log(insertProjects.error);
-
-    // const insertProjectDetails = await supabase.from("project_details").insert({
-    //   project_id: insertProjects.data?.[0]?.id,
-    //   description: values.description,
-    //   tech_stack: values.tech_stack,
-    // });
-
-    // console.log("insertProjectDetails", insertProjectDetails);
-
     const { insertProjectDetails, insertProjects } =
       await createNewProject(values);
 
@@ -80,7 +50,7 @@ export default function CreateProject() {
   return (
     <Card className=" w-3/4">
       <CardHeader>
-        <CardTitle>Create a new project</CardTitle>
+        <CardTitle className="text-xl">Create a new project</CardTitle>
       </CardHeader>
       <CardContent>
         <Form {...form}>

@@ -6,6 +6,7 @@ import Sidebar from "@/components/Sidebar";
 import Navbar from "@/components/Navbar";
 import Providers from "@/lib/providers";
 import { Analytics } from "@vercel/analytics/react"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export const viewport: Viewport = {
   themeColor: [
@@ -49,6 +50,7 @@ export default function RootLayout({
             <section className="w-full overflow-y-auto md:m-2 md:ml-0 md:border rounded-lg h-auto">
               {children}
               <Analytics />
+              <SpeedInsights />
             </section>
           </main>
         </Providers>

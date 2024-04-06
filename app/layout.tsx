@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import type { Viewport } from "next";
 import Sidebar from "@/components/Sidebar";
 import Navbar from "@/components/Navbar";
-import Providers from "@/lib/providers";
+import Providers from "@/components/providers";
 import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 

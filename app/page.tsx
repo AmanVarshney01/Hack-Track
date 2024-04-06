@@ -17,7 +17,7 @@ export default async function Index() {
   return (
     <div>
       <h1>Project Dashboard</h1>
-      <p>Welcome, {JSON.stringify(data)}</p>
+      <p>Welcome, {JSON.stringify(data, null, 2)}</p>
     </div>
   );
 }

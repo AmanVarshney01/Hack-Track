@@ -6,15 +6,6 @@ import { redirect } from "next/navigation";
 import { headers } from "next/headers";
 
 export default async function SignInWithGoogle() {
-  // const getURL = () => {
-  //   let url =
-  //     process?.env?.NEXT_PUBLIC_SITE_URL ??
-  //     process?.env?.NEXT_PUBLIC_VERCEL_URL ??
-  //     "http://localhost:3000/";
-  //   url = url.includes("http") ? url : `https://${url}`;
-  //   url = url.charAt(url.length - 1) === "/" ? url : `${url}/`;
-  //   return url;
-  // };
 
   const signInWithGoogle = async () => {
     "use server";
@@ -25,10 +16,10 @@ export default async function SignInWithGoogle() {
       provider: "google",
       options: {
         redirectTo: `${origin}/auth/callback`,
-        // queryParams: {
-        //   access_type: "offline",
-        //   prompt: "consent",
-        // },
+        queryParams: {
+          access_type: "offline",
+          prompt: "consent",
+        },
       },
     });
 

@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { createNewProject } from "@/app/actions";
+import { createNewProject } from "@/lib/actions";
 
 export const formSchema = z.object({
   name: z.string().min(2).max(50),

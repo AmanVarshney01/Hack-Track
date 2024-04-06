@@ -45,5 +45,9 @@
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.5.13",
     "supabase": "^1.151.1"
-  }
+  },
+  "trustedDependencies": [
+    "@vercel/speed-insights",
+    "supabase"
+  ]
 }

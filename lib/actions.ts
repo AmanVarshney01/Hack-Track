@@ -1,27 +1,26 @@
 "use server";
 
 import { createClient } from "@/utils/supabase/server";
-import { formSchema } from "./project/new/CreateProject";
+import { formSchema } from "../app/project/new/CreateProject";
 import { z } from "zod";
 
 export async function createNewProject(values: z.infer<typeof formSchema>) {
-
   const supabase = createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
 
-  const getMentorEmail = await supabase
+  const getMentorID = await supabase
     .from("mentors")
     .select("id")
     .eq("email", values.mentor_email);
-
+  
   const insertProjects = await supabase
     .from("projects")
     .insert({
       name: values.name,
       created_by: user?.id,
-      mentor_id: getMentorEmail.data?.[0]?.id,
+      mentor_id: getMentorID.data?.[0]?.id,
     })
     .select("id");
 

@@ -27,11 +27,22 @@ export default async function Index() {
       `
     id,
     name,
-    created_by,
-    created_at,
+    users (
+      name
+    ),
     project_details (
       description,
       tech_stack
+    ),
+    project_members (
+      users (
+        name
+      )
+    ),
+    mentors (
+      users (
+        name
+      )
     )
     `,
     )
@@ -45,17 +56,24 @@ export default async function Index() {
           <Button>Create Project</Button>
         </Link>
       </section>
-      <section className=" flex flex-row flex-wrap gap-2 p-4">
+      <section className=" grid grid-cols-1 gap-2 p-4 lg:grid-cols-2 xl:grid-cols-3">
         {projects.data ? (
           projects.data?.map((project) => (
-            <Card key={project.id}>
+            <Card className="w-full" key={project.id}>
               <CardHeader>
                 <CardTitle>{project.name}</CardTitle>
                 <CardDescription>
                   {project.project_details?.[0]?.description}
                 </CardDescription>
               </CardHeader>
-              <CardContent></CardContent>
+              <CardContent>
+                {/* <p className="text-sm font-light">
+                  Created at: {new Date(project.created_at).toDateString()}
+                </p> */}
+                {project.users?.name}
+                {/* {project.project_members?.[0]?.user_id} */}
+                {project.mentors?.users?.name}
+              </CardContent>
             </Card>
           ))
         ) : (

@@ -14,7 +14,7 @@ export async function createNewProject(values: z.infer<typeof formSchema>) {
     .from("mentors")
     .select("id")
     .eq("email", values.mentor_email);
-  
+
   const insertProjects = await supabase
     .from("projects")
     .insert({

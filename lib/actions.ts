@@ -16,19 +16,19 @@ export async function createNewProject(values: z.infer<typeof formSchema>) {
       name: values.name,
       created_by: user?.id,
     })
-    .select("id");
+    .select("id").single();
 
   const insertProjectDetails = await supabase.from("project_details").insert({
-    project_id: insertProjects.data?.[0]?.id,
+    project_id: insertProjects.data?.id,
     description: values.description,
   });
 
   try {
     for (const member of values.members) {
       await supabase.from("project_members").insert({
-        project_id: insertProjects.data?.[0]?.id,
         member_email: member?.email,
         role: member?.role,
+        project_id: insertProjects.data?.id,
       });
     }
   } catch (error) {

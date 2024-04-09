@@ -29,12 +29,10 @@ export const formSchema = z.object({
   name: z.string().min(2).max(50),
   description: z.string().min(2).max(100),
   members: z.array(
-    z
-      .object({
-        email: z.string().email(),
-        role: z.enum(["member", "mentor", "owner"]),
-      })
-      .optional(),
+    z.object({
+      email: z.string().email(),
+      role: z.enum(["member", "mentor"]).default("member"),
+    }),
   ),
 });
 

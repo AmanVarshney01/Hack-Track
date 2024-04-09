@@ -8,6 +8,7 @@ export default function Sidebar() {
       <div className=" flex h-full w-full flex-col gap-1 py-4">
         <NavButton name="Home" href="/" />
         <NavButton name="Projects" href="/project/new" />
+        <NavButton name="Activity" href="/activity" />
       </div>
       <div className=" flex w-full items-center justify-center py-2">
         <AuthButton />

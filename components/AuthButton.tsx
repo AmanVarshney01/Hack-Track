@@ -29,8 +29,8 @@ export default async function AuthButton() {
     user && (
       <div className="flex items-center justify-center">
         <DropdownMenu>
-          <DropdownMenuTrigger className="flex items-center justify-center border p-2 rounded-lg">
-            <div className="flex max-w-48 min-w-0 flex-row items-center justify-between gap-2 ">
+          <DropdownMenuTrigger className="flex items-center justify-center rounded-lg border p-2">
+            <div className="flex min-w-0 max-w-48 flex-row items-center justify-between gap-2 ">
               <Avatar className="h-6 w-6">
                 <AvatarImage src={user.user_metadata.avatar_url} />
                 <AvatarFallback>DP</AvatarFallback>
@@ -42,7 +42,7 @@ export default async function AuthButton() {
             </div>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
-            <DropdownMenuItem>
+            <DropdownMenuItem disabled={true}>
               <span className=" truncate text-sm">{user.email}</span>
             </DropdownMenuItem>
             <DropdownMenuSeparator />

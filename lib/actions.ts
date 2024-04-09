@@ -10,25 +10,30 @@ export async function createNewProject(values: z.infer<typeof formSchema>) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  const getMentorID = await supabase
-    .from("mentors")
-    .select("id")
-    .eq("email", values.mentor_email);
-
   const insertProjects = await supabase
     .from("projects")
     .insert({
       name: values.name,
       created_by: user?.id,
-      mentor_id: getMentorID.data?.[0]?.id,
     })
     .select("id");
 
   const insertProjectDetails = await supabase.from("project_details").insert({
     project_id: insertProjects.data?.[0]?.id,
     description: values.description,
-    tech_stack: values.tech_stack,
   });
+
+  try {
+    for (const member of values.members) {
+      await supabase.from("project_members").insert({
+        project_id: insertProjects.data?.[0]?.id,
+        member_email: member?.email,
+        role: member?.role,
+      });
+    }
+  } catch (error) {
+    console.error("Error inserting project members:", error);
+  }
 
   return { insertProjects, insertProjectDetails };
 }

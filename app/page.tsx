@@ -27,19 +27,10 @@ export default async function Index() {
       `
     id,
     name,
-    users (
-      name
-    ),
     project_details (
-      description,
-      tech_stack
+      description    
     ),
     project_members (
-      users (
-        name
-      )
-    ),
-    mentors (
       users (
         name
       )
@@ -47,6 +38,10 @@ export default async function Index() {
     `,
     )
     .eq("created_by", user.id);
+
+  if (projects.error) {
+    console.error(projects.error);
+  }
 
   return (
     <div className="">
@@ -66,14 +61,7 @@ export default async function Index() {
                   {project.project_details?.[0]?.description}
                 </CardDescription>
               </CardHeader>
-              <CardContent>
-                {/* <p className="text-sm font-light">
-                  Created at: {new Date(project.created_at).toDateString()}
-                </p> */}
-                {project.users?.name}
-                {/* {project.project_members?.[0]?.user_id} */}
-                {project.mentors?.users?.name}
-              </CardContent>
+              <CardContent></CardContent>
             </Card>
           ))
         ) : (

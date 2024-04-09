@@ -71,7 +71,7 @@ export default function CreateProject() {
   }
 
   return (
-    <Card className=" w-3/4">
+    <Card className=" ">
       <CardHeader>
         <CardTitle className="text-xl">Create a new project</CardTitle>
       </CardHeader>
@@ -148,7 +148,6 @@ export default function CreateProject() {
                         defaultValue={field.value}
                       >
                         <FormControl>
-                          {/* <Input className="" placeholder="Role" {...field} /> */}
                           <SelectTrigger>
                             <SelectValue placeholder="role" />
                           </SelectTrigger>

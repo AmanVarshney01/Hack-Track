@@ -44,10 +44,10 @@ export default function RootLayout({
         )}
       >
         <Providers>
-          <main className="flex h-svh flex-col bg-muted/10 md:flex-row">
+          <main className="flex h-svh flex-col bg-muted/10 md:flex-row md:py-2 md:pr-2">
             <Navbar />
             <Sidebar />
-            <section className="h-auto w-full overflow-y-auto rounded-lg bg-background p-4 md:m-2 md:ml-0 md:border">
+            <section className="h-full w-full overflow-y-auto rounded-lg bg-background p-2 md:border md:p-4">
               {children}
               <Analytics />
               <SpeedInsights />

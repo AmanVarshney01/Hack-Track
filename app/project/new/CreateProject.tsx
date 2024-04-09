@@ -71,7 +71,7 @@ export default function CreateProject() {
   }
 
   return (
-    <Card className=" ">
+    <Card className=" h-full w-full overflow-auto border-0  shadow-none">
       <CardHeader>
         <CardTitle className="text-xl">Create a new project</CardTitle>
       </CardHeader>
@@ -107,7 +107,7 @@ export default function CreateProject() {
                 </FormItem>
               )}
             />
-            <div className=" flex flex-row items-center justify-between pt-4">
+            <div className=" flex flex-row items-center justify-between pt-4 ">
               <h4 className=" font-semibold leading-none tracking-tight">
                 Add Members
               </h4>
@@ -141,7 +141,7 @@ export default function CreateProject() {
                   name={`members.${index}.role`}
                   control={form.control}
                   render={({ field }) => (
-                    <FormItem className="  min-w-40">
+                    <FormItem className="  min-w-36">
                       <FormLabel>Role</FormLabel>
                       <Select
                         onValueChange={field.onChange}

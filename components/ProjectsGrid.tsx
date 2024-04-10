@@ -1,5 +1,4 @@
 import { createClient } from "@/utils/supabase/server";
-import { redirect } from "next/navigation";
 import {
   Card,
   CardContent,
@@ -21,13 +20,12 @@ export default async function ProjectsGrid({ user }: { user: any }) {
       description    
     ),
     project_members (
-      users (
-        name
-      )
+      member_email,
+      role
     )
     `,
     )
-    .eq("created_by", user?.id);
+    .eq("project_members.member_email", user?.email);
 
   if (projects.error) {
     console.error(projects.error);

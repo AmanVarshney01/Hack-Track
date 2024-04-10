@@ -24,6 +24,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { TrashIcon } from "@radix-ui/react-icons";
 
 export const formSchema = z.object({
   name: z.string().min(2).max(50),
@@ -51,7 +52,7 @@ export default function CreateProject() {
     },
   });
 
-  const { fields, append } = useFieldArray({
+  const { fields, append, remove } = useFieldArray({
     name: "members",
     control: form.control,
   });
@@ -124,7 +125,10 @@ export default function CreateProject() {
               </Button>
             </div>
             {fields.map((field, index) => (
-              <div key={field.id} className=" flex flex-row gap-4">
+              <div
+                key={field.id}
+                className=" flex flex-row items-end justify-center gap-4"
+              >
                 <FormField
                   name={`members.${index}.email`}
                   control={form.control}
@@ -160,6 +164,9 @@ export default function CreateProject() {
                     </FormItem>
                   )}
                 />
+                <Button variant={"destructive"} onClick={() => remove(index)}>
+                  <TrashIcon />
+                </Button>
               </div>
             ))}
             <Button type="submit">Submit</Button>

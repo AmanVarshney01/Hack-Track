@@ -1,5 +1,5 @@
-export default function ActivityPage() {
-    return (
-        <div>ActivityPage</div>
-    )
+export default async function ActivityPage() {
+  await new Promise((resolve) => setTimeout(resolve, 10000));
+
+  return <div>ActivityPage</div>;
 }

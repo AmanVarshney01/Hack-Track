@@ -1,46 +1,35 @@
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import Link from "next/link";
+import ProjectsGrid from "@/components/ProjectsGrid";
+import { Suspense } from "react";
+import { Skeleton } from "@/components/ui/skeleton";
+
+function ProjectsGridSkeleton() {
+  return (
+    <div className=" grid grid-cols-1 gap-2 p-4 lg:grid-cols-2 xl:grid-cols-3">
+      <Skeleton className="h-48" />
+      <Skeleton className="h-48" />
+      <Skeleton className="h-48" />
+    </div>
+  );
+}
 
 export default async function Index() {
   const supabase = createClient();
 
   const {
     data: { user },
+    error,
   } = await supabase.auth.getUser();
+
+  if (error) {
+    console.error(error);
+  }
 
   if (!user) {
     return redirect("/login");
-  }
-
-  const projects = await supabase
-    .from("projects")
-    .select(
-      `
-    id,
-    name,
-    project_details (
-      description    
-    ),
-    project_members (
-      users (
-        name
-      )
-    )
-    `,
-    )
-    .eq("created_by", user.id);
-
-  if (projects.error) {
-    console.error(projects.error);
   }
 
   return (
@@ -51,23 +40,9 @@ export default async function Index() {
           <Button>Create Project</Button>
         </Link>
       </section>
-      <section className=" grid grid-cols-1 gap-2 p-4 lg:grid-cols-2 xl:grid-cols-3">
-        {projects.data ? (
-          projects.data?.map((project) => (
-            <Card className="w-full" key={project.id}>
-              <CardHeader>
-                <CardTitle>{project.name}</CardTitle>
-                <CardDescription>
-                  {project.project_details?.[0]?.description}
-                </CardDescription>
-              </CardHeader>
-              <CardContent></CardContent>
-            </Card>
-          ))
-        ) : (
-          <p>No projects found</p>
-        )}
-      </section>
+      <Suspense fallback={<ProjectsGridSkeleton />}>
+        <ProjectsGrid user={user} />
+      </Suspense>
     </div>
   );
 }

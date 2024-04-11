@@ -12,17 +12,17 @@ export type Database = {
     Tables: {
       project_details: {
         Row: {
-          description: string | null
+          description: string
           id: number
           project_id: number | null
         }
         Insert: {
-          description?: string | null
+          description: string
           id?: number
           project_id?: number | null
         }
         Update: {
-          description?: string | null
+          description?: string
           id?: number
           project_id?: number | null
         }

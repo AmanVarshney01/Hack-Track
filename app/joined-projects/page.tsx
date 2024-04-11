@@ -21,7 +21,7 @@ export default async function JoinedProjectsPage() {
   }
   return (
     <>
-      <section className="flex min-h-24 items-center border-b p-6">
+      <section className="flex min-h-24 items-center border-b p-4">
         <h1 className=" text-2xl font-medium">Joined Projects</h1>
       </section>
       <Suspense fallback={<ProjectsGridSkeleton />}>

@@ -7,6 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import ProjectCard from "./ProjectCard";
 
 // FIXME fix user type
 export default async function ProjectsGrid({ user }: { user: any }) {
@@ -44,7 +45,7 @@ export default async function ProjectsGrid({ user }: { user: any }) {
     )
     `,
     )
-    .eq("member_email", user?.email);
+    .eq("member_email", user.email);
 
   if (projects.error) {
     console.error(projects.error);
@@ -54,16 +55,11 @@ export default async function ProjectsGrid({ user }: { user: any }) {
     <section className=" grid grid-cols-1 gap-2 p-4 lg:grid-cols-2 xl:grid-cols-3">
       {projects.data ? (
         projects.data?.map((project) => (
-          <Card className="w-full" key={project.projects?.id}>
-            <CardHeader>
-              <CardTitle>{project.projects?.name}</CardTitle>
-              <CardDescription>
-                {project.projects?.project_details?.[0]?.description}
-              </CardDescription>
-            </CardHeader>
-            <CardContent></CardContent>
-            <CardFooter></CardFooter>
-          </Card>
+          <ProjectCard
+            id={project.projects?.id!}
+            name={project.projects?.name!}
+            description={project.projects?.project_details?.[0]?.description!}
+          />
         ))
       ) : (
         <p>No projects found</p>

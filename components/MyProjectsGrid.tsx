@@ -1,12 +1,5 @@
 import { createClient } from "@/utils/supabase/server";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import ProjectCard from "./ProjectCard";
 
 // FIXME fix user type
 export default async function ProjectsGrid({ user }: { user: any }) {
@@ -33,16 +26,11 @@ export default async function ProjectsGrid({ user }: { user: any }) {
     <section className=" grid grid-cols-1 gap-2 p-4 lg:grid-cols-2 xl:grid-cols-3">
       {projects.data ? (
         projects.data?.map((project) => (
-          <Card className="w-full" key={project.id}>
-            <CardHeader>
-              <CardTitle>{project.name}</CardTitle>
-              <CardDescription>
-                {project.project_details?.[0]?.description}
-              </CardDescription>
-            </CardHeader>
-            <CardContent></CardContent>
-            <CardFooter></CardFooter>
-          </Card>
+          <ProjectCard
+            id={project.id}
+            name={project.name}
+            description={project.project_details[0].description}
+          />
         ))
       ) : (
         <p>No projects found</p>

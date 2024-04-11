@@ -1,13 +1,12 @@
 import Link from "next/link";
 import { Button } from "./ui/button";
-import type { Route } from "next";
 
-export default function NavButton<T extends string>({
+export default function NavButton({
   name,
   href,
 }: {
   name: string;
-  href: Route<T> | URL;
+  href: string;
 }) {
   return (
     <Link href={href}>

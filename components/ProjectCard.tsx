@@ -10,16 +10,14 @@ import { ArrowRightIcon } from "@radix-ui/react-icons";
 import { Button } from "./ui/button";
 
 export default function ProjectCard({
-  id,
   name,
   description,
 }: {
-  id: number;
   name: string;
   description: string;
 }) {
   return (
-    <Card className="w-full" key={id}>
+    <Card className="w-full">
       <CardHeader>
         <CardTitle>{name}</CardTitle>
         <CardDescription>{description}</CardDescription>

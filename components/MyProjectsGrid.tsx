@@ -27,7 +27,7 @@ export default async function ProjectsGrid({ user }: { user: any }) {
       {projects.data ? (
         projects.data?.map((project) => (
           <ProjectCard
-            id={project.id}
+            key={project.id}
             name={project.name}
             description={project.project_details[0].description}
           />

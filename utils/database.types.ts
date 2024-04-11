@@ -13,18 +13,24 @@ export type Database = {
       project_details: {
         Row: {
           description: string
+          end_date: string | null
           id: number
           project_id: number | null
+          start_date: string | null
         }
         Insert: {
           description: string
+          end_date?: string | null
           id?: number
           project_id?: number | null
+          start_date?: string | null
         }
         Update: {
           description?: string
+          end_date?: string | null
           id?: number
           project_id?: number | null
+          start_date?: string | null
         }
         Relationships: [
           {

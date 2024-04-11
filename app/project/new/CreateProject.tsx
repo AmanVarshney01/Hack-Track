@@ -24,7 +24,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { TrashIcon } from "@radix-ui/react-icons";
+import { TrashIcon, UpdateIcon } from "@radix-ui/react-icons";
 
 export const formSchema = z.object({
   name: z.string().min(2).max(50),
@@ -67,8 +67,6 @@ export default function CreateProject() {
     }
 
     form.reset();
-
-    // console.log(values);
   }
 
   return (
@@ -169,7 +167,16 @@ export default function CreateProject() {
                 </Button>
               </div>
             ))}
-            <Button type="submit">Submit</Button>
+            <Button type="submit" disabled={form.formState.isSubmitting}>
+              {form.formState.isSubmitting ? (
+                <div className=" flex flex-row items-center justify-center gap-2">
+                  <UpdateIcon className=" animate-spin" />
+                  <span>Loading</span>
+                </div>
+              ) : (
+                "Create Project"
+              )}
+            </Button>
           </form>
         </Form>
       </CardContent>

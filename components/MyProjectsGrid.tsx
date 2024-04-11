@@ -3,10 +3,12 @@ import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
 
+// FIXME fix user type
 export default async function ProjectsGrid({ user }: { user: any }) {
   const supabase = createClient();
 
@@ -18,14 +20,10 @@ export default async function ProjectsGrid({ user }: { user: any }) {
     name,
     project_details (
       description    
-    ),
-    project_members (
-      member_email,
-      role
     )
     `,
     )
-    .eq("project_members.member_email", user?.email);
+    .eq("created_by", user?.id);
 
   if (projects.error) {
     console.error(projects.error);
@@ -43,6 +41,7 @@ export default async function ProjectsGrid({ user }: { user: any }) {
               </CardDescription>
             </CardHeader>
             <CardContent></CardContent>
+            <CardFooter></CardFooter>
           </Card>
         ))
       ) : (

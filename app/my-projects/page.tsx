@@ -23,7 +23,7 @@ export default async function MyProjectsPage() {
   }
   return (
     <>
-      <section className=" flex min-h-24 flex-row items-center justify-between border-b p-4">
+      <section className=" flex min-h-24 flex-row items-center justify-between p-4">
         <h1 className=" text-2xl font-medium">My Projects</h1>
         <Link href="/project/new">
           <Button>Create Project</Button>

@@ -17,6 +17,7 @@ export type Database = {
           id: number
           project_id: number | null
           start_date: string | null
+          status: Database["public"]["Enums"]["status"] | null
         }
         Insert: {
           description: string
@@ -24,6 +25,7 @@ export type Database = {
           id?: number
           project_id?: number | null
           start_date?: string | null
+          status?: Database["public"]["Enums"]["status"] | null
         }
         Update: {
           description?: string
@@ -31,6 +33,7 @@ export type Database = {
           id?: number
           project_id?: number | null
           start_date?: string | null
+          status?: Database["public"]["Enums"]["status"] | null
         }
         Relationships: [
           {
@@ -145,6 +148,7 @@ export type Database = {
     }
     Enums: {
       role: "mentor" | "member"
+      status: "active" | "completed" | "paused"
     }
     CompositeTypes: {
       [_ in never]: never

@@ -8,6 +8,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "./ui/sheet";
+import NavButton from "./NavButton";
 
 export default function MobileSidebar() {
   return (
@@ -15,10 +16,16 @@ export default function MobileSidebar() {
       <SheetTrigger>
         <HamburgerMenuIcon />
       </SheetTrigger>
-      <SheetContent className="w-60" side={"left"}>
+      <SheetContent className="w-60 " side={"left"}>
         <SheetHeader>
-          <SheetTitle>GLA Project Tracker</SheetTitle>
+          <SheetTitle>Menu</SheetTitle>
         </SheetHeader>
+        <div className=" flex h-full w-full flex-col gap-4 py-4">
+          <NavButton name="Home" href="/" />
+          <NavButton name="My Projects" href="/my-projects" />
+          <NavButton name="Joined Projects" href="/joined-projects" />
+          <NavButton name="Activity" href="/activity" />
+        </div>
       </SheetContent>
     </Sheet>
   );

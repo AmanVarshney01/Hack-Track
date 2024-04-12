@@ -1,3 +1,4 @@
+import ProjectTasksTable from "@/components/ProjectTasksTable";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -73,7 +74,9 @@ export default async function ProjectPage({
           </CardDescription>
         </CardContent>
       </Card>
-      <div className="col-span-2"></div>
+      <div className="col-span-2">
+        <ProjectTasksTable />
+      </div>
       <div className=" flex flex-col gap-4">
         <Card className=" border-0">
           <CardHeader>

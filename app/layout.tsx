@@ -45,10 +45,10 @@ export default function RootLayout({
         )}
       >
         <Providers>
-          <main className="flex h-svh flex-col bg-muted/10 md:flex-row md:py-2 md:pr-2">
+          <main className="flex h-svh flex-col">
             <Navbar />
-            <Sidebar />
-            <ScrollArea className="h-full w-full rounded-lg bg-background p-2 md:border md:p-4">
+            {/* <Sidebar /> */}
+            <ScrollArea className=" h-full w-full bg-background p-2 md:p-4">
               {children}
             </ScrollArea>
           </main>

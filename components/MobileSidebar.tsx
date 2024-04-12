@@ -13,7 +13,7 @@ import NavButton from "./NavButton";
 export default function MobileSidebar() {
   return (
     <Sheet>
-      <SheetTrigger>
+      <SheetTrigger className=" block md:hidden">
         <HamburgerMenuIcon />
       </SheetTrigger>
       <SheetContent className="w-60 " side={"left"}>

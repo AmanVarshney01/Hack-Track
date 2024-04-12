@@ -9,6 +9,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ChevronDownIcon } from "@radix-ui/react-icons";
+import Link from "next/link";
 
 export default async function AuthButton() {
   const supabase = createClient();
@@ -44,6 +45,10 @@ export default async function AuthButton() {
           <DropdownMenuContent>
             <DropdownMenuItem disabled={true}>
               <span className=" truncate text-sm">{user.email}</span>
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>
+              <Link href={"/project/new"} className=" truncate text-sm">Create Project</Link>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>

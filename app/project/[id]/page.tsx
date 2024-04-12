@@ -1,4 +1,5 @@
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -53,7 +54,7 @@ export default async function ProjectPage({
 
   return (
     <section className=" grid grid-cols-3 gap-4">
-      <Card className=" col-span-3">
+      <Card className=" col-span-3 border-0">
         <CardHeader className=" flex-row items-center justify-between">
           <CardTitle className=" flex items-center justify-center gap-4 text-2xl">
             <span>{project.data?.name}</span>{" "}
@@ -61,6 +62,7 @@ export default async function ProjectPage({
               {project.data?.project_details[0].status}
             </Badge>
           </CardTitle>
+          <Button variant={"secondary"}>Edit</Button>
         </CardHeader>
         <CardContent>
           <CardDescription className=" text-lg">
@@ -72,17 +74,25 @@ export default async function ProjectPage({
         </CardContent>
       </Card>
       <div className="col-span-2">
-        <p>{project.data?.project_details[0].start_date}</p>
-        <p>{project.data?.project_details[0].end_date}</p>
-        {project.data?.users?.name}
-        {project.data?.users?.email}
+        
       </div>
       <div className=" flex flex-col gap-4">
-        <Card>
-          {/* <CardHeader>
-            <CardTitle className=" text-xl">Details</CardTitle>
-          </CardHeader> */}
-          <CardContent className=" pt-6">
+        {/* <Card className=" border-0">
+          <CardHeader>
+            <CardTitle className=" text-xl">Project Created By</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className=" flex flex-col">
+              <span className="">{project.data?.users?.name}</span>
+              <span className="">{project.data?.users?.email}</span>
+            </div>
+          </CardContent>
+        </Card> */}
+        <Card className=" border-0">
+          <CardHeader>
+            <CardTitle className=" text-xl">Duration</CardTitle>
+          </CardHeader>
+          <CardContent className="">
             <div className=" flex flex-row items-center justify-between">
               <div className=" flex flex-col gap-2">
                 <span className=" font-medium">Start Date</span>{" "}
@@ -103,11 +113,17 @@ export default async function ProjectPage({
             </div>
           </CardContent>
         </Card>
-        <Card className=" col-span-1">
+        <Card className=" col-span-1 border-0">
           <CardHeader>
-            <CardTitle className=" text-xl">Team Members</CardTitle>
+            <CardTitle className=" text-xl">Team</CardTitle>
           </CardHeader>
           <CardContent className=" space-y-3">
+          <div
+                className=" flex flex-row items-center justify-between gap-4"
+              >
+                <span className="">{project.data?.users?.name}</span>
+                <Badge className=" rounded-full">Owner</Badge>
+              </div>
             {project.data?.project_members.map((member) => (
               <div
                 className=" flex flex-row items-center justify-between gap-4"

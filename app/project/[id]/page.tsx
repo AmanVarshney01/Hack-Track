@@ -73,21 +73,8 @@ export default async function ProjectPage({
           </CardDescription>
         </CardContent>
       </Card>
-      <div className="col-span-2">
-        
-      </div>
+      <div className="col-span-2"></div>
       <div className=" flex flex-col gap-4">
-        {/* <Card className=" border-0">
-          <CardHeader>
-            <CardTitle className=" text-xl">Project Created By</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className=" flex flex-col">
-              <span className="">{project.data?.users?.name}</span>
-              <span className="">{project.data?.users?.email}</span>
-            </div>
-          </CardContent>
-        </Card> */}
         <Card className=" border-0">
           <CardHeader>
             <CardTitle className=" text-xl">Duration</CardTitle>
@@ -118,12 +105,10 @@ export default async function ProjectPage({
             <CardTitle className=" text-xl">Team</CardTitle>
           </CardHeader>
           <CardContent className=" space-y-3">
-          <div
-                className=" flex flex-row items-center justify-between gap-4"
-              >
-                <span className="">{project.data?.users?.name}</span>
-                <Badge className=" rounded-full">Owner</Badge>
-              </div>
+            <div className=" flex flex-row items-center justify-between gap-4">
+              <span className="">{project.data?.users?.name}</span>
+              <Badge className=" rounded-full">Owner</Badge>
+            </div>
             {project.data?.project_members.map((member) => (
               <div
                 className=" flex flex-row items-center justify-between gap-4"

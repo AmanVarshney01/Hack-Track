@@ -47,8 +47,10 @@ export default async function AuthButton() {
               <span className=" truncate text-sm">{user.email}</span>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <Link href={"/project/new"} className=" truncate text-sm">Create Project</Link>
+            <DropdownMenuItem className=" cursor-pointer" asChild>
+              <Link href={"/project/new"} className=" truncate text-sm">
+                Create Project
+              </Link>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>

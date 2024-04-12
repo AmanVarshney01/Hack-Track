@@ -54,7 +54,7 @@ export default async function ProjectPage({
     .single();
 
   return (
-    <section className=" grid grid-cols-3 gap-4">
+    <section className=" mx-auto grid max-w-7xl grid-cols-3 gap-4">
       <Card className=" col-span-3 border-0">
         <CardHeader className=" flex-row items-center justify-between">
           <CardTitle className=" flex items-center justify-center gap-4 text-2xl">
@@ -101,6 +101,66 @@ export default async function ProjectPage({
                 </span>
               </div>
             </div>
+          </CardContent>
+        </Card>
+        <Card className=" col-span-1 border-0">
+          <CardHeader>
+            <CardTitle className=" text-xl">Team</CardTitle>
+          </CardHeader>
+          <CardContent className=" space-y-3">
+            <div className=" flex flex-row items-center justify-between gap-4">
+              <span className="">{project.data?.users?.name}</span>
+              <Badge className=" rounded-full">Owner</Badge>
+            </div>
+            {project.data?.project_members.map((member) => (
+              <div
+                className=" flex flex-row items-center justify-between gap-4"
+                key={member.member_email}
+              >
+                <span className="">{member.users?.name}</span>
+                <Badge className=" rounded-full">{member.role}</Badge>
+              </div>
+            ))}
+          </CardContent>
+        </Card>
+        <Card className=" col-span-1 border-0">
+          <CardHeader>
+            <CardTitle className=" text-xl">Team</CardTitle>
+          </CardHeader>
+          <CardContent className=" space-y-3">
+            <div className=" flex flex-row items-center justify-between gap-4">
+              <span className="">{project.data?.users?.name}</span>
+              <Badge className=" rounded-full">Owner</Badge>
+            </div>
+            {project.data?.project_members.map((member) => (
+              <div
+                className=" flex flex-row items-center justify-between gap-4"
+                key={member.member_email}
+              >
+                <span className="">{member.users?.name}</span>
+                <Badge className=" rounded-full">{member.role}</Badge>
+              </div>
+            ))}
+          </CardContent>
+        </Card>
+        <Card className=" col-span-1 border-0">
+          <CardHeader>
+            <CardTitle className=" text-xl">Team</CardTitle>
+          </CardHeader>
+          <CardContent className=" space-y-3">
+            <div className=" flex flex-row items-center justify-between gap-4">
+              <span className="">{project.data?.users?.name}</span>
+              <Badge className=" rounded-full">Owner</Badge>
+            </div>
+            {project.data?.project_members.map((member) => (
+              <div
+                className=" flex flex-row items-center justify-between gap-4"
+                key={member.member_email}
+              >
+                <span className="">{member.users?.name}</span>
+                <Badge className=" rounded-full">{member.role}</Badge>
+              </div>
+            ))}
           </CardContent>
         </Card>
         <Card className=" col-span-1 border-0">

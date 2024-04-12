@@ -2,12 +2,10 @@ import { Inter as FontSans } from "next/font/google";
 import "@/app/globals.css";
 import { cn } from "@/lib/utils";
 import type { Viewport } from "next";
-import Sidebar from "@/components/Sidebar";
 import Navbar from "@/components/Navbar";
 import Providers from "@/components/providers";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { ScrollArea } from "@/components/ui/scroll-area";
 
 export const viewport: Viewport = {
   themeColor: [
@@ -47,10 +45,7 @@ export default function RootLayout({
         <Providers>
           <main className="flex h-svh flex-col">
             <Navbar />
-            {/* <Sidebar /> */}
-            <ScrollArea className=" h-full w-full bg-background p-2 md:p-4">
-              {children}
-            </ScrollArea>
+            {children}
           </main>
         </Providers>
         <Analytics />

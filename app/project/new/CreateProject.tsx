@@ -80,7 +80,7 @@ export default function CreateProject() {
   }
 
   return (
-    <Card className=" h-full w-full overflow-auto border-0  shadow-none">
+    <Card className=" h-full w-full overflow-auto border-0 shadow-none">
       <CardHeader className="px-0 py-6 md:px-4">
         <CardTitle className="text-xl">Create a new project</CardTitle>
       </CardHeader>

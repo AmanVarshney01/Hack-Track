@@ -24,7 +24,7 @@ export default async function Index() {
   }
 
   return (
-    <div className=" mx-auto flex max-w-7xl flex-col gap-10">
+    <div className=" mx-auto flex w-full max-w-7xl flex-col gap-10 p-2 md:p-4">
       <section className="">
         <div className="flex flex-row items-center justify-between p-4">
           <h1 className=" text-2xl font-medium">My Projects</h1>

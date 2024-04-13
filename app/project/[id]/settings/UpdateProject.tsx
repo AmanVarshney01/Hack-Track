@@ -16,7 +16,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { createNewProject } from "@/lib/actions";
 import {
   Select,
   SelectContent,
@@ -68,14 +67,6 @@ export default function UpdateProject({ data }: { data: any }) {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    const { insertProjectDetails, insertProjects } =
-      await createNewProject(values);
-
-    // TODO: Handle error
-    if (insertProjects.error || insertProjectDetails.error) {
-      console.error(insertProjects.error || insertProjectDetails.error);
-    }
-
     form.reset();
   }
 

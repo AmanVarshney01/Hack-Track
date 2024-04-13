@@ -65,7 +65,7 @@ export default async function SettingsPage({
           <UpdateProject data={project.data} />
         </TabsContent>
         <TabsContent value="delete">
-          <DeleteProject />
+          <DeleteProject id={params.id} />
         </TabsContent>
       </Tabs>
     </div>

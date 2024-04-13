@@ -53,12 +53,6 @@ export default function CreateProject() {
     defaultValues: {
       name: "",
       description: "",
-      members: [
-        {
-          email: "",
-          role: "member",
-        },
-      ],
     },
   });
 
@@ -68,14 +62,7 @@ export default function CreateProject() {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    const { insertProjectDetails, insertProjects } =
-      await createNewProject(values);
-
-    // TODO: Handle error
-    if (insertProjects.error || insertProjectDetails.error) {
-      console.error(insertProjects.error || insertProjectDetails.error);
-    }
-
+    await createNewProject(values);
     form.reset();
   }
 
@@ -210,51 +197,55 @@ export default function CreateProject() {
                 Add Member
               </Button>
             </div>
-            {fields.map((field, index) => (
-              <div
-                key={field.id}
-                className=" flex flex-row items-end justify-center gap-4"
-              >
-                <FormField
-                  name={`members.${index}.email`}
-                  control={form.control}
-                  render={({ field }) => (
-                    <FormItem className=" w-full min-w-40">
-                      <FormLabel>Email</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Email" {...field} />
-                      </FormControl>
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  name={`members.${index}.role`}
-                  control={form.control}
-                  render={({ field }) => (
-                    <FormItem className=" w-full  max-w-36">
-                      <FormLabel>Role</FormLabel>
-                      <Select
-                        onValueChange={field.onChange}
-                        defaultValue={field.value}
-                      >
+            {fields.length != 0 ? (
+              fields.map((field, index) => (
+                <div
+                  key={field.id}
+                  className=" flex flex-row items-end justify-center gap-4"
+                >
+                  <FormField
+                    name={`members.${index}.email`}
+                    control={form.control}
+                    render={({ field }) => (
+                      <FormItem className=" w-full min-w-40">
+                        <FormLabel>Email</FormLabel>
                         <FormControl>
-                          <SelectTrigger>
-                            <SelectValue placeholder="role" />
-                          </SelectTrigger>
+                          <Input placeholder="Email" {...field} />
                         </FormControl>
-                        <SelectContent>
-                          <SelectItem value="mentor">mentor</SelectItem>
-                          <SelectItem value="member">member</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </FormItem>
-                  )}
-                />
-                <Button variant={"destructive"} onClick={() => remove(index)}>
-                  <TrashIcon />
-                </Button>
-              </div>
-            ))}
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    name={`members.${index}.role`}
+                    control={form.control}
+                    render={({ field }) => (
+                      <FormItem className=" w-full  max-w-36">
+                        <FormLabel>Role</FormLabel>
+                        <Select
+                          onValueChange={field.onChange}
+                          defaultValue={field.value}
+                        >
+                          <FormControl>
+                            <SelectTrigger>
+                              <SelectValue placeholder="role" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            <SelectItem value="mentor">mentor</SelectItem>
+                            <SelectItem value="member">member</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </FormItem>
+                    )}
+                  />
+                  <Button variant={"destructive"} onClick={() => remove(index)}>
+                    <TrashIcon />
+                  </Button>
+                </div>
+              ))
+            ) : (
+              <p>You haven't added any members yet.</p>
+            )}
             <Button type="submit" disabled={form.formState.isSubmitting}>
               {form.formState.isSubmitting ? (
                 <div className=" flex flex-row items-center justify-center gap-2">

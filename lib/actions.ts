@@ -3,6 +3,7 @@
 import { createClient } from "@/utils/supabase/server";
 import { formSchema } from "../app/project/new/CreateProject";
 import { z } from "zod";
+import { redirect } from "next/navigation";
 
 export async function createNewProject(values: z.infer<typeof formSchema>) {
   const supabase = createClient();
@@ -38,5 +39,15 @@ export async function createNewProject(values: z.infer<typeof formSchema>) {
     console.error("Error inserting project members:", error);
   }
 
-  return { insertProjects, insertProjectDetails };
+  if (insertProjects.error || insertProjectDetails.error) {
+    console.error(insertProjects.error || insertProjectDetails.error);
+  } else {
+    return redirect(`/project/${insertProjects.data?.id}`);
+  }
+}
+
+export async function deleteProject(id: number) {
+  const supabase = createClient();
+  const response = await supabase.from("projects").delete().eq("id", id);
+  return response;
 }

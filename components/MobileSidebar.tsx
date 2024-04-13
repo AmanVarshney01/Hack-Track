@@ -1,4 +1,9 @@
-import { HamburgerMenuIcon } from "@radix-ui/react-icons";
+import {
+  DashboardIcon,
+  FileIcon,
+  FileTextIcon,
+  HamburgerMenuIcon,
+} from "@radix-ui/react-icons";
 import {
   Sheet,
   SheetContent,
@@ -10,7 +15,7 @@ import {
 } from "./ui/sheet";
 import NavButton from "./NavButton";
 
-export default function MobileSidebar() {
+export default function MobileSidebar({ id }: { id: number | undefined }) {
   return (
     <Sheet>
       <SheetTrigger className=" block md:hidden">
@@ -21,10 +26,21 @@ export default function MobileSidebar() {
           <SheetTitle>Menu</SheetTitle>
         </SheetHeader>
         <div className=" flex h-full w-full flex-col gap-4 py-4">
-          <NavButton name="Home" href="/" />
-          <NavButton name="My Projects" href="/my-projects" />
-          <NavButton name="Joined Projects" href="/joined-projects" />
-          <NavButton name="Activity" href="/activity" />
+          <NavButton
+            name="Dashboard"
+            href={`/project/${id}`}
+            icon={<DashboardIcon />}
+          />
+          <NavButton
+            name="Tasks"
+            href={`/project/${id}/tasks`}
+            icon={<FileTextIcon />}
+          />
+          <NavButton
+            name="Resources"
+            href={`/project/${id}/resources`}
+            icon={<FileIcon />}
+          />
         </div>
       </SheetContent>
     </Sheet>

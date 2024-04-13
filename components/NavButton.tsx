@@ -15,7 +15,6 @@ export default function NavButton({
   icon: React.ReactNode;
 }) {
   const path = usePathname().split("/");
-  console.log("path", path[3]);
 
   const isActive =
     path.includes(href.split("/")[3]) || path[3] === href.split("/")[3];

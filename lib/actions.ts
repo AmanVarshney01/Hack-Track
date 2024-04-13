@@ -49,5 +49,10 @@ export async function createNewProject(values: z.infer<typeof formSchema>) {
 export async function deleteProject(id: number) {
   const supabase = createClient();
   const response = await supabase.from("projects").delete().eq("id", id);
-  return response;
+
+  if (response.error) {
+    console.error(response.error);
+  } else {
+    return redirect("/");
+  }
 }

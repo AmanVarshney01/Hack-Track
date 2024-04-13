@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Card,
   CardContent,
@@ -7,16 +9,39 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { deleteProject } from "@/lib/actions";
-import { redirect } from "next/navigation";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { UpdateIcon } from "@radix-ui/react-icons";
 
-export default async function DeleteProject({ id }: { id: number }) {
+export default function DeleteProject({ id }: { id: number }) {
+  const formSchema = z.object({
+    deleteConfirmation: z
+      .string()
+      .refine((value) => value === `DELETE-PROJECT-ID-${id}`, {
+        message: "Confirmation does not match",
+      }),
+  });
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      deleteConfirmation: "",
+    },
+  });
   async function onSubmit() {
-    "use server";
-    const response = await deleteProject(id);
-    if (response.error) {
-      console.error(response.error);
-    }
-    return redirect("/");
+    await deleteProject(id);
+
+    form.reset();
   }
 
   return (
@@ -29,9 +54,41 @@ export default async function DeleteProject({ id }: { id: number }) {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <form action={onSubmit}>
-          <Button variant="destructive">Delete Project</Button>
-        </form>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+            <FormField
+              control={form.control}
+              name="deleteConfirmation"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>
+                    Type{" "}
+                    <span className="text-red-500">DELETE-PROJECT-ID-{id}</span>{" "}
+                    to confirm
+                  </FormLabel>
+                  <FormControl>
+                    <Input placeholder="Type here" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <Button
+              type="submit"
+              variant={"destructive"}
+              disabled={form.formState.isSubmitting}
+            >
+              {form.formState.isSubmitting ? (
+                <div className=" flex flex-row items-center justify-center gap-2">
+                  <UpdateIcon className=" animate-spin" />
+                  <span>Loading</span>
+                </div>
+              ) : (
+                "Delete Project"
+              )}
+            </Button>
+          </form>
+        </Form>
       </CardContent>
     </Card>
   );

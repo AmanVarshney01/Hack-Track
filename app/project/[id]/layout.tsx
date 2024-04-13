@@ -9,11 +9,9 @@ export default function ProjectLayout({
   params: { id: number };
 }) {
   return (
-    <aside className=" flex h-full flex-row">
+    <section className=" flex h-full flex-row overflow-clip">
       <Sidebar id={params.id} />
-      <ScrollArea className="flex h-full w-full items-center justify-center p-4">
-        {children}
-      </ScrollArea>
-    </aside>
+      <ScrollArea className=" flex-1 p-4">{children}</ScrollArea>
+    </section>
   );
 }

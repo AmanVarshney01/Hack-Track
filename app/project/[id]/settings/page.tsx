@@ -1,6 +1,56 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import UpdateProject from "./UpdateProject";
+import DeleteProject from "./DeleteProject";
+import { createClient } from "@/utils/supabase/server";
+import { redirect } from "next/navigation";
 
-export default function SettingsPage() {
+export default async function SettingsPage({
+  params,
+}: {
+  params: { id: number };
+}) {
+  const supabase = createClient();
+
+  const {
+    data: { user },
+    error,
+  } = await supabase.auth.getUser();
+
+  if (error) {
+    console.error(error);
+  }
+
+  if (!user) {
+    return redirect("/login");
+  }
+
+  const project = await supabase
+    .from("projects")
+    .select(
+      `
+  name,
+  users (
+    name,
+    email
+  ),
+  project_details (
+    description,
+    start_date,
+    end_date,
+    status
+  ),
+  project_members (
+    member_email,
+    users (
+      name
+    ),
+    role
+  )
+  `,
+    )
+    .eq("id", params.id)
+    .single();
+
   return (
     <div className="mx-auto max-w-6xl">
       <div className=" py-4">
@@ -11,8 +61,12 @@ export default function SettingsPage() {
           <TabsTrigger value="update">Update</TabsTrigger>
           <TabsTrigger value="delete">Delete</TabsTrigger>
         </TabsList>
-        <TabsContent value="update">Update PRoject</TabsContent>
-        <TabsContent value="delete">Delete Project</TabsContent>
+        <TabsContent value="update">
+          <UpdateProject data={project.data} />
+        </TabsContent>
+        <TabsContent value="delete">
+          <DeleteProject />
+        </TabsContent>
       </Tabs>
     </div>
   );

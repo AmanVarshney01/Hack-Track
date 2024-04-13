@@ -43,7 +43,7 @@ export default function RootLayout({
         )}
       >
         <Providers>
-          <main className="flex h-svh flex-col">
+          <main className="flex h-svh w-full flex-col">
             <Navbar />
             {children}
           </main>

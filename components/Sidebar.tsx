@@ -5,8 +5,6 @@ import {
   GearIcon,
 } from "@radix-ui/react-icons";
 import NavButton from "./NavButton";
-import { Button } from "./ui/button";
-import Link from "next/link";
 
 export default function Sidebar({ id }: { id: number }) {
   return (

@@ -75,9 +75,6 @@ export default async function ProjectPage({
           <CardContent>
             <CardDescription className=" text-lg">
               {project.data?.project_details[0].description}
-              highway ordinary calm from arrange available having term
-              explanation lift list there shut nodded tree bend applied proud
-              leg trick only way nature draw
             </CardDescription>
           </CardContent>
         </Card>

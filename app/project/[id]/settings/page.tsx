@@ -40,6 +40,7 @@ export default async function SettingsPage({
     status
   ),
   project_members (
+    id,
     member_email,
     users (
       name
@@ -58,12 +59,14 @@ export default async function SettingsPage({
       </div>
       <Tabs defaultValue="update">
         <TabsList className="gap-4">
-          <TabsTrigger value="update">Update</TabsTrigger>
+          <TabsTrigger value="update">General</TabsTrigger>
+          <TabsTrigger value="team">Team</TabsTrigger>
           <TabsTrigger value="delete">Delete</TabsTrigger>
         </TabsList>
         <TabsContent value="update">
-          <UpdateProject data={project.data} />
+          <UpdateProject id={params.id} data={project.data} />
         </TabsContent>
+        <TabsContent value="team">Team</TabsContent>
         <TabsContent value="delete">
           <DeleteProject id={params.id} />
         </TabsContent>

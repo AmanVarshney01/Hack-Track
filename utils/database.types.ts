@@ -1,4 +1,3 @@
-
 export type Json =
   | string
   | number
@@ -90,7 +89,9 @@ export type Database = {
           created_at: string
           created_by: string | null
           id: number
+          priority: Database["public"]["Enums"]["task_priority"]
           project_id: number | null
+          status: Database["public"]["Enums"]["task_status"]
           title: string | null
         }
         Insert: {
@@ -98,7 +99,9 @@ export type Database = {
           created_at?: string
           created_by?: string | null
           id?: number
+          priority?: Database["public"]["Enums"]["task_priority"]
           project_id?: number | null
+          status?: Database["public"]["Enums"]["task_status"]
           title?: string | null
         }
         Update: {
@@ -106,7 +109,9 @@ export type Database = {
           created_at?: string
           created_by?: string | null
           id?: number
+          priority?: Database["public"]["Enums"]["task_priority"]
           project_id?: number | null
+          status?: Database["public"]["Enums"]["task_status"]
           title?: string | null
         }
         Relationships: [
@@ -198,6 +203,8 @@ export type Database = {
     Enums: {
       role: "mentor" | "member"
       status: "active" | "completed" | "paused"
+      task_priority: "high" | "medium" | "low"
+      task_status: "open" | "in progress" | "completed"
     }
     CompositeTypes: {
       [_ in never]: never

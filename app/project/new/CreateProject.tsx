@@ -33,23 +33,11 @@ import {
 import { cn } from "@/lib/utils";
 import { Calendar } from "@/components/ui/calendar";
 import { Textarea } from "@/components/ui/textarea";
-
-export const formSchema = z.object({
-  name: z.string().min(2).max(50),
-  description: z.string().min(2).max(150),
-  members: z.array(
-    z.object({
-      email: z.string().email(),
-      role: z.enum(["member", "mentor"]).default("member"),
-    }),
-  ),
-  startDate: z.date(),
-  endDate: z.date(),
-});
+import { insertFormSchema } from "@/utils/types";
 
 export default function CreateProject() {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof insertFormSchema>>({
+    resolver: zodResolver(insertFormSchema),
     defaultValues: {
       name: "",
       description: "",
@@ -61,7 +49,7 @@ export default function CreateProject() {
     control: form.control,
   });
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof insertFormSchema>) {
     await createNewProject(values);
     form.reset();
   }

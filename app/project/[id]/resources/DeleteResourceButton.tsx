@@ -20,7 +20,7 @@ export default function DeleteResourceButton({ id }: { id: number }) {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <TrashIcon className=" cursor-pointer" />
+        <TrashIcon className=" cursor-pointer text-red-600" />
       </SheetTrigger>
       <SheetContent>
         <SheetHeader className="pb-8">

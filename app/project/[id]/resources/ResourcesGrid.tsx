@@ -6,11 +6,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { createClient } from "@/utils/supabase/server";
-import {
-  ExternalLinkIcon,
-  Pencil2Icon,
-  TrashIcon,
-} from "@radix-ui/react-icons";
+import { ExternalLinkIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 import EditResourceButton from "./EditResourceButton";
 import DeleteResourceButton from "./DeleteResourceButton";
@@ -54,7 +50,7 @@ export default async function ResourcesGrid({ id }: { id: number }) {
               />
               <DeleteResourceButton id={resource.id} />
               <Link href={resource.url} target="_blank">
-                <ExternalLinkIcon />
+                <ExternalLinkIcon className=" text-blue-600" />
               </Link>
             </CardFooter>
           </Card>

@@ -2,6 +2,8 @@ import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import ResourcesGrid from "./ResourcesGrid";
 import AddResourceButton from "./AddResourceButton";
+import { Suspense } from "react";
+import ResourcesGridSkeleton from "@/components/skeletons/ResourcesGridSkeleton";
 
 export default async function ResourcesPage({
   params,
@@ -28,7 +30,9 @@ export default async function ResourcesPage({
         <h1 className=" text-2xl font-semibold">Resources</h1>
         <AddResourceButton id={params.id} />
       </div>
-      <ResourcesGrid id={params.id} />
+      <Suspense fallback={<ResourcesGridSkeleton />}>
+        <ResourcesGrid id={params.id} />
+      </Suspense>
     </div>
   );
 }

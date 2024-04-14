@@ -12,7 +12,8 @@ export default async function MyProjectsGrid({ user }: { user: any }) {
     id,
     name,
     project_details (
-      description    
+      status,
+      end_date   
     )
     `,
     )
@@ -30,7 +31,9 @@ export default async function MyProjectsGrid({ user }: { user: any }) {
             key={project.id}
             id={project.id}
             name={project.name}
-            description={project.project_details[0].description}
+            // description={project.project_details[0].description}
+            status={project.project_details[0].status}
+            endDate={project.project_details[0].end_date}
           />
         ))
       ) : (

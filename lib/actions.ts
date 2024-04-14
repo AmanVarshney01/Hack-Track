@@ -1,7 +1,7 @@
 "use server";
 
 import { createClient } from "@/utils/supabase/server";
-import { insertFormSchema, updateDescriptionFormSchema, updateEndDateFormSchema, updateStartDateFormSchema, updateTitleFormSchema } from "@/utils/types";
+import { insertFormSchema, updateDescriptionFormSchema, updateEndDateFormSchema, updateStartDateFormSchema, updateStatusFormSchema, updateTitleFormSchema } from "@/utils/types";
 import { z } from "zod";
 import { redirect } from "next/navigation";
 
@@ -143,6 +143,25 @@ export async function updateEndDate(id: number, values: z.infer<typeof updateEnd
 
   const updateProject = await supabase.from("project_details").update({
     end_date: values.endDate?.toISOString()
+  }).eq("project_id", id)
+
+  if (updateProject.error) {
+    console.error(updateProject.error);
+  }
+}
+
+export async function updateStatus(id: number, values: z.infer<typeof updateStatusFormSchema>) {
+  const supabase = createClient()
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    return redirect("/login");
+  }
+
+  const updateProject = await supabase.from("project_details").update({
+    status: values.status
   }).eq("project_id", id)
 
   if (updateProject.error) {

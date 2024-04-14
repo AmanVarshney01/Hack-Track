@@ -15,7 +15,8 @@ export default async function JoinedProjectsGrid({ user }: { user: any }) {
       id,
       name,
       project_details (
-        description
+        status,
+        end_date
       )
     )
     `,
@@ -34,7 +35,8 @@ export default async function JoinedProjectsGrid({ user }: { user: any }) {
             key={project.projects?.id!}
             id={project.projects?.id!}
             name={project.projects?.name!}
-            description={project.projects?.project_details?.[0]?.description!}
+            status={project.projects?.project_details[0].status!}
+            endDate={project.projects?.project_details[0].end_date!}
           />
         ))
       ) : (

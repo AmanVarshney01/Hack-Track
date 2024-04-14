@@ -12,27 +12,27 @@ export type Database = {
       project_details: {
         Row: {
           description: string
-          end_date: string | null
+          end_date: string
           id: number
           project_id: number | null
-          start_date: string | null
-          status: Database["public"]["Enums"]["status"] | null
+          start_date: string
+          status: Database["public"]["Enums"]["status"]
         }
         Insert: {
           description: string
-          end_date?: string | null
+          end_date: string
           id?: number
           project_id?: number | null
-          start_date?: string | null
-          status?: Database["public"]["Enums"]["status"] | null
+          start_date: string
+          status?: Database["public"]["Enums"]["status"]
         }
         Update: {
           description?: string
-          end_date?: string | null
+          end_date?: string
           id?: number
           project_id?: number | null
-          start_date?: string | null
-          status?: Database["public"]["Enums"]["status"] | null
+          start_date?: string
+          status?: Database["public"]["Enums"]["status"]
         }
         Relationships: [
           {

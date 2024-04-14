@@ -9,23 +9,28 @@ import {
 import { ArrowRightIcon } from "@radix-ui/react-icons";
 import { Button } from "./ui/button";
 import Link from "next/link";
+import StatusBadge from "./StatusBadge";
 
 export default function ProjectCard({
   id,
   name,
-  description,
+  status,
+  endDate,
 }: {
   id: number;
   name: string;
-  description: string;
+  status: "active" | "paused" | "completed" | null | undefined;
+  endDate: string;
 }) {
   return (
     <Card className="w-full">
-      <CardHeader>
+      <CardHeader className=" space-y-2">
         <CardTitle>{name}</CardTitle>
-        <CardDescription>{description}</CardDescription>
+        <CardDescription>
+          <StatusBadge variant={status} />
+        </CardDescription>
       </CardHeader>
-      <CardContent></CardContent>
+      <CardContent>End Date: {endDate}</CardContent>
       <CardFooter className=" justify-end border-t p-2">
         <Link href={`/project/${id}`}>
           <Button

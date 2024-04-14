@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
-import { CalendarIcon, TrashIcon, UpdateIcon } from "@radix-ui/react-icons";
+import { CalendarIcon, UpdateIcon } from "@radix-ui/react-icons";
 import {
   Popover,
   PopoverContent,
@@ -29,13 +29,22 @@ import {
   updateDescriptionFormSchema,
   updateEndDateFormSchema,
   updateStartDateFormSchema,
+  updateStatusFormSchema,
 } from "@/utils/types";
 import {
   updateDescription,
   updateEndDate,
   updateStartDate,
   updateTitle,
+  updateStatus,
 } from "@/lib/actions";
+import {
+  Select,
+  SelectContent,
+  SelectTrigger,
+  SelectValue,
+  SelectItem,
+} from "@/components/ui/select";
 
 export default function UpdateProject({ id, data }: { id: number; data: any }) {
   const titleForm = useForm<z.infer<typeof updateTitleFormSchema>>({
@@ -88,6 +97,19 @@ export default function UpdateProject({ id, data }: { id: number; data: any }) {
     values: z.infer<typeof updateEndDateFormSchema>,
   ) {
     await updateEndDate(id, values);
+  }
+
+  const statusForm = useForm<z.infer<typeof updateStatusFormSchema>>({
+    resolver: zodResolver(updateStatusFormSchema),
+    defaultValues: {
+      status: data?.project_details[0].status,
+    },
+  });
+
+  async function onUpdateStatusSubmit(
+    values: z.infer<typeof updateStatusFormSchema>,
+  ) {
+    await updateStatus(id, values);
   }
 
   return (
@@ -165,6 +187,54 @@ export default function UpdateProject({ id, data }: { id: number; data: any }) {
         </CardContent>
       </Card>
       <div className="flex flex-row gap-4">
+        <Card>
+          <CardContent className=" pt-6">
+            <Form {...statusForm}>
+              <form
+                onSubmit={statusForm.handleSubmit(onUpdateStatusSubmit)}
+                className="space-y-8"
+              >
+                <FormField
+                  control={statusForm.control}
+                  name={"status"}
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Status</FormLabel>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
+                        <FormControl>
+                          <SelectTrigger className="min-w-48">
+                            <SelectValue />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="active">Active</SelectItem>
+                          <SelectItem value="paused">Paused</SelectItem>
+                          <SelectItem value="completed">Completed</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </FormItem>
+                  )}
+                />
+                <Button
+                  type="submit"
+                  disabled={statusForm.formState.isSubmitting}
+                >
+                  {statusForm.formState.isSubmitting ? (
+                    <div className=" flex flex-row items-center justify-center gap-2">
+                      <UpdateIcon className=" animate-spin" />
+                      <span>Loading</span>
+                    </div>
+                  ) : (
+                    "Update"
+                  )}
+                </Button>
+              </form>
+            </Form>
+          </CardContent>
+        </Card>
         <Card>
           <CardContent className=" pt-6">
             <Form {...startDateForm}>

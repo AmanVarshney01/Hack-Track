@@ -39,3 +39,7 @@ export const updateStartDateFormSchema = z.object({
 export const updateEndDateFormSchema = z.object({
   endDate: z.date(),
 });
+
+export const updateStatusFormSchema = z.object({
+  status: z.enum(["active", "paused", "completed"]),
+});

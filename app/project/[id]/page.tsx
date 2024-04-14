@@ -1,4 +1,5 @@
 import ProjectTasksTable from "@/components/ProjectTasksTable";
+import StatusBadge from "@/components/StatusBadge";
 import { Badge } from "@/components/ui/badge";
 import {
   Card,
@@ -67,9 +68,7 @@ export default async function ProjectPage({
           <CardHeader>
             <CardTitle className=" flex items-center gap-4 text-2xl">
               <span>{project.data?.name}</span>
-              <Badge className=" rounded-full">
-                {project.data?.project_details[0].status}
-              </Badge>
+              <StatusBadge variant={project.data?.project_details[0].status} />
             </CardTitle>
           </CardHeader>
           <CardContent>

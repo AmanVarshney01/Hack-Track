@@ -3,7 +3,7 @@ import MyProjectsGrid from "@/components/MyProjectsGrid";
 import JoinedProjectsGrid from "@/components/JoinedProjectsGrid";
 import { Suspense } from "react";
 import { Button } from "@/components/ui/button";
-import ProjectsGridSkeleton from "@/components/ProjectsGridSkeleton";
+import ProjectsGridSkeleton from "@/components/skeletons/ProjectsGridSkeleton";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 

@@ -66,7 +66,7 @@ export default async function ProjectPage({
       <section className=" grid grid-cols-3 gap-4">
         <Card className=" col-span-3">
           <CardHeader>
-            <CardTitle className=" flex items-center gap-4 text-2xl">
+            <CardTitle className=" flex items-center justify-between gap-4 text-2xl">
               <span>{project.data?.name}</span>
               <StatusBadge variant={project.data?.project_details[0].status} />
             </CardTitle>

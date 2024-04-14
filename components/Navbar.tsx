@@ -1,6 +1,8 @@
 import Link from "next/link";
 import AuthButton from "./AuthButton";
 import MobileSidebar from "./MobileSidebar";
+import { Suspense } from "react";
+import AuthButtonSkeleton from "./skeletons/AuthButtonSkeleton";
 
 export default function Navbar({ params }: { params?: { id: number } }) {
   return (
@@ -11,7 +13,9 @@ export default function Navbar({ params }: { params?: { id: number } }) {
           <h1 className="text-lg font-semibold">GLA Project Tracker</h1>
         </Link>
       </div>
-      <AuthButton />
+      <Suspense fallback={<AuthButtonSkeleton />}>
+        <AuthButton />
+      </Suspense>
     </nav>
   );
 }

@@ -113,7 +113,7 @@ export default function UpdateProject({ id, data }: { id: number; data: any }) {
   }
 
   return (
-    <section className="flex flex-col space-y-8">
+    <section className="flex flex-col space-y-4">
       <Card>
         <CardContent className=" pt-6">
           <Form {...titleForm}>
@@ -186,7 +186,7 @@ export default function UpdateProject({ id, data }: { id: number; data: any }) {
           </Form>
         </CardContent>
       </Card>
-      <div className="flex flex-row gap-4">
+      <div className="flex flex-col gap-4 md:flex-row">
         <Card>
           <CardContent className=" pt-6">
             <Form {...statusForm}>

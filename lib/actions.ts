@@ -1,7 +1,7 @@
 "use server";
 
 import { createClient } from "@/utils/supabase/server";
-import { insertFormSchema, updateDescriptionFormSchema, updateEndDateFormSchema, updateStartDateFormSchema, updateStatusFormSchema, updateTitleFormSchema } from "@/utils/types";
+import { insertFormSchema, resourceFormSchema, updateDescriptionFormSchema, updateEndDateFormSchema, updateStartDateFormSchema, updateStatusFormSchema, updateTitleFormSchema } from "@/utils/types";
 import { z } from "zod";
 import { redirect } from "next/navigation";
 
@@ -42,37 +42,11 @@ export async function createNewProject(
     }
 
     if (insertProjects.error || insertProjectDetails.error) {
-      console.error(insertProjects.error || insertProjectDetails.error);
+      throw new Error(insertProjects.error?.message || insertProjectDetails.error?.message);
     } else {
       return redirect(`/project/${insertProjects.data?.id}`);
     }
 }
-
-// export async function updateProject(id: number, values: z.infer<typeof updateFormSchema>) {
-//   const supabase = createClient();
-//   const {
-//     data: { user },
-//   } = await supabase.auth.getUser();
-
-//   if (!user) {
-//     return redirect("/login");
-//   }
-
-//     const updateProject = await supabase.from("projects").update({
-//       name: values.name,
-//     }).eq("id", id);
-
-//     const updateProjectDetails = await supabase.from("project_details").update({
-//       description: values.description,
-//       start_date: values.startDate?.toISOString(),
-//       end_date: values.endDate?.toISOString(),
-//     }).eq("project_id", id);
-
-//     if (updateProject.error || updateProjectDetails.error) {
-//       console.error(updateProject.error || updateProjectDetails.error);
-//     }
-
-// }
 
 export async function updateTitle(id: number, values: z.infer<typeof updateTitleFormSchema>) {
   const supabase = createClient()
@@ -89,7 +63,7 @@ export async function updateTitle(id: number, values: z.infer<typeof updateTitle
   }).eq("id", id);
 
   if (updateProject.error) {
-    console.error(updateProject.error);
+    throw new Error(updateProject.error.message);
   }
 }
 
@@ -108,7 +82,7 @@ export async function updateDescription(id: number, values: z.infer<typeof updat
   }).eq("project_id", id)
 
   if (updateProject.error) {
-    console.error(updateProject.error);
+   throw new Error(updateProject.error.message);
   }
 }
 
@@ -127,7 +101,7 @@ export async function updateStartDate(id: number, values: z.infer<typeof updateS
   }).eq("project_id", id)
 
   if (updateProject.error) {
-    console.error(updateProject.error);
+    throw new Error(updateProject.error.message);
   }
 }
 
@@ -146,7 +120,7 @@ export async function updateEndDate(id: number, values: z.infer<typeof updateEnd
   }).eq("project_id", id)
 
   if (updateProject.error) {
-    console.error(updateProject.error);
+    throw new Error(updateProject.error.message);
   }
 }
 
@@ -165,7 +139,7 @@ export async function updateStatus(id: number, values: z.infer<typeof updateStat
   }).eq("project_id", id)
 
   if (updateProject.error) {
-    console.error(updateProject.error);
+    throw new Error(updateProject.error.message);
   }
 }
 
@@ -186,4 +160,45 @@ export async function deleteProject(id: number) {
     } else {
       return redirect("/");
     }
+}
+
+export async function insertResource(id: number, values: z.infer<typeof resourceFormSchema>) {
+  const supabase = createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    return redirect("/login");
+  }
+
+  const response = await supabase.from("project_resources").insert({
+    project_id: id,
+    name: values.resourceName,
+    url: values.resourceUrl,
+  });
+
+  if (response.error) {
+    throw new Error(response.error.message);
+  }
+} 
+
+export async function updateResource(id: number, values: z.infer<typeof resourceFormSchema>) {
+  const supabase = createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    return redirect("/login");
+  }
+
+  const response = await supabase.from("project_resources").update({
+    name: values.resourceName,
+    url: values.resourceUrl,
+  }).eq("project_id", id);
+
+  if (response.error) {
+    throw new Error(response.error.message);
+  }
 }

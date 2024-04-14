@@ -28,9 +28,7 @@ export default function ProjectCard({
     <Card className="w-full">
       <CardHeader className=" space-y-2">
         <CardTitle className=" text-xl">{name}</CardTitle>
-        <CardDescription>
-          <StatusBadge variant={status} />
-        </CardDescription>
+        <StatusBadge variant={status} />
       </CardHeader>
       <CardContent className=" text-sm text-muted-foreground">
         <div className=" flex flex-col">

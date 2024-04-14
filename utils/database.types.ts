@@ -83,6 +83,38 @@ export type Database = {
           },
         ]
       }
+      project_resources: {
+        Row: {
+          created_at: string
+          id: number
+          name: string
+          project_id: number | null
+          url: string
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          name: string
+          project_id?: number | null
+          url: string
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          name?: string
+          project_id?: number | null
+          url?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "public_resources_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       project_tasks: {
         Row: {
           assigned_to: string | null

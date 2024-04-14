@@ -43,3 +43,8 @@ export const updateEndDateFormSchema = z.object({
 export const updateStatusFormSchema = z.object({
   status: z.enum(["active", "paused", "completed"]),
 });
+
+export const resourceFormSchema = z.object({
+  resourceName: z.string().min(2).max(50),
+  resourceUrl: z.string().url(),
+});

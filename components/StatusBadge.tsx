@@ -18,5 +18,9 @@ const statusVariants = cva("rounded-full", {
 export default function StatusBadge({
   variant,
 }: VariantProps<typeof statusVariants>) {
-  return <Badge className={cn(statusVariants({ variant }))}>{variant}</Badge>;
+  return (
+    <Badge className={cn(statusVariants({ variant }), "w-min")}>
+      {variant}
+    </Badge>
+  );
 }

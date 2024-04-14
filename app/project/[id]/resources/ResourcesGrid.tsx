@@ -13,6 +13,7 @@ import {
 } from "@radix-ui/react-icons";
 import Link from "next/link";
 import EditResourceButton from "./EditResourceButton";
+import DeleteResourceButton from "./DeleteResourceButton";
 
 export default async function ResourcesGrid({ id }: { id: number }) {
   const supabase = createClient();
@@ -47,11 +48,11 @@ export default async function ResourcesGrid({ id }: { id: number }) {
             </CardHeader>
             <CardFooter className=" justify-end space-x-4">
               <EditResourceButton
-                id={id}
+                id={resource.id}
                 name={resource.name}
                 url={resource.url}
               />
-              <TrashIcon />
+              <DeleteResourceButton id={resource.id} />
               <Link href={resource.url} target="_blank">
                 <ExternalLinkIcon />
               </Link>

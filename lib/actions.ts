@@ -196,9 +196,26 @@ export async function updateResource(id: number, values: z.infer<typeof resource
   const response = await supabase.from("project_resources").update({
     name: values.resourceName,
     url: values.resourceUrl,
-  }).eq("project_id", id);
+  }).eq("id", id);
 
   if (response.error) {
     throw new Error(response.error.message);
+  }
+}
+
+export async function deleteResource(id: number) {
+  const supabase = createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    return redirect("/login");
+  }
+
+  const response = await supabase.from("project_resources").delete().eq("id", id);
+
+  if (response.error) {
+    console.error(response.error);
   }
 }

@@ -25,7 +25,7 @@ import { resourceFormSchema } from "@/utils/types";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { updateResource } from "@/lib/actions";
-import { Pencil2Icon } from "@radix-ui/react-icons";
+import { Pencil2Icon, UpdateIcon } from "@radix-ui/react-icons";
 
 export default function EditResourceButton({
   id,
@@ -90,7 +90,16 @@ export default function EditResourceButton({
               )}
             />
 
-            <Button type="submit">Save</Button>
+            <Button type="submit" disabled={form.formState.isSubmitting}>
+              {form.formState.isSubmitting ? (
+                <div className=" flex flex-row items-center justify-center gap-2">
+                  <UpdateIcon className=" animate-spin" />
+                  <span>Loading</span>
+                </div>
+              ) : (
+                "Save"
+              )}
+            </Button>
           </form>
         </Form>
       </SheetContent>

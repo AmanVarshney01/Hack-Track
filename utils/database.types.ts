@@ -117,43 +117,33 @@ export type Database = {
       }
       project_tasks: {
         Row: {
-          assigned_to: string | null
           created_at: string
-          created_by: string | null
+          created_by: string
           id: number
           priority: Database["public"]["Enums"]["task_priority"]
           project_id: number | null
           status: Database["public"]["Enums"]["task_status"]
-          title: string | null
+          title: string
         }
         Insert: {
-          assigned_to?: string | null
           created_at?: string
-          created_by?: string | null
+          created_by: string
           id?: number
           priority?: Database["public"]["Enums"]["task_priority"]
           project_id?: number | null
           status?: Database["public"]["Enums"]["task_status"]
-          title?: string | null
+          title: string
         }
         Update: {
-          assigned_to?: string | null
           created_at?: string
-          created_by?: string | null
+          created_by?: string
           id?: number
           priority?: Database["public"]["Enums"]["task_priority"]
           project_id?: number | null
           status?: Database["public"]["Enums"]["task_status"]
-          title?: string | null
+          title?: string
         }
         Relationships: [
-          {
-            foreignKeyName: "public_project_tasks_assigned_to_fkey"
-            columns: ["assigned_to"]
-            isOneToOne: false
-            referencedRelation: "users"
-            referencedColumns: ["id"]
-          },
           {
             foreignKeyName: "public_project_tasks_created_by_fkey"
             columns: ["created_by"]

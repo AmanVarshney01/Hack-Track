@@ -26,7 +26,7 @@ export default async function ResourcesPage({
   }
   return (
     <div className="mx-auto max-w-6xl">
-      <div className=" flex flex-row items-center justify-between py-4">
+      <div className=" flex flex-row items-center justify-between py-10">
         <h1 className=" text-2xl font-semibold">Resources</h1>
         <AddResourceButton id={params.id} />
       </div>

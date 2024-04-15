@@ -60,7 +60,7 @@ export default async function ProjectPage({
 
   return (
     <div className="mx-auto max-w-6xl">
-      <div className=" py-4">
+      <div className=" py-10">
         <h1 className=" text-2xl font-semibold">Dashboard</h1>
       </div>
       <section className=" grid grid-cols-3 gap-4">

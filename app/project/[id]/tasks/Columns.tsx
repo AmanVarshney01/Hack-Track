@@ -1,6 +1,5 @@
 "use client";
 
-import { Database } from "@/utils/database.types";
 import { ColumnDef } from "@tanstack/react-table";
 
 // export type Tasks = Database["public"]["Tables"]["project_tasks"]["Row"];
@@ -29,8 +28,4 @@ export const columns: ColumnDef<Tasks>[] = [
     accessorKey: "status",
     header: "Status",
   },
-  //   {
-  //     accessorKey: "created_at",
-  //     header: "Created At",
-  //   },
 ];

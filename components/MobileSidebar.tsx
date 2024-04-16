@@ -1,21 +1,30 @@
+"use client";
+
 import {
   DashboardIcon,
   FileIcon,
   FileTextIcon,
+  GearIcon,
   HamburgerMenuIcon,
 } from "@radix-ui/react-icons";
 import {
   Sheet,
   SheetContent,
-  SheetDescription,
   SheetFooter,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
 } from "./ui/sheet";
 import NavButton from "./NavButton";
+import { usePathname } from "next/navigation";
 
-export default function MobileSidebar({ id }: { id: number | undefined }) {
+export default function MobileSidebar() {
+  const path = usePathname().split("/");
+  const isProject = path[1] === "project";
+  if (!isProject) {
+    return;
+  }
+  const id = path[2];
   return (
     <Sheet>
       <SheetTrigger className=" block md:hidden">
@@ -42,6 +51,13 @@ export default function MobileSidebar({ id }: { id: number | undefined }) {
             icon={<FileIcon />}
           />
         </div>
+        <SheetFooter>
+          <NavButton
+            name="Project Settings"
+            href={`/project/${id}/settings`}
+            icon={<GearIcon />}
+          />
+        </SheetFooter>
       </SheetContent>
     </Sheet>
   );

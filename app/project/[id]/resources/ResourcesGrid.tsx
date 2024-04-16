@@ -29,35 +29,35 @@ export default async function ResourcesGrid({ id }: { id: number }) {
     console.error(resources.error);
   }
 
+  if (resources.count === null) {
+    return <p>No resources found</p>;
+  }
+
   return (
     <section className=" grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-3">
-      {resources.data ? (
-        resources.data?.map((resource) => (
-          <Card key={resource.id}>
-            <CardHeader>
-              <Link href={resource.url} target="_blank">
-                <CardTitle>{resource.name}</CardTitle>
-              </Link>
-              <CardDescription className=" line-clamp-2">
-                {resource.url}
-              </CardDescription>
-            </CardHeader>
-            <CardFooter className=" justify-end space-x-4">
-              <EditResourceButton
-                id={resource.id}
-                name={resource.name}
-                url={resource.url}
-              />
-              <DeleteResourceButton id={resource.id} />
-              <Link href={resource.url} target="_blank">
-                <ExternalLinkIcon className=" text-blue-600" />
-              </Link>
-            </CardFooter>
-          </Card>
-        ))
-      ) : (
-        <p>No resources found</p>
-      )}
+      {resources.data?.map((resource) => (
+        <Card key={resource.id}>
+          <CardHeader>
+            <Link href={resource.url} target="_blank">
+              <CardTitle>{resource.name}</CardTitle>
+            </Link>
+            <CardDescription className=" line-clamp-2">
+              {resource.url}
+            </CardDescription>
+          </CardHeader>
+          <CardFooter className=" justify-end space-x-4">
+            <EditResourceButton
+              id={resource.id}
+              name={resource.name}
+              url={resource.url}
+            />
+            <DeleteResourceButton id={resource.id} />
+            <Link href={resource.url} target="_blank">
+              <ExternalLinkIcon className=" text-blue-600" />
+            </Link>
+          </CardFooter>
+        </Card>
+      ))}
     </section>
   );
 }

@@ -34,30 +34,32 @@ export default function MobileSidebar() {
         <SheetHeader>
           <SheetTitle>Menu</SheetTitle>
         </SheetHeader>
-        <div className=" flex h-full w-full flex-col gap-4 py-4">
-          <NavButton
-            name="Dashboard"
-            href={`/project/${id}`}
-            icon={<DashboardIcon />}
-          />
-          <NavButton
-            name="Tasks"
-            href={`/project/${id}/tasks`}
-            icon={<FileTextIcon />}
-          />
-          <NavButton
-            name="Resources"
-            href={`/project/${id}/resources`}
-            icon={<FileIcon />}
-          />
+        <div className=" flex h-full flex-col justify-between py-4">
+          <div className=" flex w-full flex-col gap-4 ">
+            <NavButton
+              name="Dashboard"
+              href={`/project/${id}`}
+              icon={<DashboardIcon />}
+            />
+            <NavButton
+              name="Tasks"
+              href={`/project/${id}/tasks`}
+              icon={<FileTextIcon />}
+            />
+            <NavButton
+              name="Resources"
+              href={`/project/${id}/resources`}
+              icon={<FileIcon />}
+            />
+          </div>
+          <SheetFooter className="mt-auto">
+            <NavButton
+              name="Project Settings"
+              href={`/project/${id}/settings`}
+              icon={<GearIcon />}
+            />
+          </SheetFooter>
         </div>
-        <SheetFooter>
-          <NavButton
-            name="Project Settings"
-            href={`/project/${id}/settings`}
-            icon={<GearIcon />}
-          />
-        </SheetFooter>
       </SheetContent>
     </Sheet>
   );

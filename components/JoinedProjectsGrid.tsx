@@ -1,8 +1,12 @@
 import { createClient } from "@/utils/supabase/server";
 import ProjectCard from "./ProjectCard";
+import { Tables } from "@/utils/database.types";
 
-// FIXME fix user type
-export default async function JoinedProjectsGrid({ user }: { user: any }) {
+export default async function JoinedProjectsGrid({
+  user,
+}: {
+  user: Tables<"users">;
+}) {
   const supabase = createClient();
 
   const projects = await supabase

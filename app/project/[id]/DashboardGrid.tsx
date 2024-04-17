@@ -7,7 +7,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Table } from "@/components/ui/table";
 import { createClient } from "@/utils/supabase/server";
 
 export default async function DashboardGrid({

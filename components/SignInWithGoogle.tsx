@@ -6,7 +6,6 @@ import { redirect } from "next/navigation";
 import { headers } from "next/headers";
 
 export default async function SignInWithGoogle() {
-
   const signInWithGoogle = async () => {
     "use server";
 
@@ -32,8 +31,8 @@ export default async function SignInWithGoogle() {
 
   return (
     <form action={signInWithGoogle} className="w-full">
-      <Button className="w-full" type="submit">
-        <Image className="mr-2" src={googleLogo} alt="Google Logo" />
+      <Button variant={"secondary"} className="w-full" type="submit">
+        <Image className="mr-2 " src={googleLogo} alt="Google Logo" />
         Sign in with Google
       </Button>
     </form>

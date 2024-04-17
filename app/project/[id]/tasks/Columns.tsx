@@ -43,7 +43,6 @@ export const columns: ColumnDef<Tasks>[] = [
     id: "actions",
     cell: ({ row }) => {
       const { id, title, status, priority } = row.original;
-      console.log(id);
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>

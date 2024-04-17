@@ -47,7 +47,7 @@ export default async function DashboardGrid({
     <section className=" flex flex-col gap-4">
       <Card className=" ">
         <CardHeader>
-          <CardTitle className=" flex items-center justify-between gap-4 text-2xl">
+          <CardTitle className=" md:flex-md flex flex-col items-start justify-between gap-2 text-2xl md:items-center md:gap-4">
             <span>{project.data?.name}</span>
             <StatusBadge variant={project.data?.project_details[0].status} />
           </CardTitle>

@@ -25,7 +25,7 @@ export default async function Login({
   }
 
   return (
-    <section className="fixed left-0 top-0 flex min-h-svh w-full items-center justify-center bg-background">
+    <section className="fixed left-0 top-0 flex min-h-svh w-full items-center justify-center bg-background p-4">
       <Card>
         <CardHeader>
           <CardTitle className=" text-xl">GLA Project Tracker</CardTitle>

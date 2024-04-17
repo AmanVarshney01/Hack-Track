@@ -6,8 +6,6 @@ import { Button } from "./ui/button";
 export default function ThemeToggle() {
   const { theme, setTheme } = useTheme();
 
-  console.log(theme);
-
   return (
     <Button
       className=" w-full"

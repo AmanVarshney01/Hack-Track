@@ -13,9 +13,7 @@ import { deleteTask } from "@/lib/actions";
 import { TrashIcon } from "@radix-ui/react-icons";
 
 export default function DeleteTaskButton({ id }: { id: number }) {
-  console.log("id", id);
   async function onSubmit() {
-    // "use server";
     await deleteTask(id);
   }
 

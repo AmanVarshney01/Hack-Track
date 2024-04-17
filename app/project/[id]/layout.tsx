@@ -11,7 +11,7 @@ export default function ProjectLayout({
   return (
     <section className=" flex h-full flex-row overflow-clip">
       <Sidebar id={params.id} />
-      <ScrollArea className=" flex-1 p-4">{children}</ScrollArea>
+      <ScrollArea className=" h-full w-full p-4">{children}</ScrollArea>
     </section>
   );
 }

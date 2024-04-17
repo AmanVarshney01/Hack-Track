@@ -47,15 +47,8 @@ export default async function AuthButton() {
             <DropdownMenuItem disabled={true}>
               <span className=" truncate text-sm">{user.email}</span>
             </DropdownMenuItem>
-            {/* <DropdownMenuSeparator />
-            <DropdownMenuItem className=" cursor-pointer" asChild>
-              <Link href={"/project/new"} className=" truncate text-sm">
-                Create Project
-              </Link>
-            </DropdownMenuItem> */}
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
-              {/* <Button className="w-full text-left"></Button> */}
               <ThemeToggle />
             </DropdownMenuItem>
             <DropdownMenuSeparator />

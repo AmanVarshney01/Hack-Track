@@ -91,7 +91,7 @@ export default function AddResourceButton({ id }: { id: number }) {
                   <span>Loading</span>
                 </div>
               ) : (
-                "Save"
+                "Add"
               )}
             </Button>
           </form>

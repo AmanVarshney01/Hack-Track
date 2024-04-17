@@ -14,7 +14,7 @@ export default async function NewProject() {
   }
 
   return (
-    <div className=" mx-auto flex h-full w-full max-w-7xl items-center justify-center">
+    <div className=" mx-auto flex h-full w-full max-w-7xl items-center justify-center ">
       <CreateProject />
     </div>
   );

@@ -6,7 +6,6 @@ import Navbar from "@/components/Navbar";
 import Providers from "@/components/providers";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { ScrollArea } from "@/components/ui/scroll-area";
 
 export const viewport: Viewport = {
   themeColor: [
@@ -44,9 +43,9 @@ export default function RootLayout({
         )}
       >
         <Providers>
-          <main className="flex h-svh w-full flex-col overflow-clip">
+          <main className="flex h-svh w-full flex-col">
             <Navbar />
-            <ScrollArea className=" flex-1 p-4">{children}</ScrollArea>
+            {children}
           </main>
         </Providers>
         <Analytics />

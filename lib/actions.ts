@@ -1,7 +1,7 @@
 "use server";
 
 import { createClient } from "@/utils/supabase/server";
-import { insertFormSchema, resourceFormSchema, updateDescriptionFormSchema, updateEndDateFormSchema, updateStartDateFormSchema, updateStatusFormSchema, updateTitleFormSchema } from "@/utils/types";
+import { insertFormSchema, resourceFormSchema, taskFormSchema, updateDescriptionFormSchema, updateEndDateFormSchema, updateStartDateFormSchema, updateStatusFormSchema, updateTitleFormSchema } from "@/utils/types";
 import { z } from "zod";
 import { redirect } from "next/navigation";
 
@@ -217,5 +217,28 @@ export async function deleteResource(id: number) {
 
   if (response.error) {
     console.error(response.error);
+  }
+}
+
+export async function insertTask(id: number, values: z.infer<typeof taskFormSchema>) {
+  const supabase = createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    return redirect("/login");
+  }
+
+  const response = await supabase.from("project_tasks").insert({
+    project_id: id,
+    title: values.taskTitle,
+    priority: values.priority,
+    status: values.status,
+    created_by: user?.id,
+  });
+
+  if (response.error) {
+    throw new Error(response.error.message);
   }
 }

@@ -55,11 +55,11 @@ export default function CreateProject() {
   }
 
   return (
-    <Card className=" h-full w-full overflow-auto border-0 shadow-none">
-      <CardHeader className="px-0 py-6 md:px-4">
+    <Card className=" h-full w-full border-0 shadow-none">
+      <CardHeader className="">
         <CardTitle className="text-xl">Create a new project</CardTitle>
       </CardHeader>
-      <CardContent className="px-0 pb-6 md:px-4">
+      <CardContent className="">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <FormField

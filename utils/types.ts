@@ -1,6 +1,7 @@
 import { SupabaseClient } from "@supabase/supabase-js";
 import type { Database } from "@/utils/database.types";
 import { z } from "zod";
+import { title } from "process";
 
 export type TypedSupabaseClient = SupabaseClient<Database>;
 
@@ -16,13 +17,6 @@ export const insertFormSchema = z.object({
   startDate: z.date(),
   endDate: z.date(),
 });
-
-// export const updateFormSchema = z.object({
-//   name: z.string().min(2).max(50),
-//   description: z.string().min(2).max(150),
-//   startDate: z.date(),
-//   endDate: z.date(),
-// });
 
 export const updateTitleFormSchema = z.object({
   name: z.string().min(2).max(50),
@@ -48,3 +42,9 @@ export const resourceFormSchema = z.object({
   resourceName: z.string().min(2).max(50),
   resourceUrl: z.string().url(),
 });
+
+export const taskFormSchema = z.object({
+  taskTitle: z.string().min(2).max(50),
+  status: z.enum(["open", "in progress", "completed"]),
+  priority: z.enum(["high", "medium", "low"]),
+})

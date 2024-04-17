@@ -1,9 +1,8 @@
-import { Button } from "@/components/ui/button";
 import { Tasks, columns } from "./Columns";
 import { TasksTable } from "./TasksTable";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
-import Link from "next/link";
+import AddTaskButton from "./AddTaskButton";
 
 export default async function TasksPage({
   params,
@@ -33,7 +32,8 @@ export default async function TasksPage({
     title,
     created_by:users(name),
     priority,
-    status    `,
+    status    
+    `,
     )
     .eq("project_id", params.id);
 
@@ -52,9 +52,8 @@ export default async function TasksPage({
     <div className="mx-auto max-w-6xl">
       <div className="flex flex-row items-center justify-between py-10">
         <h1 className=" text-2xl font-semibold">Tasks</h1>
-        <Link href="/project/new">
-          <Button>Add Task</Button>
-        </Link>
+        {/* <Button>Add Task</Button> */}
+        <AddTaskButton id={params.id} />
       </div>
       <TasksTable data={transformedData!} columns={columns} />
     </div>

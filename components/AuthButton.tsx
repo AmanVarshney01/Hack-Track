@@ -48,11 +48,11 @@ export default async function AuthButton() {
               <span className=" truncate text-sm">{user.email}</span>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem asChild>
+            <DropdownMenuItem className=" p-0">
               <ThemeToggle />
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem className=" p-0" asChild>
+            <DropdownMenuItem className=" p-0">
               <form action={signOut} className=" w-full text-left">
                 <Button variant={"destructive"} className=" w-full">
                   Logout

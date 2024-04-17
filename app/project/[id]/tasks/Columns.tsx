@@ -1,8 +1,19 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { DotsHorizontalIcon } from "@radix-ui/react-icons";
+import DeleteTaskButton from "./DeleteTaskButton";
+import EditTaskButton from "./EditTaskButton";
 
-// export type Tasks = Database["public"]["Tables"]["project_tasks"]["Row"];
 export type Tasks = {
   id: number;
   title: string;
@@ -27,5 +38,33 @@ export const columns: ColumnDef<Tasks>[] = [
   {
     accessorKey: "status",
     header: "Status",
+  },
+  {
+    id: "actions",
+    cell: ({ row }) => {
+      const { id, title, status, priority } = row.original;
+      console.log(id);
+      return (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" className="h-8 w-8 p-0">
+              <span className="sr-only">Open menu</span>
+              <DotsHorizontalIcon />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <EditTaskButton
+              id={id}
+              title={title}
+              status={status}
+              priority={priority}
+            />
+            {/* <DropdownMenuSeparator /> */}
+            <DropdownMenuSeparator />
+            <DeleteTaskButton id={id} />
+          </DropdownMenuContent>
+        </DropdownMenu>
+      );
+    },
   },
 ];

@@ -50,9 +50,8 @@ export default async function TasksPage({
 
   return (
     <div className="mx-auto max-w-6xl">
-      <div className="flex flex-row items-center justify-between py-10">
+      <div className="flex flex-row items-center justify-between px-4 py-10">
         <h1 className=" text-2xl font-semibold">Tasks</h1>
-        {/* <Button>Add Task</Button> */}
         <AddTaskButton id={params.id} />
       </div>
       <TasksTable data={transformedData!} columns={columns} />

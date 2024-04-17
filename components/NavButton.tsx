@@ -24,7 +24,7 @@ export default function NavButton({
       <Button
         className={cn(
           "w-full justify-start gap-2 text-base",
-          isActive && "bg-accent text-accent-foreground",
+          isActive && "bg-primary text-primary-foreground",
         )}
         variant={"ghost"}
       >

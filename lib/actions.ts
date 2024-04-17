@@ -242,3 +242,41 @@ export async function insertTask(id: number, values: z.infer<typeof taskFormSche
     throw new Error(response.error.message);
   }
 }
+
+export async function deleteTask(id: number) {
+  const supabase = createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    return redirect("/login");
+  }
+
+  const response = await supabase.from("project_tasks").delete().eq("id", id);
+
+  if (response.error) {
+    throw new Error(response.error.message);
+  }
+}
+
+export async function updateTask(id: number, values: z.infer<typeof taskFormSchema>) {
+  const supabase = createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    return redirect("/login");
+  }
+
+  const response = await supabase.from("project_tasks").update({
+    title: values.taskTitle,
+    priority: values.priority,
+    status: values.status,
+  }).eq("id", id);
+
+  if (response.error) {
+    throw new Error(response.error.message);
+  }
+}

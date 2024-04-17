@@ -121,7 +121,7 @@ export type Database = {
           created_by: string
           id: number
           priority: Database["public"]["Enums"]["task_priority"]
-          project_id: number | null
+          project_id: number
           status: Database["public"]["Enums"]["task_status"]
           title: string
         }
@@ -130,7 +130,7 @@ export type Database = {
           created_by: string
           id?: number
           priority?: Database["public"]["Enums"]["task_priority"]
-          project_id?: number | null
+          project_id: number
           status?: Database["public"]["Enums"]["task_status"]
           title: string
         }
@@ -139,7 +139,7 @@ export type Database = {
           created_by?: string
           id?: number
           priority?: Database["public"]["Enums"]["task_priority"]
-          project_id?: number | null
+          project_id?: number
           status?: Database["public"]["Enums"]["task_status"]
           title?: string
         }

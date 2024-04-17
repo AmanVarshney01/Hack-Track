@@ -9,25 +9,29 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { deleteResource } from "@/lib/actions";
+import { deleteTask } from "@/lib/actions";
 import { TrashIcon } from "@radix-ui/react-icons";
 
-export default function DeleteResourceButton({ id }: { id: number }) {
+export default function DeleteTaskButton({ id }: { id: number }) {
+  console.log("id", id);
   async function onSubmit() {
-    "use server";
-    await deleteResource(id);
+    // "use server";
+    await deleteTask(id);
   }
 
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <TrashIcon className=" cursor-pointer text-red-600" />
+        <Button className="w-full gap-2" variant={"destructive"}>
+          <TrashIcon />
+          Delete
+        </Button>
       </SheetTrigger>
       <SheetContent>
         <SheetHeader className="pb-8">
-          <SheetTitle>Delete Resource</SheetTitle>
+          <SheetTitle>Delete Task</SheetTitle>
           <SheetDescription>
-            Are you sure you want to delete this resource?
+            Are you sure you want to delete this task?
           </SheetDescription>
         </SheetHeader>
         <SheetFooter>

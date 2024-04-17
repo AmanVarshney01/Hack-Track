@@ -1,12 +1,9 @@
 import { createClient } from "@/utils/supabase/server";
 import ProjectCard from "./ProjectCard";
-import { Tables } from "@/utils/database.types";
+import { Database, Tables } from "@/utils/database.types";
+import { User } from "@supabase/supabase-js";
 
-export default async function MyProjectsGrid({
-  user,
-}: {
-  user: Tables<"users">;
-}) {
+export default async function MyProjectsGrid({ user }: { user: User }) {
   const supabase = createClient();
 
   const projects = await supabase

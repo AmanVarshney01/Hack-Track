@@ -27,7 +27,7 @@ export default async function Index() {
     <div className=" mx-auto flex w-full max-w-7xl flex-col gap-10 p-2 md:p-4">
       <section className="">
         <div className="flex flex-row items-center justify-between p-4">
-          <h1 className=" text-2xl font-medium">My Projects</h1>
+          <h1 className=" text-2xl font-semibold">My Projects</h1>
           <Link href="/project/new">
             <Button>Create Project</Button>
           </Link>
@@ -38,7 +38,7 @@ export default async function Index() {
       </section>
       <section className="">
         <div className="flex flex-row items-center p-4">
-          <h1 className=" text-2xl font-medium">Joined Projects</h1>
+          <h1 className=" text-2xl font-semibold">Joined Projects</h1>
         </div>
         <Suspense fallback={<ProjectsGridSkeleton />}>
           <JoinedProjectsGrid user={user} />

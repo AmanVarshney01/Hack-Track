@@ -1,12 +1,8 @@
 import { createClient } from "@/utils/supabase/server";
 import ProjectCard from "./ProjectCard";
-import { Tables } from "@/utils/database.types";
+import { User } from "@supabase/supabase-js";
 
-export default async function JoinedProjectsGrid({
-  user,
-}: {
-  user: Tables<"users">;
-}) {
+export default async function JoinedProjectsGrid({ user }: { user: User }) {
   const supabase = createClient();
 
   const projects = await supabase
@@ -25,7 +21,7 @@ export default async function JoinedProjectsGrid({
     )
     `,
     )
-    .eq("member_email", user.email);
+    .eq("member_email", user.email!);
 
   if (projects.error) {
     console.error(projects.error);

@@ -10,6 +10,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { ChevronDownIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
+import { Button } from "./ui/button";
+import ThemeToggle from "./ThemeToggle";
 
 export default async function AuthButton() {
   const supabase = createClient();
@@ -45,16 +47,23 @@ export default async function AuthButton() {
             <DropdownMenuItem disabled={true}>
               <span className=" truncate text-sm">{user.email}</span>
             </DropdownMenuItem>
-            <DropdownMenuSeparator />
+            {/* <DropdownMenuSeparator />
             <DropdownMenuItem className=" cursor-pointer" asChild>
               <Link href={"/project/new"} className=" truncate text-sm">
                 Create Project
               </Link>
-            </DropdownMenuItem>
+            </DropdownMenuItem> */}
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
-              <form action={signOut}>
-                <button className="w-full text-left">Logout</button>
+              {/* <Button className="w-full text-left"></Button> */}
+              <ThemeToggle />
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem className=" p-0" asChild>
+              <form action={signOut} className=" w-full text-left">
+                <Button variant={"destructive"} className=" w-full">
+                  Logout
+                </Button>
               </form>
             </DropdownMenuItem>
           </DropdownMenuContent>

@@ -1,4 +1,3 @@
-import ProjectTasksTable from "@/components/ProjectTasksTable";
 import StatusBadge from "@/components/StatusBadge";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -8,6 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Table } from "@/components/ui/table";
 import { createClient } from "@/utils/supabase/server";
 
 export default async function DashboardGrid({
@@ -58,7 +58,8 @@ export default async function DashboardGrid({
         </CardHeader>
       </Card>
       <div className=" flex flex-col justify-between lg:flex-row">
-        <ProjectTasksTable />
+        {/* <Table className=" w-auto"></Table> */}
+        <div></div>
         <div className=" flex flex-col  gap-4 ">
           <Card className="">
             <CardHeader>

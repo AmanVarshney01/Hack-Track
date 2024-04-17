@@ -5,9 +5,9 @@ import { cn } from "@/lib/utils";
 const statusVariants = cva("rounded-full", {
   variants: {
     variant: {
-      active: "border-green-400 bg-green-100",
-      paused: "border-yellow-400 bg-yellow-100",
-      completed: "border-blue-400 bg-blue-100",
+      active: "",
+      paused: "",
+      completed: "",
     },
   },
   defaultVariants: {

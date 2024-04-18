@@ -9,6 +9,7 @@ export default function ThemeToggle() {
   return (
     <Button
       className=" w-full"
+      variant={"secondary"}
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
     >
       {theme === "dark" ? "Light Mode" : "Dark Mode"}

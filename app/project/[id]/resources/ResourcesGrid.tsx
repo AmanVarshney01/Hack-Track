@@ -10,6 +10,7 @@ import { ExternalLinkIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 import EditResourceButton from "./EditResourceButton";
 import DeleteResourceButton from "./DeleteResourceButton";
+import EmptyCard from "@/components/EmptyCard";
 
 export default async function ResourcesGrid({ id }: { id: number }) {
   const supabase = createClient();
@@ -26,11 +27,13 @@ export default async function ResourcesGrid({ id }: { id: number }) {
     .eq("project_id", id);
 
   if (resources.error) {
-    console.error(resources.error);
+    throw new Error(resources.error.message);
   }
 
-  if (resources.count === null) {
-    return <p>No resources found</p>;
+  if (!resources.data || resources.data?.length === 0) {
+    return (
+      <EmptyCard message="No resources found. Add a resource to get started." />
+    );
   }
 
   return (

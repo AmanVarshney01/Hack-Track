@@ -62,7 +62,7 @@ export default function GithubCard({
             <span className=" font-medium">Homepage</span>
             {data?.homepage !== null && (
               <Link href={`${data?.homepage}`} target="_blank">
-                {data?.homepage}
+                {new URL(data?.homepage!).hostname}
               </Link>
             )}
           </div>

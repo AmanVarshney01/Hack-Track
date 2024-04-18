@@ -8,11 +8,9 @@ import { usePathname } from "next/navigation";
 export default function SettingsNavButton({
   name,
   href,
-  //   icon,
 }: {
   name: string;
   href: string;
-  //   icon: React.ReactNode;
 }) {
   const path = usePathname().split("/");
   console.log("path", path);
@@ -23,13 +21,12 @@ export default function SettingsNavButton({
   return (
     <Link href={href}>
       <Button
-        className={cn(
-          "w-full justify-start gap-2 text-base",
-          isActive && "bg-primary text-primary-foreground",
-        )}
-        variant={"ghost"}
+        // className={cn(
+        //   "w-full justify-start gap-2 text-base",
+        //   isActive && "bg-primary text-primary-foreground",
+        // )}
+        variant={isActive ? "secondary" : "ghost"}
       >
-        {/* {icon} */}
         {name}
       </Button>
     </Link>

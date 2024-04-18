@@ -22,11 +22,8 @@ export default function NavButton({
   return (
     <Link href={href}>
       <Button
-        className={cn(
-          "w-full justify-start gap-2 text-base",
-          isActive && "bg-primary text-primary-foreground",
-        )}
-        variant={"ghost"}
+        className={cn("w-full justify-start gap-2 text-base")}
+        variant={isActive ? "secondary" : "ghost"}
       >
         {icon}
         {name}

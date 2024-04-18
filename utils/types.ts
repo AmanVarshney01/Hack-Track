@@ -48,3 +48,7 @@ export const taskFormSchema = z.object({
   status: z.enum(["open", "in progress", "completed"]),
   priority: z.enum(["high", "medium", "low"]),
 })
+
+export const githubFormSchema = z.object({
+  githubUrl: z.string().url(),
+});

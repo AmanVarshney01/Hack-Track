@@ -1,3 +1,4 @@
+import GithubCard from "@/components/GithubCard";
 import StatusBadge from "@/components/StatusBadge";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -8,8 +9,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { createClient } from "@/utils/supabase/server";
-import Link from "next/link";
-import { ExternalLinkIcon } from "@radix-ui/react-icons";
 
 export default async function DashboardGrid({
   projectID,
@@ -33,7 +32,8 @@ export default async function DashboardGrid({
     description,
     start_date,
     end_date,
-    status
+    status,
+    github_url
   ),
   project_members (
     member_email,
@@ -47,9 +47,27 @@ export default async function DashboardGrid({
     .eq("id", projectID)
     .single();
 
-  const { html_url, updated_at, name, homepage } = await fetch(
-    `https://api.github.com/repos/amanvarshney01/oxabags`,
-  ).then((res) => res.json());
+  if (project.error) {
+    throw new Error(project.error.message);
+  }
+
+  const isGithubConnected =
+    project.data?.project_details[0].github_url !== null;
+
+  console.log("isGithubConnected", isGithubConnected);
+
+  let githubData;
+  if (isGithubConnected) {
+    const githubUrl = new URL(project.data?.project_details[0].github_url!);
+    githubData = await fetch(
+      `https://api.github.com/repos${githubUrl.pathname}`,
+    ).then((res) => res.json());
+    console.log("githubData", githubData);
+
+    if (githubData.message === "Not Found") {
+      throw new Error("Repository not found");
+    }
+  }
 
   return (
     <section className=" flex flex-col gap-4">
@@ -89,32 +107,7 @@ export default async function DashboardGrid({
         </CardContent>
       </Card>
       <div className=" flex flex-col gap-4 lg:flex-row">
-        <Card className=" h-min w-full">
-          <CardHeader>
-            <CardTitle className=" flex flex-row items-center gap-2 text-xl">
-              Github Repository
-              <Link href={html_url} target="_blank" className="">
-                <ExternalLinkIcon />
-              </Link>
-            </CardTitle>
-          </CardHeader>
-          <CardContent className=" space-y-3">
-            <div className=" flex flex-row items-center justify-between gap-4">
-              <span className=" font-medium">Name</span>
-              <span className="">{name}</span>
-            </div>
-            <div className=" flex flex-row items-center justify-between gap-4">
-              <span className=" font-medium">Last Updated</span>
-              <span className="">{new Date(updated_at).toDateString()}</span>
-            </div>
-            <div className=" flex flex-row items-center justify-between gap-4">
-              <span className=" font-medium">Homepage</span>
-              <Link href={homepage} target="_blank">
-                {new URL(homepage).hostname}
-              </Link>
-            </div>
-          </CardContent>
-        </Card>
+        <GithubCard data={githubData} isGithubConnected={isGithubConnected} />
         <Card className="h-min w-full">
           <CardHeader>
             <CardTitle className=" text-xl">Team</CardTitle>

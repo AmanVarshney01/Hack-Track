@@ -23,6 +23,10 @@ export default function SettingsLayout({
             href={`/project/${params.id}/settings/team`}
           />
           <SettingsNavButton
+            name="Github"
+            href={`/project/${params.id}/settings/github`}
+          />
+          <SettingsNavButton
             name="Delete"
             href={`/project/${params.id}/settings/delete`}
           />

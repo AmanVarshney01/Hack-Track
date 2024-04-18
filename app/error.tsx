@@ -21,6 +21,7 @@ export default function Error({
       <div className=" flex flex-col items-center justify-center gap-4">
         <Image src={cat} alt="Fast Typing Cat" />
         <h2 className=" text-xl">😭 I am working hard to fix this!</h2>
+        <p className=" text-sm">{error.message}</p>
         <Button className="w-full" onClick={() => reset()}>
           Try again
         </Button>

@@ -280,3 +280,14 @@ export async function updateTask(id: number, values: z.infer<typeof taskFormSche
     throw new Error(response.error.message);
   }
 }
+
+export async function saveGithubUrl(id: number, url: string) {
+  const supabase = createClient();
+  const response = await supabase.from("project_details").update({
+    github_url: url,
+  }).eq("project_id", id);
+
+  if (response.error) {
+    throw new Error(response.error.message);
+  }
+}

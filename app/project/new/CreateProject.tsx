@@ -40,6 +40,7 @@ export default function CreateProject() {
     defaultValues: {
       name: "",
       description: "",
+      githubUrl: "",
     },
   });
 
@@ -54,7 +55,7 @@ export default function CreateProject() {
   }
 
   return (
-    <Card className=" h-full w-full border-0 shadow-none">
+    <Card className=" h-full w-full">
       <CardHeader className="">
         <CardTitle className="text-xl">Create a new project</CardTitle>
       </CardHeader>
@@ -88,6 +89,23 @@ export default function CreateProject() {
               )}
             />
             <div className=" flex flex-col gap-4 md:flex-row">
+              <FormField
+                control={form.control}
+                name="githubUrl"
+                render={({ field }) => (
+                  <FormItem className="w-full">
+                    <FormLabel>Github Repository URL (optional)</FormLabel>
+                    <FormControl>
+                      <Input
+                        className=""
+                        placeholder="Github Repository URL"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
               <FormField
                 control={form.control}
                 name={"startDate"}

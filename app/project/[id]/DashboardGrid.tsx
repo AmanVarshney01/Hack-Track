@@ -54,15 +54,12 @@ export default async function DashboardGrid({
   const isGithubConnected =
     project.data?.project_details[0].github_url !== null;
 
-  console.log("isGithubConnected", isGithubConnected);
-
   let githubData;
   if (isGithubConnected) {
     const githubUrl = new URL(project.data?.project_details[0].github_url!);
     githubData = await fetch(
       `https://api.github.com/repos${githubUrl.pathname}`,
     ).then((res) => res.json());
-    console.log("githubData", githubData);
 
     if (githubData.message === "Not Found") {
       throw new Error("Repository not found");
@@ -107,7 +104,15 @@ export default async function DashboardGrid({
         </CardContent>
       </Card>
       <div className=" flex flex-col gap-4 lg:flex-row">
-        <GithubCard data={githubData} isGithubConnected={isGithubConnected} />
+        <GithubCard
+          data={{
+            name: githubData?.name,
+            updated_at: githubData?.updated_at,
+            html_url: githubData?.html_url,
+            homepage: githubData?.homepage,
+          }}
+          isGithubConnected={isGithubConnected}
+        />
         <Card className="h-min w-full">
           <CardHeader>
             <CardTitle className=" text-xl">Team</CardTitle>

@@ -5,6 +5,7 @@ import type { Viewport } from "next";
 import Navbar from "@/components/Navbar";
 import Providers from "@/components/providers";
 import { Analytics } from "@vercel/analytics/react";
+import { ScrollArea } from "@/components/ui/scroll-area";
 // import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const viewport: Viewport = {
@@ -45,7 +46,7 @@ export default function RootLayout({
         <Providers>
           <main className="flex h-svh w-full flex-col">
             <Navbar />
-            {children}
+            <ScrollArea className=" flex-1 p-4">{children}</ScrollArea>
           </main>
         </Providers>
         <Analytics />

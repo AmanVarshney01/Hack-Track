@@ -13,6 +13,7 @@ export type Database = {
         Row: {
           description: string
           end_date: string
+          github_url: string | null
           id: number
           project_id: number | null
           start_date: string
@@ -21,6 +22,7 @@ export type Database = {
         Insert: {
           description: string
           end_date: string
+          github_url?: string | null
           id?: number
           project_id?: number | null
           start_date: string
@@ -29,6 +31,7 @@ export type Database = {
         Update: {
           description?: string
           end_date?: string
+          github_url?: string | null
           id?: number
           project_id?: number | null
           start_date?: string

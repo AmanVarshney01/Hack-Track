@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -71,9 +70,6 @@ export default function CreateProject() {
                   <FormControl>
                     <Input placeholder="Project Name" {...field} />
                   </FormControl>
-                  {/* <FormDescription>
-                    This is your public display name.
-                  </FormDescription> */}
                   <FormMessage />
                 </FormItem>
               )}
@@ -122,7 +118,6 @@ export default function CreateProject() {
                           mode="single"
                           selected={field.value}
                           onSelect={field.onChange}
-                          // disabled={(date) => date > new Date()}
                           initialFocus
                         />
                       </PopoverContent>

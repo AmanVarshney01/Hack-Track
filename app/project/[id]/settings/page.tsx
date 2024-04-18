@@ -52,25 +52,5 @@ export default async function SettingsPage({
     .eq("id", params.id)
     .single();
 
-  return (
-    <div className="mx-auto max-w-6xl">
-      <div className=" px-2 py-5 md:px-4 md:py-10">
-        <h1 className=" text-2xl font-semibold">Settings</h1>
-      </div>
-      <Tabs defaultValue="update">
-        <TabsList className="gap-4">
-          <TabsTrigger value="update">General</TabsTrigger>
-          <TabsTrigger value="team">Team</TabsTrigger>
-          <TabsTrigger value="delete">Delete</TabsTrigger>
-        </TabsList>
-        <TabsContent value="update">
-          <UpdateProject id={params.id} data={project.data} />
-        </TabsContent>
-        <TabsContent value="team">Team</TabsContent>
-        <TabsContent value="delete">
-          <DeleteProject id={params.id} />
-        </TabsContent>
-      </Tabs>
-    </div>
-  );
+  return <UpdateProject id={params.id} data={project.data} />;
 }

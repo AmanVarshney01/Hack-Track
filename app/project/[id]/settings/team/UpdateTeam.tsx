@@ -24,7 +24,7 @@ import { Input } from "@/components/ui/input";
 import { updateMembersFormSchema } from "@/utils/types";
 import { TrashIcon, UpdateIcon } from "@radix-ui/react-icons";
 import { CardContent, Card, CardHeader, CardTitle } from "@/components/ui/card";
-import { updateMembers } from "@/lib/actions";
+import { deleteMember, updateMembers } from "@/lib/actions";
 
 export default function UpdateTeam({
   projectId,
@@ -50,6 +50,11 @@ export default function UpdateTeam({
 
   async function onSubmit(values: z.infer<typeof updateMembersFormSchema>) {
     await updateMembers(projectId, values);
+  }
+
+  async function removeMember(index: number) {
+    await deleteMember(members[index].id);
+    remove(index);
   }
 
   return (
@@ -110,7 +115,10 @@ export default function UpdateTeam({
                     "Save"
                   )}
                 </Button>
-                <Button variant={"destructive"} onClick={() => remove(index)}>
+                <Button
+                  variant={"destructive"}
+                  onClick={() => removeMember(index)}
+                >
                   <TrashIcon />
                 </Button>
               </div>

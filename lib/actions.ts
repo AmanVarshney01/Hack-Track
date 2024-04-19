@@ -344,3 +344,20 @@ export async function insertMembers(id: number, values: z.infer<typeof insertMem
     }
   }
 }
+
+export async function deleteMember(id: number) {
+  const supabase = createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    return redirect("/login");
+  }
+
+  const response = await supabase.from("project_members").delete().eq("id", id);
+
+  if (response.error) {
+    throw new Error(response.error.message);
+  }
+}

@@ -2,6 +2,7 @@
 
 import { useTheme } from "next-themes";
 import { Button } from "./ui/button";
+import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
 
 export default function ThemeToggle() {
   const { theme, setTheme } = useTheme();
@@ -12,7 +13,17 @@ export default function ThemeToggle() {
       variant={"secondary"}
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
     >
-      {theme === "dark" ? "Light Mode" : "Dark Mode"}
+      {theme === "dark" ? (
+        <div className=" flex flex-row items-center justify-center gap-2">
+          <SunIcon />
+          <span>Light Mode</span>
+        </div>
+      ) : (
+        <div className=" flex flex-row items-center justify-center gap-2">
+          <MoonIcon />
+          <span>Dark Mode</span>
+        </div>
+      )}
     </Button>
   );
 }

@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { Button } from "./ui/button";
-import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 
 export default function NavButton({
@@ -22,7 +21,7 @@ export default function NavButton({
   return (
     <Link href={href}>
       <Button
-        className={cn("w-full justify-start gap-2 text-base")}
+        className={"w-full justify-start gap-2 text-base"}
         variant={isActive ? "secondary" : "ghost"}
       >
         {icon}

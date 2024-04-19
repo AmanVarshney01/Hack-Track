@@ -47,7 +47,7 @@ export default function DeleteProject({ id }: { id: number }) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Delete Project Details</CardTitle>
+        <CardTitle>Delete Project</CardTitle>
         <CardDescription>
           Are you sure you want to delete this project? This action cannot be
           undone.

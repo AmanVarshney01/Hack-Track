@@ -59,7 +59,6 @@ export default function EditTaskButton({
 
   async function onSubmit(values: z.infer<typeof taskFormSchema>) {
     await updateTask(id, values);
-    form.reset();
     setOpen(false);
   }
 

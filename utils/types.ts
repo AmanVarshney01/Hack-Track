@@ -52,3 +52,21 @@ export const taskFormSchema = z.object({
 export const githubFormSchema = z.object({
   githubUrl: z.string().url(),
 });
+
+export const updateMembersFormSchema = z.object({
+  members: z.array(
+    z.object({
+      email: z.string().email(),
+      role: z.enum(["member", "mentor"]).default("member"),
+    }),
+  ),
+})
+
+export const insertMembersFormSchema = z.object({
+  members: z.array(
+    z.object({
+      email: z.string().email(),
+      role: z.enum(["member", "mentor"]).default("member"),
+    }),
+  ),
+})

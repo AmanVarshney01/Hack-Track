@@ -48,7 +48,6 @@ export default function EditResourceButton({
 
   async function onSubmit(values: z.infer<typeof resourceFormSchema>) {
     await updateResource(id, values);
-    form.reset();
     setOpen(false);
   }
 

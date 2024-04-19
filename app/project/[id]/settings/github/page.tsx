@@ -1,3 +1,4 @@
+import { redirect } from "next/navigation";
 import GithubForm from "./GithubForm";
 import { createClient } from "@/utils/supabase/server";
 
@@ -7,6 +8,16 @@ export default async function GithubPage({
   params: { id: number };
 }) {
   const supabase = createClient();
+
+  const user = await supabase.auth.getUser();
+
+  if (user.error) {
+    throw new Error(user.error.message);
+  }
+
+  if (!user.data.user) {
+    return redirect("/login");
+  }
 
   const { data, error } = await supabase
     .from("project_details")

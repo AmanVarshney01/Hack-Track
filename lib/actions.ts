@@ -1,7 +1,7 @@
 "use server";
 
 import { createClient } from "@/utils/supabase/server";
-import { insertFormSchema, resourceFormSchema, taskFormSchema, updateDescriptionFormSchema, updateEndDateFormSchema, updateStartDateFormSchema, updateStatusFormSchema, updateTitleFormSchema } from "@/utils/types";
+import { insertFormSchema, resourceFormSchema, taskFormSchema, updateDescriptionFormSchema, updateEndDateFormSchema, updateMembersFormSchema, updateStartDateFormSchema, updateStatusFormSchema, updateTitleFormSchema } from "@/utils/types";
 import { z } from "zod";
 import { redirect } from "next/navigation";
 
@@ -35,9 +35,9 @@ export async function createNewProject(
 
     for (const member of values.members) {
       await supabase.from("project_members").insert({
-        member_email: member?.email,
-        role: member?.role,
-        project_id: insertProjects.data?.id,
+        project_id: insertProjects.data?.id!,
+        member_email: member.email,
+        role: member.role,
       });
     }
 
@@ -283,6 +283,13 @@ export async function updateTask(id: number, values: z.infer<typeof taskFormSche
 
 export async function saveGithubUrl(id: number, url: string) {
   const supabase = createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    return redirect("/login");
+  }
   const response = await supabase.from("project_details").update({
     github_url: url,
   }).eq("project_id", id);
@@ -290,4 +297,27 @@ export async function saveGithubUrl(id: number, url: string) {
   if (response.error) {
     throw new Error(response.error.message);
   }
+}
+
+export async function updateMembers(id: number, values: z.infer<typeof updateMembersFormSchema>) {
+  const supabase = createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    return redirect("/login");
+  }
+  
+  for (const member of values.members) {
+    const response = await supabase.from("project_members").update({
+      member_email: member.email,
+      role: member.role,
+    }).eq("project_id", id)
+
+    if (response.error) {
+      throw new Error(response.error.message);
+    }
+  }
+
 }

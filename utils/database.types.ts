@@ -52,21 +52,21 @@ export type Database = {
           created_at: string
           id: number
           member_email: string
-          project_id: number | null
+          project_id: number
           role: Database["public"]["Enums"]["role"]
         }
         Insert: {
           created_at?: string
           id?: number
           member_email: string
-          project_id?: number | null
+          project_id: number
           role: Database["public"]["Enums"]["role"]
         }
         Update: {
           created_at?: string
           id?: number
           member_email?: string
-          project_id?: number | null
+          project_id?: number
           role?: Database["public"]["Enums"]["role"]
         }
         Relationships: [

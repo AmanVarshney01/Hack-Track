@@ -1,7 +1,7 @@
 import { createClient } from "@/utils/supabase/server";
 import ProjectCard from "./ProjectCard";
-import { Database, Tables } from "@/utils/database.types";
 import { User } from "@supabase/supabase-js";
+import EmptyCard from "./EmptyCard";
 
 export default async function MyProjectsGrid({ user }: { user: User }) {
   const supabase = createClient();
@@ -21,24 +21,26 @@ export default async function MyProjectsGrid({ user }: { user: User }) {
     .eq("created_by", user?.id);
 
   if (projects.error) {
-    console.error(projects.error);
+    throw new Error(projects.error.message);
   }
 
   return (
     <section className=" grid grid-cols-1 gap-4 p-4 lg:grid-cols-2 xl:grid-cols-3">
-      {projects.data ? (
+      {projects.data.length !== 0 ? (
         projects.data?.map((project) => (
           <ProjectCard
             key={project.id}
             id={project.id}
             name={project.name}
-            // description={project.project_details[0].description}
             status={project.project_details[0].status}
             endDate={project.project_details[0].end_date}
           />
         ))
       ) : (
-        <p>No projects found</p>
+        <EmptyCard
+          className="col-span-3"
+          message="You have not created any projects yet. Click the button above to create a new project."
+        />
       )}
     </section>
   );

@@ -22,12 +22,21 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { insertMembersFormSchema } from "@/utils/types";
+import { insertMembers } from "@/lib/actions";
 
 export default function InsertTeam({ projectId }: { projectId: number }) {
   const form = useForm<z.infer<typeof insertMembersFormSchema>>({
     resolver: zodResolver(insertMembersFormSchema),
+    defaultValues: {
+      members: [
+        {
+          email: "",
+          role: "member",
+        },
+      ],
+    },
   });
 
   const { fields, append, remove } = useFieldArray({
@@ -36,18 +45,15 @@ export default function InsertTeam({ projectId }: { projectId: number }) {
   });
 
   async function onSubmit(values: z.infer<typeof insertMembersFormSchema>) {
-    // await createNewProject(values);
+    await insertMembers(projectId, values);
     form.reset();
   }
   return (
     <Card>
-      <CardHeader>
-        <CardTitle>Add Team Members</CardTitle>
-      </CardHeader>
-      <CardContent>
+      <CardContent className=" pt-6">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-            <div className=" flex flex-row items-center justify-between pt-4 ">
+            <div className=" flex flex-row items-center justify-between ">
               <h4 className=" font-semibold leading-none tracking-tight">
                 Add Members
               </h4>
@@ -63,55 +69,51 @@ export default function InsertTeam({ projectId }: { projectId: number }) {
                 Add Member
               </Button>
             </div>
-            {fields.length != 0 ? (
-              fields.map((field, index) => (
-                <div
-                  key={field.id}
-                  className=" flex flex-row items-end justify-center gap-4"
-                >
-                  <FormField
-                    name={`members.${index}.email`}
-                    control={form.control}
-                    render={({ field }) => (
-                      <FormItem className=" w-full min-w-40">
-                        <FormLabel>Email</FormLabel>
+            {fields.map((field, index) => (
+              <div
+                key={field.id}
+                className=" flex flex-row items-end justify-center gap-4"
+              >
+                <FormField
+                  name={`members.${index}.email`}
+                  control={form.control}
+                  render={({ field }) => (
+                    <FormItem className=" w-full min-w-40">
+                      <FormLabel>Email</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Email" {...field} />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  name={`members.${index}.role`}
+                  control={form.control}
+                  render={({ field }) => (
+                    <FormItem className=" w-full  max-w-36">
+                      <FormLabel>Role</FormLabel>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
                         <FormControl>
-                          <Input placeholder="Email" {...field} />
+                          <SelectTrigger>
+                            <SelectValue placeholder="role" />
+                          </SelectTrigger>
                         </FormControl>
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    name={`members.${index}.role`}
-                    control={form.control}
-                    render={({ field }) => (
-                      <FormItem className=" w-full  max-w-36">
-                        <FormLabel>Role</FormLabel>
-                        <Select
-                          onValueChange={field.onChange}
-                          defaultValue={field.value}
-                        >
-                          <FormControl>
-                            <SelectTrigger>
-                              <SelectValue placeholder="role" />
-                            </SelectTrigger>
-                          </FormControl>
-                          <SelectContent>
-                            <SelectItem value="mentor">mentor</SelectItem>
-                            <SelectItem value="member">member</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </FormItem>
-                    )}
-                  />
-                  <Button variant={"destructive"} onClick={() => remove(index)}>
-                    <TrashIcon />
-                  </Button>
-                </div>
-              ))
-            ) : (
-              <p>You haven't added any members yet.</p>
-            )}
+                        <SelectContent>
+                          <SelectItem value="mentor">mentor</SelectItem>
+                          <SelectItem value="member">member</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </FormItem>
+                  )}
+                />
+                <Button variant={"destructive"} onClick={() => remove(index)}>
+                  <TrashIcon />
+                </Button>
+              </div>
+            ))}
             <Button type="submit" disabled={form.formState.isSubmitting}>
               {form.formState.isSubmitting ? (
                 <div className=" flex flex-row items-center justify-center gap-2">

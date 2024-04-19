@@ -115,7 +115,7 @@ export default async function DashboardGrid({
         />
         <Card className="h-min w-full">
           <CardHeader>
-            <CardTitle className=" text-xl">Team</CardTitle>
+            <CardTitle className=" text-xl">Team Members</CardTitle>
           </CardHeader>
           <CardContent className=" space-y-4">
             <div className=" flex flex-row items-center justify-between gap-4">

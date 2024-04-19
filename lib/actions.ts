@@ -1,7 +1,7 @@
 "use server";
 
 import { createClient } from "@/utils/supabase/server";
-import { insertFormSchema, resourceFormSchema, taskFormSchema, updateDescriptionFormSchema, updateEndDateFormSchema, updateMembersFormSchema, updateStartDateFormSchema, updateStatusFormSchema, updateTitleFormSchema } from "@/utils/types";
+import { insertFormSchema, insertMembersFormSchema, resourceFormSchema, taskFormSchema, updateDescriptionFormSchema, updateEndDateFormSchema, updateMembersFormSchema, updateStartDateFormSchema, updateStatusFormSchema, updateTitleFormSchema } from "@/utils/types";
 import { z } from "zod";
 import { redirect } from "next/navigation";
 
@@ -320,4 +320,27 @@ export async function updateMembers(id: number, values: z.infer<typeof updateMem
     }
   }
 
+}
+
+export async function insertMembers(id: number, values: z.infer<typeof insertMembersFormSchema>) {
+  const supabase = createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    return redirect("/login");
+  }
+  
+  for (const member of values.members) {
+    const response = await supabase.from("project_members").insert({
+      project_id: id,
+      member_email: member.email,
+      role: member.role,
+    });
+
+    if (response.error) {
+      throw new Error(response.error.message);
+    }
+  }
 }

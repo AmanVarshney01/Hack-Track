@@ -128,13 +128,17 @@ export default async function DashboardGrid({
             <div className=" flex flex-row items-center justify-between gap-4">
               <span className=" font-medium">Start Date</span>
               <span className="">
-                {project.data?.project_details[0].start_date}
+                {new Date(
+                  project.data?.project_details[0].start_date!,
+                ).toDateString()}
               </span>
             </div>
             <div className=" flex flex-row items-center justify-between gap-4">
               <span className=" font-medium">End Date</span>
               <span className="">
-                {project.data?.project_details[0].end_date}
+                {new Date(
+                  project.data?.project_details[0].end_date!,
+                ).toDateString()}
               </span>
             </div>
           </CardContent>

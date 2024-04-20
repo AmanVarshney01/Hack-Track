@@ -5,8 +5,8 @@ import { z } from "zod";
 export type TypedSupabaseClient = SupabaseClient<Database>;
 
 export const insertFormSchema = z.object({
-  name: z.string().min(2).max(50),
-  description: z.string().min(2).max(150),
+  projectTitle: z.string().min(2).max(50),
+  projectDescription: z.string().min(2).max(150),
   githubUrl: z.string().url().refine(async (value) => {
     try {
       const url = new URL(value);
@@ -16,7 +16,9 @@ export const insertFormSchema = z.object({
     } catch (error) {
       return false;
     }
-  }, "Invalid GitHub URL").optional(),
+  }, {
+    message: "Invalid GitHub URL",
+  }).optional(),
   members: z.array(
     z.object({
       email: z.string().email(),
@@ -28,11 +30,11 @@ export const insertFormSchema = z.object({
 });
 
 export const updateTitleFormSchema = z.object({
-  name: z.string().min(2).max(50),
+  projectTitle: z.string().min(2).max(50),
 });
 
 export const updateDescriptionFormSchema = z.object({
-  description: z.string().min(2).max(150),
+  projectDescription: z.string().min(2).max(150),
 });
 
 export const updateStartDateFormSchema = z.object({
@@ -68,7 +70,9 @@ export const githubFormSchema = z.object({
     } catch (error) {
       return false;
     }
-  }, "Invalid GitHub URL"),
+  }, {
+    message: "Invalid GitHub URL",
+  })
 });
 
 export const updateMembersFormSchema = z.object({

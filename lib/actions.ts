@@ -20,7 +20,7 @@ export async function createNewProject(
     const insertProjects = await supabase
       .from("projects")
       .insert({
-        name: values.name,
+        name: values.projectTitle,
         created_by: user?.id,
       })
       .select("id")
@@ -28,9 +28,9 @@ export async function createNewProject(
 
     const insertProjectDetails = await supabase.from("project_details").insert({
       project_id: insertProjects.data?.id,
-      description: values.description,
-      start_date: values.startDate?.toISOString(),
-      end_date: values.endDate?.toISOString(),
+      description: values.projectDescription,
+      start_date: values.startDate?.toDateString(),
+      end_date: values.endDate?.toDateString(),
     });
 
     for (const member of values.members) {
@@ -59,7 +59,7 @@ export async function updateTitle(id: number, values: z.infer<typeof updateTitle
   }
 
   const updateProject = await supabase.from("projects").update({
-    name: values.name,
+    name: values.projectTitle,
   }).eq("id", id);
 
   if (updateProject.error) {
@@ -78,7 +78,7 @@ export async function updateDescription(id: number, values: z.infer<typeof updat
   }
 
   const updateProject = await supabase.from("project_details").update({
-    description: values.description
+    description: values.projectDescription
   }).eq("project_id", id)
 
   if (updateProject.error) {
@@ -97,7 +97,7 @@ export async function updateStartDate(id: number, values: z.infer<typeof updateS
   }
 
   const updateProject = await supabase.from("project_details").update({
-    start_date: values.startDate?.toISOString()
+    start_date: values.startDate?.toDateString()
   }).eq("project_id", id)
 
   if (updateProject.error) {
@@ -116,7 +116,7 @@ export async function updateEndDate(id: number, values: z.infer<typeof updateEnd
   }
 
   const updateProject = await supabase.from("project_details").update({
-    end_date: values.endDate?.toISOString()
+    end_date: values.endDate?.toDateString()
   }).eq("project_id", id)
 
   if (updateProject.error) {
@@ -340,6 +340,11 @@ export async function insertMembers(id: number, values: z.infer<typeof insertMem
     });
 
     if (response.error) {
+      if (response.status === 409) {
+        return {
+          error: "Member already exists",
+        }
+      }
       throw new Error(response.error.message);
     }
   }

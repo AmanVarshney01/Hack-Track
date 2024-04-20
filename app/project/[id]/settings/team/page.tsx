@@ -36,7 +36,9 @@ export default async function TeamPage({ params }: { params: { id: number } }) {
 
   return (
     <div className=" flex flex-col gap-4">
-      <UpdateTeam projectId={params.id} members={projectMembers.data} />
+      {projectMembers.data.length > 0 && (
+        <UpdateTeam projectId={params.id} members={projectMembers.data} />
+      )}
       <InsertTeam projectId={params.id} />
     </div>
   );

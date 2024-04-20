@@ -5,6 +5,7 @@ import type { Viewport } from "next";
 import Navbar from "@/components/Navbar";
 import Providers from "@/components/providers";
 import { Analytics } from "@vercel/analytics/react";
+import { Toaster } from "sonner";
 // import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const viewport: Viewport = {
@@ -46,6 +47,7 @@ export default function RootLayout({
           <main className="flex h-svh w-full flex-col">
             <Navbar />
             {children}
+            <Toaster richColors />
           </main>
         </Providers>
         <Analytics />

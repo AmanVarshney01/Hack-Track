@@ -25,6 +25,7 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { insertMembersFormSchema } from "@/utils/types";
 import { insertMembers } from "@/lib/actions";
+import { toast } from "sonner";
 
 export default function InsertTeam({ projectId }: { projectId: number }) {
   const form = useForm<z.infer<typeof insertMembersFormSchema>>({
@@ -45,7 +46,12 @@ export default function InsertTeam({ projectId }: { projectId: number }) {
   });
 
   async function onSubmit(values: z.infer<typeof insertMembersFormSchema>) {
-    await insertMembers(projectId, values);
+    const response = await insertMembers(projectId, values);
+
+    if (response?.error) {
+      toast.error(response.error);
+    }
+
     form.reset();
   }
   return (
@@ -83,6 +89,7 @@ export default function InsertTeam({ projectId }: { projectId: number }) {
                       <FormControl>
                         <Input placeholder="Email" {...field} />
                       </FormControl>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />

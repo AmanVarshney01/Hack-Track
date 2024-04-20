@@ -38,7 +38,7 @@ export default async function GithubCard({
         </CardHeader>
         <CardContent className=" space-y-3">
           <CardDescription>
-            <p>Connect a Github repository to view more details</p>
+            Connect a Github repository to view more details
           </CardDescription>
         </CardContent>
       </Card>

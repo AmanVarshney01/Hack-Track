@@ -50,7 +50,7 @@ export default function UpdateProject({ id, data }: { id: number; data: any }) {
   const titleForm = useForm<z.infer<typeof updateTitleFormSchema>>({
     resolver: zodResolver(updateTitleFormSchema),
     defaultValues: {
-      name: data?.name,
+      projectTitle: data?.name,
     },
   });
 
@@ -63,7 +63,7 @@ export default function UpdateProject({ id, data }: { id: number; data: any }) {
   const descriptionForm = useForm<z.infer<typeof updateDescriptionFormSchema>>({
     resolver: zodResolver(updateDescriptionFormSchema),
     defaultValues: {
-      description: data?.project_details[0].description,
+      projectDescription: data?.project_details[0].description,
     },
   });
 
@@ -123,7 +123,7 @@ export default function UpdateProject({ id, data }: { id: number; data: any }) {
             >
               <FormField
                 control={titleForm.control}
-                name="name"
+                name="projectTitle"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Name</FormLabel>
@@ -158,7 +158,7 @@ export default function UpdateProject({ id, data }: { id: number; data: any }) {
             >
               <FormField
                 control={descriptionForm.control}
-                name="description"
+                name="projectDescription"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Description</FormLabel>

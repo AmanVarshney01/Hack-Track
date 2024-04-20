@@ -17,7 +17,7 @@ export default async function Index() {
   } = await supabase.auth.getUser();
 
   if (error) {
-    console.error(error);
+    throw new Error(error.message);
   }
 
   if (!user) {

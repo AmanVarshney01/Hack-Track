@@ -18,7 +18,7 @@ export default async function ResourcesPage({
   } = await supabase.auth.getUser();
 
   if (error) {
-    console.error(error);
+    throw new Error(error.message);
   }
 
   if (!user) {

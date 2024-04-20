@@ -1,8 +1,9 @@
-import { columns } from "./Columns";
-import TasksTable from "./TasksTable";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import AddTaskButton from "./AddTaskButton";
+import TasksGrid from "./TasksGrid";
+import { Suspense } from "react";
+import TasksGridSkeleton from "@/components/skeletons/TasksGridSkeleton";
 
 export default async function TasksPage({
   params,
@@ -17,35 +18,11 @@ export default async function TasksPage({
   } = await supabase.auth.getUser();
 
   if (error) {
-    console.error(error);
+    throw new Error(error.message);
   }
 
   if (!user) {
     return redirect("/login");
-  }
-
-  const tasks = await supabase
-    .from("project_tasks")
-    .select(
-      `
-    id,
-    title,
-    created_by:users(name),
-    priority,
-    status    
-    `,
-    )
-    .eq("project_id", params.id);
-
-  const transformedData = tasks.data?.map((task) => {
-    return {
-      ...task,
-      created_by: task.created_by?.name!,
-    };
-  });
-
-  if (tasks.error) {
-    console.error(tasks.error);
   }
 
   return (
@@ -54,7 +31,9 @@ export default async function TasksPage({
         <h1 className=" text-2xl font-semibold">Tasks</h1>
         <AddTaskButton id={params.id} />
       </div>
-      <TasksTable data={transformedData!} columns={columns} />
+      <Suspense fallback={<TasksGridSkeleton />}>
+        <TasksGrid projectID={params.id} />
+      </Suspense>
     </div>
   );
 }

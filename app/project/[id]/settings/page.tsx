@@ -17,7 +17,7 @@ export default async function SettingsPage({
   } = await supabase.auth.getUser();
 
   if (error) {
-    console.error(error);
+    throw new Error(error.message);
   }
 
   if (!user) {

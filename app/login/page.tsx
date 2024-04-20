@@ -18,7 +18,12 @@ export default async function Login({
   const supabase = createClient();
   const {
     data: { user },
+    error,
   } = await supabase.auth.getUser();
+
+  if (error) {
+    throw new Error(error.message);
+  }
 
   if (user) {
     redirect("/");

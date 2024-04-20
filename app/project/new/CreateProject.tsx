@@ -246,7 +246,7 @@ export default function CreateProject() {
                 </div>
               ))
             ) : (
-              <p>You haven't added any members yet.</p>
+              <p>You have not added any members yet.</p>
             )}
             <Button type="submit" disabled={form.formState.isSubmitting}>
               {form.formState.isSubmitting ? (

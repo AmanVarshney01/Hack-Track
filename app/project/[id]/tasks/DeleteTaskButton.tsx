@@ -11,10 +11,12 @@ import {
 } from "@/components/ui/sheet";
 import { deleteTask } from "@/lib/actions";
 import { TrashIcon } from "@radix-ui/react-icons";
+import { toast } from "sonner";
 
 export default function DeleteTaskButton({ id }: { id: number }) {
   async function onSubmit() {
     await deleteTask(id);
+    toast.success("Task deleted successfully");
   }
 
   return (

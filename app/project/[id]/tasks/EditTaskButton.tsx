@@ -34,6 +34,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { toast } from "sonner";
 
 export default function EditTaskButton({
   id,
@@ -59,6 +60,7 @@ export default function EditTaskButton({
 
   async function onSubmit(values: z.infer<typeof taskFormSchema>) {
     await updateTask(id, values);
+    toast.success("Task updated successfully");
     setOpen(false);
   }
 

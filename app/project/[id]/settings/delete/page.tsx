@@ -1,4 +1,4 @@
-import DeleteProject from "../DeleteProject";
+import DeleteProject from "./DeleteProject";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 

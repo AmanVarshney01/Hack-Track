@@ -26,6 +26,7 @@ import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { updateResource } from "@/lib/actions";
 import { Pencil2Icon, UpdateIcon } from "@radix-ui/react-icons";
+import { toast } from "sonner";
 
 export default function EditResourceButton({
   id,
@@ -48,6 +49,7 @@ export default function EditResourceButton({
 
   async function onSubmit(values: z.infer<typeof resourceFormSchema>) {
     await updateResource(id, values);
+    toast.success("Resource updated successfully");
     setOpen(false);
   }
 

@@ -33,6 +33,7 @@ import { useState } from "react";
 import { taskFormSchema } from "@/utils/types";
 import { UpdateIcon } from "@radix-ui/react-icons";
 import { insertTask } from "@/lib/actions";
+import { toast } from "sonner";
 
 export default function AddTaskButton({ id }: { id: number }) {
   const [open, setOpen] = useState(false);
@@ -48,6 +49,7 @@ export default function AddTaskButton({ id }: { id: number }) {
 
   async function onSubmit(values: z.infer<typeof taskFormSchema>) {
     await insertTask(id, values);
+    toast.success("Task added successfully");
     form.reset();
     setOpen(false);
   }

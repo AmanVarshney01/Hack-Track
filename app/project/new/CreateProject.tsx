@@ -33,6 +33,7 @@ import { cn } from "@/lib/utils";
 import { Calendar } from "@/components/ui/calendar";
 import { Textarea } from "@/components/ui/textarea";
 import { insertFormSchema } from "@/utils/types";
+import { toast } from "sonner";
 
 export default function CreateProject() {
   const form = useForm<z.infer<typeof insertFormSchema>>({
@@ -50,6 +51,7 @@ export default function CreateProject() {
 
   async function onSubmit(values: z.infer<typeof insertFormSchema>) {
     await createNewProject(values);
+    toast.success("Project created successfully");
     form.reset();
   }
 

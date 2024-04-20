@@ -18,6 +18,7 @@ import { Input } from "@/components/ui/input";
 import { UpdateIcon } from "@radix-ui/react-icons";
 import { saveGithubUrl } from "@/lib/actions";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { toast } from "sonner";
 
 export default function GithubForm({ id, url }: { id: number; url: string }) {
   const form = useForm<z.infer<typeof githubFormSchema>>({
@@ -29,6 +30,7 @@ export default function GithubForm({ id, url }: { id: number; url: string }) {
 
   async function onSubmit(values: z.infer<typeof githubFormSchema>) {
     await saveGithubUrl(id, values.githubUrl);
+    toast.success("Github URL saved successfully");
   }
 
   return (

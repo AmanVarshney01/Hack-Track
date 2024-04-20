@@ -45,6 +45,7 @@ import {
   SelectValue,
   SelectItem,
 } from "@/components/ui/select";
+import { toast } from "sonner";
 
 export default function UpdateProject({ id, data }: { id: number; data: any }) {
   const titleForm = useForm<z.infer<typeof updateTitleFormSchema>>({
@@ -58,6 +59,7 @@ export default function UpdateProject({ id, data }: { id: number; data: any }) {
     values: z.infer<typeof updateTitleFormSchema>,
   ) {
     await updateTitle(id, values);
+    toast.success("Project title updated successfully");
   }
 
   const descriptionForm = useForm<z.infer<typeof updateDescriptionFormSchema>>({
@@ -71,6 +73,7 @@ export default function UpdateProject({ id, data }: { id: number; data: any }) {
     values: z.infer<typeof updateDescriptionFormSchema>,
   ) {
     await updateDescription(id, values);
+    toast.success("Project description updated successfully");
   }
 
   const startDateForm = useForm<z.infer<typeof updateStartDateFormSchema>>({
@@ -84,6 +87,7 @@ export default function UpdateProject({ id, data }: { id: number; data: any }) {
     values: z.infer<typeof updateStartDateFormSchema>,
   ) {
     await updateStartDate(id, values);
+    toast.success("Project start date updated successfully");
   }
 
   const endDateForm = useForm<z.infer<typeof updateEndDateFormSchema>>({
@@ -97,6 +101,7 @@ export default function UpdateProject({ id, data }: { id: number; data: any }) {
     values: z.infer<typeof updateEndDateFormSchema>,
   ) {
     await updateEndDate(id, values);
+    toast.success("Project end date updated successfully");
   }
 
   const statusForm = useForm<z.infer<typeof updateStatusFormSchema>>({
@@ -110,6 +115,7 @@ export default function UpdateProject({ id, data }: { id: number; data: any }) {
     values: z.infer<typeof updateStatusFormSchema>,
   ) {
     await updateStatus(id, values);
+    toast.success("Project status updated successfully");
   }
 
   return (

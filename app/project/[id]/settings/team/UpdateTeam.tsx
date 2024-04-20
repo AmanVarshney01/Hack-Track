@@ -25,6 +25,7 @@ import { updateMembersFormSchema } from "@/utils/types";
 import { TrashIcon, UpdateIcon } from "@radix-ui/react-icons";
 import { CardContent, Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { deleteMember, updateMembers } from "@/lib/actions";
+import { toast } from "sonner";
 
 export default function UpdateTeam({
   projectId,
@@ -50,6 +51,7 @@ export default function UpdateTeam({
 
   async function onSubmit(values: z.infer<typeof updateMembersFormSchema>) {
     await updateMembers(projectId, values);
+    toast.success("Members updated successfully");
   }
 
   async function removeMember(index: number) {

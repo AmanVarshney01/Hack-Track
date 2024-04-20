@@ -28,6 +28,7 @@ import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { insertResource } from "@/lib/actions";
 import { UpdateIcon } from "@radix-ui/react-icons";
+import { toast } from "sonner";
 
 export default function AddResourceButton({ id }: { id: number }) {
   const [open, setOpen] = useState(false);
@@ -42,6 +43,7 @@ export default function AddResourceButton({ id }: { id: number }) {
 
   async function onSubmit(values: z.infer<typeof resourceFormSchema>) {
     await insertResource(id, values);
+    toast.success("Resource added successfully");
     form.reset();
     setOpen(false);
   }

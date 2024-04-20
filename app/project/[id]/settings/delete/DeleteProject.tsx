@@ -23,6 +23,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { UpdateIcon } from "@radix-ui/react-icons";
+import { toast } from "sonner";
 
 export default function DeleteProject({ id }: { id: number }) {
   const formSchema = z.object({
@@ -40,7 +41,7 @@ export default function DeleteProject({ id }: { id: number }) {
   });
   async function onSubmit() {
     await deleteProject(id);
-
+    toast.success("Project deleted successfully");
     form.reset();
   }
 

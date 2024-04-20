@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -11,11 +13,12 @@ import {
 } from "@/components/ui/sheet";
 import { deleteResource } from "@/lib/actions";
 import { TrashIcon } from "@radix-ui/react-icons";
+import { toast } from "sonner";
 
 export default function DeleteResourceButton({ id }: { id: number }) {
   async function onSubmit() {
-    "use server";
     await deleteResource(id);
+    toast.success("Resource deleted successfully");
   }
 
   return (

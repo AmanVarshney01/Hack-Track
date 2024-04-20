@@ -1,6 +1,6 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import UpdateProject from "./UpdateProject";
-import DeleteProject from "./DeleteProject";
+import DeleteProject from "./delete/DeleteProject";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 

@@ -7,7 +7,16 @@ export type TypedSupabaseClient = SupabaseClient<Database>;
 export const insertFormSchema = z.object({
   name: z.string().min(2).max(50),
   description: z.string().min(2).max(150),
-  githubUrl: z.string().url().optional(),
+  githubUrl: z.string().url().refine(async (value) => {
+    try {
+      const url = new URL(value);
+      const response = await fetch(`https://api.github.com/repos${url.pathname}`);
+      const data = await response.json();
+      return response.ok && data;
+    } catch (error) {
+      return false;
+    }
+  }, "Invalid GitHub URL").optional(),
   members: z.array(
     z.object({
       email: z.string().email(),
@@ -50,7 +59,16 @@ export const taskFormSchema = z.object({
 })
 
 export const githubFormSchema = z.object({
-  githubUrl: z.string().url(),
+  githubUrl: z.string().url().refine(async (value) => {
+    try {
+      const url = new URL(value);
+      const response = await fetch(`https://api.github.com/repos${url.pathname}`);
+      const data = await response.json();
+      return response.ok && data;
+    } catch (error) {
+      return false;
+    }
+  }, "Invalid GitHub URL"),
 });
 
 export const updateMembersFormSchema = z.object({

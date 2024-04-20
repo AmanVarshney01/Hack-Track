@@ -24,7 +24,7 @@ export default async function GithubCard({
     ).then((res) => res.json());
 
     if (githubData.message === "Not Found") {
-      throw new Error("Repository not found");
+      throw new Error("Github Repository not found");
     }
   }
 

@@ -13,12 +13,7 @@ export default async function Index() {
 
   const {
     data: { user },
-    error,
   } = await supabase.auth.getUser();
-
-  if (error) {
-    throw new Error(error.message);
-  }
 
   if (!user) {
     return redirect("/login");

@@ -8,12 +8,7 @@ export default async function TeamPage({ params }: { params: { id: number } }) {
 
   const {
     data: { user },
-    error,
   } = await supabase.auth.getUser();
-
-  if (error) {
-    throw new Error(error.message);
-  }
 
   if (!user) {
     return redirect("/login");

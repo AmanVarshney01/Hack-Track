@@ -9,13 +9,11 @@ export default async function DeletePage({
 }) {
   const supabase = createClient();
 
-  const user = await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
-  if (user.error) {
-    throw new Error(user.error.message);
-  }
-
-  if (!user.data.user) {
+  if (!user) {
     return redirect("/login");
   }
   return <DeleteProject id={params.id} />;

@@ -21,10 +21,6 @@ export default async function Login({
     error,
   } = await supabase.auth.getUser();
 
-  if (error) {
-    throw new Error(error.message);
-  }
-
   if (user) {
     redirect("/");
   }

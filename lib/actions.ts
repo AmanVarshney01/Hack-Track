@@ -156,7 +156,7 @@ export async function deleteProject(id: number) {
   const response = await supabase.from("projects").delete().eq("id", id);
 
     if (response.error) {
-      console.error(response.error);
+      throw new Error(response.error.message);
     } else {
       return redirect("/");
     }
@@ -216,7 +216,7 @@ export async function deleteResource(id: number) {
   const response = await supabase.from("project_resources").delete().eq("id", id);
 
   if (response.error) {
-    console.error(response.error);
+    throw new Error(response.error.message);
   }
 }
 

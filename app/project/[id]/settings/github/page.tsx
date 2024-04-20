@@ -11,10 +11,6 @@ export default async function GithubPage({
 
   const user = await supabase.auth.getUser();
 
-  if (user.error) {
-    throw new Error(user.error.message);
-  }
-
   if (!user.data.user) {
     return redirect("/login");
   }

@@ -9,18 +9,25 @@ import {
 import Link from "next/link";
 import { ExternalLinkIcon } from "@radix-ui/react-icons";
 
-export default function GithubCard({
-  data,
+export default async function GithubCard({
+  githubUrl,
   isGithubConnected,
 }: {
-  data?: {
-    name: string;
-    updated_at: string;
-    html_url: string;
-    homepage: string;
-  };
+  githubUrl: string;
   isGithubConnected: boolean;
 }) {
+  let githubData;
+  if (isGithubConnected) {
+    const parsedGithubUrl = new URL(githubUrl);
+    githubData = await fetch(
+      `https://api.github.com/repos${parsedGithubUrl.pathname}`,
+    ).then((res) => res.json());
+
+    if (githubData.message === "Not Found") {
+      throw new Error("Repository not found");
+    }
+  }
+
   if (!isGithubConnected) {
     return (
       <Card className=" h-min w-full">
@@ -42,7 +49,7 @@ export default function GithubCard({
         <CardHeader>
           <CardTitle className=" flex flex-row items-center gap-2 text-xl">
             Github Repository
-            <Link href={`${data?.html_url}`} target="_blank" className="">
+            <Link href={`${githubData.html_url}`} target="_blank" className="">
               <ExternalLinkIcon />
             </Link>
           </CardTitle>
@@ -50,19 +57,19 @@ export default function GithubCard({
         <CardContent className=" space-y-3">
           <div className=" flex flex-row items-center justify-between gap-4">
             <span className=" font-medium">Name</span>
-            <span className="">{data?.name}</span>
+            <span className="">{githubData.name}</span>
           </div>
           <div className=" flex flex-row items-center justify-between gap-4">
             <span className=" font-medium">Last Updated</span>
             <span className="">
-              {new Date(data?.updated_at!).toDateString()}
+              {new Date(githubData.updated_at!).toDateString()}
             </span>
           </div>
-          {data?.homepage !== "" && (
+          {githubData.homepage !== "" && (
             <div className=" flex flex-row items-center justify-between gap-4">
               <span className=" font-medium">Homepage</span>
-              <Link href={`${data?.homepage}`} target="_blank">
-                {new URL(data?.homepage!).hostname}
+              <Link href={`${githubData.homepage}`} target="_blank">
+                {new URL(githubData.homepage!).hostname}
               </Link>
             </div>
           )}

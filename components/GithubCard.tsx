@@ -58,14 +58,14 @@ export default function GithubCard({
               {new Date(data?.updated_at!).toDateString()}
             </span>
           </div>
-          <div className=" flex flex-row items-center justify-between gap-4">
-            <span className=" font-medium">Homepage</span>
-            {data?.homepage !== null && (
+          {data?.homepage !== "" && (
+            <div className=" flex flex-row items-center justify-between gap-4">
+              <span className=" font-medium">Homepage</span>
               <Link href={`${data?.homepage}`} target="_blank">
                 {new URL(data?.homepage!).hostname}
               </Link>
-            )}
-          </div>
+            </div>
+          )}
         </CardContent>
       </Card>
     );

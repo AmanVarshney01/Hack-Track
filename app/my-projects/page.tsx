@@ -7,6 +7,7 @@ import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
+import { ArrowLeftIcon } from "@radix-ui/react-icons";
 
 export default async function MyProjectsPage() {
   const supabase = createClient();
@@ -23,10 +24,17 @@ export default async function MyProjectsPage() {
     <ScrollArea className="h-full w-full p-4">
       <div className=" mx-auto flex w-full max-w-7xl flex-col gap-4">
         <Card className="border-0">
-          <CardHeader className="flex flex-row items-center justify-between">
-            <CardTitle className=" text-2xl font-semibold">
-              My Projects
-            </CardTitle>
+          <CardHeader className="flex flex-row items-center justify-between gap-4">
+            <div className="flex flex-row items-center gap-4">
+              <Link href={"/"}>
+                <Button variant={"ghost"}>
+                  <ArrowLeftIcon />
+                </Button>
+              </Link>
+              <CardTitle className=" text-2xl font-semibold">
+                My Projects
+              </CardTitle>
+            </div>
             <Link href="/project/new">
               <Button>Create Project</Button>
             </Link>

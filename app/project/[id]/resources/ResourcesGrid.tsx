@@ -48,7 +48,7 @@ export default async function ResourcesGrid({
       {resources.data?.map((resource) => {
         const faviconUrl = new URL(resource.url).origin + "/favicon.ico";
         return (
-          <Card key={resource.id}>
+          <Card key={resource.id} className=" flex flex-col justify-between">
             <CardHeader>
               <Link href={resource.url} target="_blank">
                 <CardTitle className="flex flex-row items-center gap-2">

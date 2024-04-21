@@ -28,7 +28,7 @@ export default async function JoinedProjectsGrid({ user }: { user: User }) {
   }
 
   return (
-    <section className=" grid grid-cols-1 gap-4 p-4 lg:grid-cols-2 xl:grid-cols-3">
+    <section className=" grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-3">
       {projects.data.length !== 0 ? (
         projects.data?.map((project) => (
           <ProjectCard

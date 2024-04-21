@@ -54,7 +54,9 @@ export default async function ResourcesGrid({
                 <CardTitle className="flex flex-row items-center gap-2">
                   <Avatar className=" h-8 w-8 border-2 border-foreground">
                     <AvatarImage className=" bg-white" src={faviconUrl} />
-                    <AvatarFallback>ICO</AvatarFallback>
+                    <AvatarFallback>
+                      {resource.name.charAt(0).toUpperCase()}
+                    </AvatarFallback>
                   </Avatar>
                   <span className=" capitalize">{resource.name}</span>
                 </CardTitle>

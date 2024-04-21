@@ -78,7 +78,7 @@ export default function InsertTeam({ projectId }: { projectId: number }) {
             {fields.map((field, index) => (
               <div
                 key={field.id}
-                className=" flex flex-row items-end justify-center gap-4"
+                className=" flex flex-col justify-center gap-4 md:flex-row"
               >
                 <FormField
                   name={`members.${index}.email`}
@@ -116,12 +116,20 @@ export default function InsertTeam({ projectId }: { projectId: number }) {
                     </FormItem>
                   )}
                 />
-                <Button variant={"destructive"} onClick={() => remove(index)}>
+                <Button
+                  className="w-full self-end md:w-fit"
+                  variant={"destructive"}
+                  onClick={() => remove(index)}
+                >
                   <TrashIcon />
                 </Button>
               </div>
             ))}
-            <Button type="submit" disabled={form.formState.isSubmitting}>
+            <Button
+              className="w-full md:w-fit"
+              type="submit"
+              disabled={form.formState.isSubmitting}
+            >
               {form.formState.isSubmitting ? (
                 <div className=" flex flex-row items-center justify-center gap-2">
                   <UpdateIcon className=" animate-spin" />

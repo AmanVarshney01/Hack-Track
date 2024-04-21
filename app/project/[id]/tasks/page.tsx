@@ -22,7 +22,7 @@ export default async function TasksPage({
   }
 
   return (
-    <div className="mx-auto max-w-6xl">
+    <div className="mx-auto max-w-6xl p-4">
       <div className="flex flex-row items-center justify-between px-2 py-5 md:px-4 md:py-8">
         <h1 className=" text-2xl font-semibold">Tasks</h1>
         <AddTaskButton id={params.id} />

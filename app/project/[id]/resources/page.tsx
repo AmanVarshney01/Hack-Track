@@ -26,7 +26,7 @@ export default async function ResourcesPage({
         <AddResourceButton id={params.id} />
       </div>
       <Suspense fallback={<ResourcesGridSkeleton />}>
-        <ResourcesGrid id={params.id} />
+        <ResourcesGrid projectId={params.id} />
       </Suspense>
     </div>
   );

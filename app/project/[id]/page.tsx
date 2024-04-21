@@ -25,7 +25,7 @@ export default async function ProjectPage({
         <h1 className=" text-2xl font-semibold">Dashboard</h1>
       </div>
       <Suspense fallback={<DashboardGridSkeleton />}>
-        <DashboardGrid projectID={params.id} userID={user.id} />
+        <DashboardGrid projectId={params.id} userID={user.id} />
       </Suspense>
     </div>
   );

@@ -24,28 +24,20 @@ export default async function SettingsPage({
     .select(
       `
   name,
-  users (
-    name,
-    email
-  ),
   project_details (
     description,
     start_date,
     end_date,
     status
-  ),
-  project_members (
-    id,
-    member_email,
-    users (
-      name
-    ),
-    role
   )
   `,
     )
     .eq("id", params.id)
     .single();
+
+  if (project.error) {
+    throw new Error(project.error.message);
+  }
 
   return <UpdateProject id={params.id} data={project.data} />;
 }

@@ -1,5 +1,6 @@
 import {
   Card,
+  CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
@@ -11,8 +12,14 @@ import Link from "next/link";
 import EditResourceButton from "./EditResourceButton";
 import DeleteResourceButton from "./DeleteResourceButton";
 import EmptyCard from "@/components/EmptyCard";
+import Image from "next/image";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-export default async function ResourcesGrid({ id }: { id: number }) {
+export default async function ResourcesGrid({
+  projectId,
+}: {
+  projectId: number;
+}) {
   const supabase = createClient();
 
   const resources = await supabase
@@ -24,7 +31,7 @@ export default async function ResourcesGrid({ id }: { id: number }) {
     url
     `,
     )
-    .eq("project_id", id);
+    .eq("project_id", projectId);
 
   if (resources.error) {
     throw new Error(resources.error.message);
@@ -38,29 +45,40 @@ export default async function ResourcesGrid({ id }: { id: number }) {
 
   return (
     <section className=" grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-3">
-      {resources.data?.map((resource) => (
-        <Card key={resource.id}>
-          <CardHeader>
-            <Link href={resource.url} target="_blank">
-              <CardTitle>{resource.name}</CardTitle>
-            </Link>
-            <CardDescription className=" line-clamp-2">
-              {resource.url}
-            </CardDescription>
-          </CardHeader>
-          <CardFooter className=" justify-end space-x-4">
-            <EditResourceButton
-              id={resource.id}
-              name={resource.name}
-              url={resource.url}
-            />
-            <DeleteResourceButton id={resource.id} />
-            <Link href={resource.url} target="_blank">
-              <ExternalLinkIcon className=" text-blue-600" />
-            </Link>
-          </CardFooter>
-        </Card>
-      ))}
+      {resources.data?.map((resource) => {
+        const faviconUrl = new URL(resource.url).origin + "/favicon.ico";
+        return (
+          <Card key={resource.id}>
+            <CardHeader>
+              <Link href={resource.url} target="_blank">
+                <CardTitle className="flex flex-row items-center gap-2">
+                  <Avatar className=" h-8 w-8 border-2 border-foreground">
+                    <AvatarImage className=" bg-white" src={faviconUrl} />
+                    <AvatarFallback>ICO</AvatarFallback>
+                  </Avatar>
+                  <span className=" capitalize">{resource.name}</span>
+                </CardTitle>
+              </Link>
+            </CardHeader>
+            <CardContent>
+              <CardDescription className=" line-clamp-2">
+                {resource.url}
+              </CardDescription>
+            </CardContent>
+            <CardFooter className=" justify-end space-x-4">
+              <EditResourceButton
+                id={resource.id}
+                name={resource.name}
+                url={resource.url}
+              />
+              <DeleteResourceButton id={resource.id} />
+              <Link href={resource.url} target="_blank">
+                <ExternalLinkIcon className=" text-blue-600" />
+              </Link>
+            </CardFooter>
+          </Card>
+        );
+      })}
     </section>
   );
 }

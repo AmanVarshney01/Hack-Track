@@ -4,6 +4,7 @@ import { createClient } from "@/utils/supabase/server";
 import { insertFormSchema, insertMembersFormSchema, resourceFormSchema, taskFormSchema, updateDescriptionFormSchema, updateEndDateFormSchema, updateMembersFormSchema, updateStartDateFormSchema, updateStatusFormSchema, updateTitleFormSchema } from "@/utils/types";
 import { z } from "zod";
 import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
 
 export async function createNewProject(
   values: z.infer<typeof insertFormSchema>,
@@ -17,35 +18,36 @@ export async function createNewProject(
     return redirect("/login");
   }
 
-    const insertProjects = await supabase
-      .from("projects")
-      .insert({
-        name: values.projectTitle,
-        created_by: user?.id,
-      })
-      .select("id")
-      .single();
+  const insertProjects = await supabase
+    .from("projects")
+    .insert({
+      name: values.projectTitle,
+      created_by: user?.id,
+    })
+    .select("id")
+    .single();
 
-    const insertProjectDetails = await supabase.from("project_details").insert({
-      project_id: insertProjects.data?.id,
-      description: values.projectDescription,
-      start_date: values.startDate?.toDateString(),
-      end_date: values.endDate?.toDateString(),
+  const insertProjectDetails = await supabase.from("project_details").insert({
+    project_id: insertProjects.data?.id,
+    description: values.projectDescription,
+    start_date: values.startDate?.toDateString(),
+    end_date: values.endDate?.toDateString(),
+  });
+
+  for (const member of values.members) {
+    await supabase.from("project_members").insert({
+      project_id: insertProjects.data?.id!,
+      member_email: member.email,
+      role: member.role,
     });
+  }
 
-    for (const member of values.members) {
-      await supabase.from("project_members").insert({
-        project_id: insertProjects.data?.id!,
-        member_email: member.email,
-        role: member.role,
-      });
-    }
-
-    if (insertProjects.error || insertProjectDetails.error) {
-      throw new Error(insertProjects.error?.message || insertProjectDetails.error?.message);
-    } else {
-      return redirect(`/project/${insertProjects.data?.id}`);
-    }
+  if (insertProjects.error || insertProjectDetails.error) {
+    throw new Error(insertProjects.error?.message || insertProjectDetails.error?.message);
+  } else {
+    revalidatePath(`/`)
+    return redirect(`/project/${insertProjects.data?.id}`);
+  }
 }
 
 export async function updateTitle(id: number, values: z.infer<typeof updateTitleFormSchema>) {
@@ -65,6 +67,7 @@ export async function updateTitle(id: number, values: z.infer<typeof updateTitle
   if (updateProject.error) {
     throw new Error(updateProject.error.message);
   }
+  revalidatePath(`/project/${id}`)
 }
 
 export async function updateDescription(id: number, values: z.infer<typeof updateDescriptionFormSchema>) {
@@ -82,8 +85,9 @@ export async function updateDescription(id: number, values: z.infer<typeof updat
   }).eq("project_id", id)
 
   if (updateProject.error) {
-   throw new Error(updateProject.error.message);
+    throw new Error(updateProject.error.message);
   }
+  revalidatePath(`/project/${id}`)
 }
 
 export async function updateStartDate(id: number, values: z.infer<typeof updateStartDateFormSchema>) {
@@ -103,6 +107,8 @@ export async function updateStartDate(id: number, values: z.infer<typeof updateS
   if (updateProject.error) {
     throw new Error(updateProject.error.message);
   }
+
+  revalidatePath(`/project/${id}`)
 }
 
 export async function updateEndDate(id: number, values: z.infer<typeof updateEndDateFormSchema>) {
@@ -122,6 +128,8 @@ export async function updateEndDate(id: number, values: z.infer<typeof updateEnd
   if (updateProject.error) {
     throw new Error(updateProject.error.message);
   }
+
+  revalidatePath(`/project/${id}`)
 }
 
 export async function updateStatus(id: number, values: z.infer<typeof updateStatusFormSchema>) {
@@ -141,6 +149,8 @@ export async function updateStatus(id: number, values: z.infer<typeof updateStat
   if (updateProject.error) {
     throw new Error(updateProject.error.message);
   }
+
+  revalidatePath(`/project/${id}`)
 }
 
 export async function deleteProject(id: number) {
@@ -152,14 +162,16 @@ export async function deleteProject(id: number) {
   if (!user) {
     return redirect("/login");
   }
-  
+
   const response = await supabase.from("projects").delete().eq("id", id);
 
-    if (response.error) {
-      throw new Error(response.error.message);
-    } else {
-      return redirect("/");
-    }
+  if (response.error) {
+    throw new Error(response.error.message);
+  }
+
+  revalidatePath(`/`)
+  return redirect("/");
+
 }
 
 export async function insertResource(id: number, values: z.infer<typeof resourceFormSchema>) {
@@ -181,7 +193,9 @@ export async function insertResource(id: number, values: z.infer<typeof resource
   if (response.error) {
     throw new Error(response.error.message);
   }
-} 
+
+  revalidatePath(`/project/${id}/resources`)
+}
 
 export async function updateResource(id: number, values: z.infer<typeof resourceFormSchema>) {
   const supabase = createClient();
@@ -201,6 +215,8 @@ export async function updateResource(id: number, values: z.infer<typeof resource
   if (response.error) {
     throw new Error(response.error.message);
   }
+
+  revalidatePath(`/project/${id}/resources`)
 }
 
 export async function deleteResource(id: number) {
@@ -218,6 +234,8 @@ export async function deleteResource(id: number) {
   if (response.error) {
     throw new Error(response.error.message);
   }
+
+  revalidatePath(`/project/${id}/resources`)
 }
 
 export async function insertTask(id: number, values: z.infer<typeof taskFormSchema>) {
@@ -241,6 +259,8 @@ export async function insertTask(id: number, values: z.infer<typeof taskFormSche
   if (response.error) {
     throw new Error(response.error.message);
   }
+
+  revalidatePath(`/project/${id}/tasks`)
 }
 
 export async function deleteTask(id: number) {
@@ -258,6 +278,8 @@ export async function deleteTask(id: number) {
   if (response.error) {
     throw new Error(response.error.message);
   }
+
+  revalidatePath(`/project/${id}/tasks`)
 }
 
 export async function updateTask(id: number, values: z.infer<typeof taskFormSchema>) {
@@ -279,6 +301,8 @@ export async function updateTask(id: number, values: z.infer<typeof taskFormSche
   if (response.error) {
     throw new Error(response.error.message);
   }
+
+  revalidatePath(`/project/${id}/tasks`)
 }
 
 export async function saveGithubUrl(id: number, url: string) {
@@ -297,6 +321,8 @@ export async function saveGithubUrl(id: number, url: string) {
   if (response.error) {
     throw new Error(response.error.message);
   }
+
+  revalidatePath(`/project/${id}`)
 }
 
 export async function updateMembers(id: number, values: z.infer<typeof updateMembersFormSchema>) {
@@ -308,7 +334,7 @@ export async function updateMembers(id: number, values: z.infer<typeof updateMem
   if (!user) {
     return redirect("/login");
   }
-  
+
   for (const member of values.members) {
     const response = await supabase.from("project_members").update({
       member_email: member.email,
@@ -320,6 +346,7 @@ export async function updateMembers(id: number, values: z.infer<typeof updateMem
     }
   }
 
+  revalidatePath(`/project/${id}`)
 }
 
 export async function insertMembers(id: number, values: z.infer<typeof insertMembersFormSchema>) {
@@ -331,7 +358,7 @@ export async function insertMembers(id: number, values: z.infer<typeof insertMem
   if (!user) {
     return redirect("/login");
   }
-  
+
   for (const member of values.members) {
     const response = await supabase.from("project_members").insert({
       project_id: id,
@@ -348,6 +375,8 @@ export async function insertMembers(id: number, values: z.infer<typeof insertMem
       throw new Error(response.error.message);
     }
   }
+
+  revalidatePath(`/project/${id}`)
 }
 
 export async function deleteMember(id: number) {
@@ -365,4 +394,6 @@ export async function deleteMember(id: number) {
   if (response.error) {
     throw new Error(response.error.message);
   }
+
+  revalidatePath(`/project/${id}`)
 }

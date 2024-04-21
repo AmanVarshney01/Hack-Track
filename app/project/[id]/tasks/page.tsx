@@ -28,7 +28,7 @@ export default async function TasksPage({
         <AddTaskButton id={params.id} />
       </div>
       <Suspense fallback={<TasksGridSkeleton />}>
-        <TasksGrid projectID={params.id} />
+        <TasksGrid projectId={params.id} />
       </Suspense>
     </div>
   );

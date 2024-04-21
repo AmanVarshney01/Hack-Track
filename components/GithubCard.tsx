@@ -8,11 +8,14 @@ import {
 
 import Link from "next/link";
 import { ExternalLinkIcon } from "@radix-ui/react-icons";
+import { Button } from "./ui/button";
 
 export default async function GithubCard({
+  projectId,
   githubUrl,
   isGithubConnected,
 }: {
+  projectId: number;
   githubUrl: string;
   isGithubConnected: boolean;
 }) {
@@ -35,11 +38,14 @@ export default async function GithubCard({
           <CardTitle className=" flex flex-row items-center gap-2 text-xl">
             Github Repository
           </CardTitle>
-        </CardHeader>
-        <CardContent className=" space-y-3">
           <CardDescription>
             Connect a Github repository to view more details
           </CardDescription>
+        </CardHeader>
+        <CardContent className=" space-y-3">
+          <Link href={`/project/${projectId}/settings/github`}>
+            <Button>Connect Github</Button>
+          </Link>
         </CardContent>
       </Card>
     );

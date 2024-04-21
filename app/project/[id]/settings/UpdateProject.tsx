@@ -47,11 +47,25 @@ import {
 } from "@/components/ui/select";
 import { toast } from "sonner";
 
-export default function UpdateProject({ id, data }: { id: number; data: any }) {
+export default function UpdateProject({
+  id,
+  data,
+}: {
+  id: number;
+  data: {
+    name: string;
+    project_details: {
+      description: string;
+      start_date: string;
+      end_date: string;
+      status: "active" | "completed" | "paused";
+    }[];
+  };
+}) {
   const titleForm = useForm<z.infer<typeof updateTitleFormSchema>>({
     resolver: zodResolver(updateTitleFormSchema),
     defaultValues: {
-      projectTitle: data?.name,
+      projectTitle: data.name,
     },
   });
 
@@ -65,7 +79,7 @@ export default function UpdateProject({ id, data }: { id: number; data: any }) {
   const descriptionForm = useForm<z.infer<typeof updateDescriptionFormSchema>>({
     resolver: zodResolver(updateDescriptionFormSchema),
     defaultValues: {
-      projectDescription: data?.project_details[0].description,
+      projectDescription: data.project_details[0].description,
     },
   });
 
@@ -79,7 +93,7 @@ export default function UpdateProject({ id, data }: { id: number; data: any }) {
   const startDateForm = useForm<z.infer<typeof updateStartDateFormSchema>>({
     resolver: zodResolver(updateStartDateFormSchema),
     defaultValues: {
-      startDate: new Date(data?.project_details[0].start_date),
+      startDate: new Date(data.project_details[0].start_date),
     },
   });
 
@@ -93,7 +107,7 @@ export default function UpdateProject({ id, data }: { id: number; data: any }) {
   const endDateForm = useForm<z.infer<typeof updateEndDateFormSchema>>({
     resolver: zodResolver(updateEndDateFormSchema),
     defaultValues: {
-      endDate: new Date(data?.project_details[0].end_date),
+      endDate: new Date(data.project_details[0].end_date),
     },
   });
 
@@ -107,7 +121,7 @@ export default function UpdateProject({ id, data }: { id: number; data: any }) {
   const statusForm = useForm<z.infer<typeof updateStatusFormSchema>>({
     resolver: zodResolver(updateStatusFormSchema),
     defaultValues: {
-      status: data?.project_details[0].status,
+      status: data.project_details[0].status,
     },
   });
 

@@ -2,7 +2,7 @@ import { columns } from "./Columns";
 import TasksTable from "./TasksTable";
 import { createClient } from "@/utils/supabase/server";
 
-export default async function TasksGrid({ projectID }: { projectID: number }) {
+export default async function TasksGrid({ projectId }: { projectId: number }) {
   const supabase = createClient();
 
   const { data, error } = await supabase
@@ -16,7 +16,7 @@ export default async function TasksGrid({ projectID }: { projectID: number }) {
     status    
     `,
     )
-    .eq("project_id", projectID);
+    .eq("project_id", projectId);
 
   const transformedData = data?.map((task) => {
     return {

@@ -1,5 +1,6 @@
 import SettingsNavButton from "@/components/SettingsNavButton";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
 
 export default function SettingsLayout({
@@ -11,27 +12,31 @@ export default function SettingsLayout({
 }) {
   return (
     <section className="mx-auto max-w-6xl p-4">
-      <div className=" flex flex-col gap-6 px-2 py-5 md:px-4 md:py-8">
-        <h1 className=" text-2xl font-semibold">Settings</h1>
-        <div className=" flex w-min flex-row gap-2">
-          <SettingsNavButton
-            name="General"
-            href={`/project/${params.id}/settings`}
-          />
-          <SettingsNavButton
-            name="Team"
-            href={`/project/${params.id}/settings/team`}
-          />
-          <SettingsNavButton
-            name="Github"
-            href={`/project/${params.id}/settings/github`}
-          />
-          <SettingsNavButton
-            name="Delete"
-            href={`/project/${params.id}/settings/delete`}
-          />
-        </div>
-      </div>
+      <Card className=" border-0">
+        <CardHeader>
+          <CardTitle className=" text-2xl font-semibold">Settings</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className=" flex w-min flex-row gap-2">
+            <SettingsNavButton
+              name="General"
+              href={`/project/${params.id}/settings`}
+            />
+            <SettingsNavButton
+              name="Team"
+              href={`/project/${params.id}/settings/team`}
+            />
+            <SettingsNavButton
+              name="Github"
+              href={`/project/${params.id}/settings/github`}
+            />
+            <SettingsNavButton
+              name="Delete"
+              href={`/project/${params.id}/settings/delete`}
+            />
+          </div>
+        </CardContent>
+      </Card>
       {children}
     </section>
   );

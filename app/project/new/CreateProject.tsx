@@ -58,7 +58,9 @@ export default function CreateProject() {
   return (
     <Card className=" h-full w-full border-0">
       <CardHeader className="">
-        <CardTitle className="text-xl">Create a new project</CardTitle>
+        <CardTitle className="text-2xl font-semibold">
+          Create a new project
+        </CardTitle>
       </CardHeader>
       <CardContent className="">
         <Form {...form}>

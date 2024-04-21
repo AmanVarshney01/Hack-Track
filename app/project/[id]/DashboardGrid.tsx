@@ -61,10 +61,12 @@ export default async function DashboardGrid({
           <CardTitle className=" flex flex-col items-start justify-between gap-2 text-2xl md:flex-row md:items-center md:gap-4">
             <span>{project.data?.name}</span>
           </CardTitle>
+        </CardHeader>
+        <CardContent>
           <CardDescription className=" text-lg">
             {project.data?.project_details[0].description}
           </CardDescription>
-        </CardHeader>
+        </CardContent>
       </Card>
       <div className=" flex flex-col gap-4 lg:flex-row">
         <Card className="h-min w-full">

@@ -52,7 +52,7 @@ export default async function ResourcesGrid({
             <CardHeader>
               <Link href={resource.url} target="_blank">
                 <CardTitle className="flex flex-row items-center gap-2">
-                  <Avatar className=" h-8 w-8 border-2 border-foreground">
+                  <Avatar className=" h-6 w-6 border-2 border-foreground">
                     <AvatarImage className=" bg-white" src={faviconUrl} />
                     <AvatarFallback>
                       {resource.name.charAt(0).toUpperCase()}

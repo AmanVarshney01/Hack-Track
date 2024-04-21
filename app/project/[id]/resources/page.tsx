@@ -4,6 +4,7 @@ import ResourcesGrid from "./ResourcesGrid";
 import AddResourceButton from "./AddResourceButton";
 import { Suspense } from "react";
 import ResourcesGridSkeleton from "@/components/skeletons/ResourcesGridSkeleton";
+import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default async function ResourcesPage({
   params,
@@ -21,10 +22,12 @@ export default async function ResourcesPage({
   }
   return (
     <div className="mx-auto max-w-6xl p-4">
-      <div className=" flex flex-row items-center justify-between px-2 py-5 md:px-4 md:py-8">
-        <h1 className=" text-2xl font-semibold">Resources</h1>
-        <AddResourceButton id={params.id} />
-      </div>
+      <Card className=" border-0 ">
+        <CardHeader className=" flex flex-row items-center justify-between ">
+          <CardTitle className=" text-2xl font-semibold">Resources</CardTitle>
+          <AddResourceButton id={params.id} />
+        </CardHeader>
+      </Card>
       <Suspense fallback={<ResourcesGridSkeleton />}>
         <ResourcesGrid projectId={params.id} />
       </Suspense>

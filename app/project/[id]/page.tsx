@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import DashboardGrid from "./DashboardGrid";
 import { Suspense } from "react";
 import DashboardGridSkeleton from "@/components/skeletons/DashboardGridSkeleton";
+import { Card, CardTitle, CardHeader } from "@/components/ui/card";
 
 export default async function ProjectPage({
   params,
@@ -21,9 +22,11 @@ export default async function ProjectPage({
 
   return (
     <div className="mx-auto max-w-6xl p-4">
-      <div className="px-2 py-5 md:px-4 md:py-8">
-        <h1 className=" text-2xl font-semibold">Dashboard</h1>
-      </div>
+      <Card className="border-0">
+        <CardHeader>
+          <CardTitle className=" text-2xl font-semibold">Dashboard</CardTitle>
+        </CardHeader>
+      </Card>
       <Suspense fallback={<DashboardGridSkeleton />}>
         <DashboardGrid projectId={params.id} userID={user.id} />
       </Suspense>

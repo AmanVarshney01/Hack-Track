@@ -24,13 +24,13 @@ export default async function JoinedProjectsPage() {
     <ScrollArea className="h-full w-full p-4">
       <div className=" mx-auto flex w-full max-w-7xl flex-col gap-4">
         <Card className="border-0">
-          <CardHeader className="flex flex-row items-center gap-4">
+          <CardHeader className="flex flex-row items-center gap-4 p-2 md:p-6">
             <Link href={"/"}>
               <Button variant={"ghost"}>
                 <ArrowLeftIcon />
               </Button>
             </Link>
-            <CardTitle className="text-2xl font-semibold">
+            <CardTitle className="text-xl font-semibold md:text-2xl">
               Joined Projects
             </CardTitle>
           </CardHeader>

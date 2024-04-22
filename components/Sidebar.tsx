@@ -3,6 +3,7 @@ import {
   FileIcon,
   FileTextIcon,
   GearIcon,
+  Pencil1Icon,
 } from "@radix-ui/react-icons";
 import NavButton from "./NavButton";
 
@@ -26,7 +27,12 @@ export default function Sidebar({ id }: { id: number }) {
           icon={<FileIcon />}
         />
       </div>
-      <div className=" w-full">
+      <div className="flex  w-full flex-col gap-2">
+        <NavButton
+          name="Feedback"
+          href="https://forms.gle/mpREKPiNAApJ41er8"
+          icon={<Pencil1Icon />}
+        />
         <NavButton
           name="Project Settings"
           href={`/project/${id}/settings`}

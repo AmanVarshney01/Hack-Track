@@ -188,6 +188,7 @@ export async function insertResource(id: number, values: z.infer<typeof resource
     project_id: id,
     name: values.resourceName,
     url: values.resourceUrl,
+    created_by: user?.id,
   });
 
   if (response.error) {

@@ -11,7 +11,7 @@ export default function SettingsLayout({
   params: { id: number };
 }) {
   return (
-    <section className="mx-auto max-w-6xl p-4">
+    <section className="mx-auto flex max-w-6xl flex-col gap-4 p-4">
       <Card className=" border-0">
         <CardHeader>
           <CardTitle className=" text-2xl font-semibold">Settings</CardTitle>

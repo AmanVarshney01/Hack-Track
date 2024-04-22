@@ -49,9 +49,11 @@ export default async function AuthButton() {
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem className=" p-0">
-              <Button variant={"secondary"} className=" w-full">
-                <Link href="/project/new">Create Project</Link>
-              </Button>
+              <Link href="/project/new" className="w-full">
+                <Button variant={"secondary"} className=" w-full">
+                  Create Project
+                </Button>
+              </Link>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem className=" p-0">

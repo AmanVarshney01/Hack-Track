@@ -21,7 +21,7 @@ export default async function ProjectPage({
   }
 
   return (
-    <div className="mx-auto max-w-6xl p-4">
+    <div className="mx-auto flex max-w-6xl flex-col gap-4 p-4">
       <Card className="border-0">
         <CardHeader>
           <CardTitle className=" text-2xl font-semibold">Dashboard</CardTitle>

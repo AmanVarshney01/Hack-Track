@@ -41,7 +41,6 @@ export default async function Index() {
               <CardDescription>{user.email}</CardDescription>
             </div>
           </CardHeader>
-          <CardContent></CardContent>
         </Card>
         <Suspense fallback={<ProjectsGridSkeleton />}>
           <HomeGrid userId={user.id} email={user.email!} />

@@ -22,7 +22,7 @@ export default async function TasksPage({
   }
 
   return (
-    <div className="mx-auto max-w-6xl p-4">
+    <div className="mx-auto flex max-w-6xl flex-col gap-4 p-4">
       <Card className=" border-0 ">
         <CardHeader className=" flex flex-row items-center justify-between ">
           <CardTitle className=" text-2xl font-semibold">Tasks</CardTitle>

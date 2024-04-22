@@ -2,6 +2,7 @@ import { createClient } from "@/utils/supabase/server";
 import UpdateTeam from "./UpdateTeam";
 import { redirect } from "next/navigation";
 import InsertTeam from "./InsertTeam";
+import EmptyCard from "@/components/EmptyCard";
 
 export default async function TeamPage({ params }: { params: { id: number } }) {
   const supabase = createClient();
@@ -27,6 +28,22 @@ export default async function TeamPage({ params }: { params: { id: number } }) {
 
   if (projectMembers.error) {
     throw new Error(projectMembers.error.message);
+  }
+
+  const projectOwnerId = await supabase
+    .from("projects")
+    .select("created_by")
+    .eq("id", params.id)
+    .single();
+
+  if (projectOwnerId.error) {
+    throw new Error(projectOwnerId.error.message);
+  }
+
+  if (projectOwnerId.data.created_by !== user.id) {
+    return (
+      <EmptyCard message="You are not the owner of this project. Only the owner can update the project settings." />
+    );
   }
 
   return (

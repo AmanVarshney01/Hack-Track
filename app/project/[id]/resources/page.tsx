@@ -29,7 +29,7 @@ export default async function ResourcesPage({
         </CardHeader>
       </Card>
       <Suspense fallback={<ResourcesGridSkeleton />}>
-        <ResourcesGrid projectId={params.id} />
+        <ResourcesGrid projectId={params.id} userId={user.id} />
       </Suspense>
     </div>
   );

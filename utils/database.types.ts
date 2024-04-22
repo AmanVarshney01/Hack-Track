@@ -89,6 +89,7 @@ export type Database = {
       project_resources: {
         Row: {
           created_at: string
+          created_by: string
           id: number
           name: string
           project_id: number | null
@@ -96,6 +97,7 @@ export type Database = {
         }
         Insert: {
           created_at?: string
+          created_by: string
           id?: number
           name: string
           project_id?: number | null
@@ -103,12 +105,20 @@ export type Database = {
         }
         Update: {
           created_at?: string
+          created_by?: string
           id?: number
           name?: string
           project_id?: number | null
           url?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "public_project_resources_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "public_resources_project_id_fkey"
             columns: ["project_id"]

@@ -1,4 +1,4 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import EmptyCard from "@/components/EmptyCard";
 import UpdateProject from "./UpdateProject";
 import DeleteProject from "./delete/DeleteProject";
 import { createClient } from "@/utils/supabase/server";
@@ -23,13 +23,14 @@ export default async function SettingsPage({
     .from("projects")
     .select(
       `
-  name,
-  project_details (
-    description,
-    start_date,
-    end_date,
-    status
-  )
+    name,
+    created_by,
+    project_details (
+      description,
+      start_date,
+      end_date,
+      status
+    )
   `,
     )
     .eq("id", params.id)
@@ -37,6 +38,12 @@ export default async function SettingsPage({
 
   if (project.error) {
     throw new Error(project.error.message);
+  }
+
+  if (project.data.created_by !== user.id) {
+    return (
+      <EmptyCard message="You are not the owner of this project. Only the owner can update the project settings." />
+    );
   }
 
   return <UpdateProject id={params.id} data={project.data} />;

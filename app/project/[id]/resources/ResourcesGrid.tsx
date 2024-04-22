@@ -17,8 +17,10 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export default async function ResourcesGrid({
   projectId,
+  userId,
 }: {
   projectId: number;
+  userId: string;
 }) {
   const supabase = createClient();
 
@@ -28,7 +30,8 @@ export default async function ResourcesGrid({
       `
     id,
     name,
-    url
+    url,
+    created_by
     `,
     )
     .eq("project_id", projectId);
@@ -41,6 +44,16 @@ export default async function ResourcesGrid({
     return (
       <EmptyCard message="No resources found. Add a resource to get started." />
     );
+  }
+
+  const projectOwnerId = await supabase
+    .from("projects")
+    .select("created_by")
+    .eq("id", projectId)
+    .single();
+
+  if (projectOwnerId.error) {
+    throw new Error(projectOwnerId.error.message);
   }
 
   return (
@@ -68,12 +81,17 @@ export default async function ResourcesGrid({
               </CardDescription>
             </CardContent>
             <CardFooter className=" justify-end space-x-4">
-              <EditResourceButton
-                id={resource.id}
-                name={resource.name}
-                url={resource.url}
-              />
-              <DeleteResourceButton id={resource.id} />
+              {(resource.created_by === userId ||
+                projectOwnerId.data.created_by === userId) && (
+                <>
+                  <EditResourceButton
+                    id={resource.id}
+                    name={resource.name}
+                    url={resource.url}
+                  />
+                  <DeleteResourceButton id={resource.id} />
+                </>
+              )}
               <Link href={resource.url} target="_blank">
                 <ExternalLinkIcon className=" text-blue-600" />
               </Link>

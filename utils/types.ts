@@ -1,8 +1,4 @@
-import { SupabaseClient } from "@supabase/supabase-js";
-import type { Database } from "@/utils/database.types";
 import { z } from "zod";
-
-export type TypedSupabaseClient = SupabaseClient<Database>;
 
 export const insertFormSchema = z.object({
   projectTitle: z.string().min(2).max(50),

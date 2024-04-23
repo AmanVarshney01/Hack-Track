@@ -61,9 +61,9 @@ export default function TasksTable<TData, TValue>({
           className=" w-min max-w-sm"
         />
       </div>
-      {/* FIXME Fix horizontal scroll , cheap workaround rn */}
-      <ScrollArea className=" h-full w-[92vw] self-center rounded-md md:w-[calc(95vw-12rem)] lg:w-full ">
-        <Card>
+      {/* FIXME fix overflowing card */}
+      <ScrollArea className=" h-full w-[92vw] self-center rounded-md border md:w-[calc(95vw-12rem)] lg:w-full ">
+        <Card className=" border-0">
           <CardContent className="p-2">
             <Table className="whitespace-nowrap">
               <TableHeader>

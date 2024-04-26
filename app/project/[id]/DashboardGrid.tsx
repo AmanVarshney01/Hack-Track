@@ -12,10 +12,8 @@ import { createClient } from "@/utils/supabase/server";
 
 export default async function DashboardGrid({
   projectId,
-  userID,
 }: {
   projectId: number;
-  userID: string;
 }) {
   const supabase = createClient();
 

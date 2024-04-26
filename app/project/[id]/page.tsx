@@ -28,7 +28,7 @@ export default async function ProjectPage({
         </CardHeader>
       </Card>
       <Suspense fallback={<DashboardGridSkeleton />}>
-        <DashboardGrid projectId={params.id} userID={user.id} />
+        <DashboardGrid projectId={params.id} />
       </Suspense>
     </div>
   );

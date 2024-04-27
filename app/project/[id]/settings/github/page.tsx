@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import GithubForm from "./GithubForm";
+import GithubForm from "./_components/GithubForm";
 import { createClient } from "@/utils/supabase/server";
 import EmptyCard from "@/components/EmptyCard";
 import { getGithubURL } from "@/server/queries";

@@ -14,7 +14,7 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "./ui/sheet";
+} from "../../components/ui/sheet";
 import NavButton from "./NavButton";
 import { usePathname } from "next/navigation";
 

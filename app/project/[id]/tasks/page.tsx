@@ -1,5 +1,5 @@
-import AddTaskButton from "./AddTaskButton";
-import TasksGrid from "./TasksGrid";
+import AddTaskButton from "./_components/AddTaskButton";
+import TasksGrid from "./_components/TasksGrid";
 import { Suspense } from "react";
 import TasksGridSkeleton from "@/components/skeletons/TasksGridSkeleton";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";

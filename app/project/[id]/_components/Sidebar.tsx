@@ -5,7 +5,7 @@ import {
   GearIcon,
   Pencil1Icon,
 } from "@radix-ui/react-icons";
-import NavButton from "./NavButton";
+import NavButton from "../../../_components/NavButton";
 
 export default function Sidebar({ id }: { id: number }) {
   return (

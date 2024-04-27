@@ -1,4 +1,4 @@
-import UpdateProject from "./UpdateProject";
+import UpdateProject from "./_components/UpdateProject";
 import { getProjectDetails } from "@/server/queries";
 
 export default async function SettingsPage({

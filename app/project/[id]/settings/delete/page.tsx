@@ -1,5 +1,5 @@
 // import EmptyCard from "@/components/EmptyCard";
-import DeleteProject from "./DeleteProject";
+import DeleteProject from "./_components/DeleteProject";
 
 export default async function DeletePage({
   params,

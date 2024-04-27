@@ -10,8 +10,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { ChevronDownIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
-import { Button } from "./ui/button";
-import ThemeToggle from "./ThemeToggle";
+import { Button } from "../../components/ui/button";
+import ThemeToggle from "../../components/ThemeToggle";
 
 export default async function AuthButton() {
   const supabase = createClient();

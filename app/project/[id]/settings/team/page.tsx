@@ -1,5 +1,5 @@
-import UpdateTeam from "./UpdateTeam";
-import InsertTeam from "./InsertTeam";
+import UpdateTeam from "./_components/UpdateTeam";
+import InsertTeam from "./_components/InsertTeam";
 // import EmptyCard from "@/components/EmptyCard";
 import { getProjectMembers } from "@/server/queries";
 

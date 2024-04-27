@@ -2,7 +2,7 @@ import { Inter as FontSans } from "next/font/google";
 import "@/app/globals.css";
 import { cn } from "@/lib/utils";
 import type { Viewport } from "next";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/app/_components/Navbar";
 import Providers from "@/components/providers";
 import { Analytics } from "@vercel/analytics/react";
 import { Toaster } from "sonner";

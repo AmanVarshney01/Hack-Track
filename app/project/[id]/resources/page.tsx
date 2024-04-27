@@ -1,5 +1,5 @@
-import ResourcesGrid from "./ResourcesGrid";
-import AddResourceButton from "./AddResourceButton";
+import ResourcesGrid from "./_components/ResourcesGrid";
+import AddResourceButton from "./_components/AddResourceButton";
 import { Suspense } from "react";
 import ResourcesGridSkeleton from "@/components/skeletons/ResourcesGridSkeleton";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";

@@ -11,16 +11,10 @@ import {
 } from "@/components/ui/card";
 import { getJoinedProjectsCount, getMyProjectsCount } from "@/server/queries";
 
-export default async function HomeGrid({
-  userId,
-  email,
-}: {
-  userId: string;
-  email: string;
-}) {
-  const myProjectsCount = await getMyProjectsCount(userId);
+export default async function HomeGrid() {
+  const myProjectsCount = await getMyProjectsCount();
+  const joinedProjectsCount = await getJoinedProjectsCount();
 
-  const joinedProjectsCount = await getJoinedProjectsCount(email);
   return (
     <div className=" flex w-full flex-col gap-4 md:flex-row">
       <Card className="  flex w-full flex-col justify-between">

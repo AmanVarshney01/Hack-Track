@@ -2,6 +2,23 @@ import "server-only"
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 
+export async function getUser() {
+    const supabase = createClient();
+
+    const { data: { user } } = await supabase.auth.getUser();
+
+    if (!user) {
+        return redirect("/login");
+    }
+
+    return {
+        name: user?.user_metadata.full_name,
+        email: user?.email,
+        avatarUrl: user?.user_metadata.avatar_url,
+    }
+
+}
+
 export async function getProject(projectId: number) {
     const supabase = createClient();
 
@@ -123,7 +140,7 @@ export async function getJoinedProjects() {
     return response
 }
 
-export async function getMyProjectsCount(userId: string) {
+export async function getMyProjectsCount() {
     const supabase = createClient();
 
     const { data: { user } } = await supabase.auth.getUser();
@@ -135,12 +152,12 @@ export async function getMyProjectsCount(userId: string) {
     const response = await supabase
         .from("projects")
         .select("*", { count: "exact", head: true })
-        .eq("created_by", userId);
+        .eq("created_by", user.id);
 
     return response
 }
 
-export async function getJoinedProjectsCount(email: string) {
+export async function getJoinedProjectsCount() {
     const supabase = createClient();
 
     const { data: { user } } = await supabase.auth.getUser();
@@ -152,7 +169,7 @@ export async function getJoinedProjectsCount(email: string) {
     const response = await supabase
         .from("project_members")
         .select("*", { count: "exact", head: true })
-        .eq("member_email", email);
+        .eq("member_email", user.email!);
 
     return response
 }

@@ -8,7 +8,7 @@ import {
 
 import Link from "next/link";
 import { ExternalLinkIcon } from "@radix-ui/react-icons";
-import { Button } from "./ui/button";
+import { Button } from "../../../../components/ui/button";
 
 export default async function GithubCard({
   projectId,

@@ -1,10 +1,8 @@
 import { Suspense } from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import MyProjectsGrid from "@/app/my-projects/MyProjectsGrid";
+import MyProjectsGrid from "@/app/my-projects/_components/MyProjectsGrid";
 import ProjectsGridSkeleton from "@/components/skeletons/ProjectsGridSkeleton";
-import { createClient } from "@/utils/supabase/server";
-import { redirect } from "next/navigation";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowLeftIcon } from "@radix-ui/react-icons";

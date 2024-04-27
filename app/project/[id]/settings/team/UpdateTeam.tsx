@@ -24,7 +24,7 @@ import { Input } from "@/components/ui/input";
 import { updateMembersFormSchema } from "@/utils/types";
 import { TrashIcon, UpdateIcon } from "@radix-ui/react-icons";
 import { CardContent, Card, CardHeader, CardTitle } from "@/components/ui/card";
-import { deleteMember, updateMembers } from "@/lib/actions";
+import { deleteMember, updateMembers } from "@/server/actions";
 import { toast } from "sonner";
 
 export default function UpdateTeam({

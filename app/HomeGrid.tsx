@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { createClient } from "@/utils/supabase/server";
 import Link from "next/link";
 import { ArrowRightIcon } from "@radix-ui/react-icons";
 import {
@@ -10,6 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { getJoinedProjectsCount, getMyProjectsCount } from "@/server/queries";
 
 export default async function HomeGrid({
   userId,
@@ -18,17 +18,9 @@ export default async function HomeGrid({
   userId: string;
   email: string;
 }) {
-  const supabase = createClient();
+  const myProjectsCount = await getMyProjectsCount(userId);
 
-  const myProjects = await supabase
-    .from("projects")
-    .select("*", { count: "exact", head: true })
-    .eq("created_by", userId);
-
-  const joinedProjects = await supabase
-    .from("project_members")
-    .select("*", { count: "exact", head: true })
-    .eq("member_email", email);
+  const joinedProjectsCount = await getJoinedProjectsCount(email);
   return (
     <div className=" flex w-full flex-col gap-4 md:flex-row">
       <Card className="  flex w-full flex-col justify-between">
@@ -40,7 +32,7 @@ export default async function HomeGrid({
         </CardHeader>
         <CardContent>
           <div>
-            <p>Total projects: {myProjects.count}</p>
+            <p>Total projects: {myProjectsCount.count}</p>
           </div>
         </CardContent>
         <CardFooter className=" border-t p-2">
@@ -64,7 +56,7 @@ export default async function HomeGrid({
         </CardHeader>
         <CardContent>
           <div>
-            <p>Total projects: {joinedProjects.count}</p>
+            <p>Total projects: {joinedProjectsCount.count}</p>
           </div>
         </CardContent>
         <CardFooter className=" border-t p-2">

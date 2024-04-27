@@ -32,7 +32,7 @@ import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { taskFormSchema } from "@/utils/types";
 import { UpdateIcon } from "@radix-ui/react-icons";
-import { insertTask } from "@/lib/actions";
+import { insertTask } from "@/server/actions";
 import { toast } from "sonner";
 
 export default function AddTaskButton({ id }: { id: number }) {

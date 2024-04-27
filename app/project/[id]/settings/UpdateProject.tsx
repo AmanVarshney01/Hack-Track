@@ -37,7 +37,7 @@ import {
   updateStartDate,
   updateTitle,
   updateStatus,
-} from "@/lib/actions";
+} from "@/server/actions";
 import {
   Select,
   SelectContent,

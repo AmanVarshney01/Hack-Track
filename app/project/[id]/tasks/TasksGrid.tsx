@@ -1,32 +1,19 @@
+import { getProjectTasks } from "@/server/queries";
 import { columns } from "./Columns";
 import TasksTable from "./TasksTable";
-import { createClient } from "@/utils/supabase/server";
 
 export default async function TasksGrid({ projectId }: { projectId: number }) {
-  const supabase = createClient();
+  const projectTasks = await getProjectTasks(projectId);
 
-  const { data, error } = await supabase
-    .from("project_tasks")
-    .select(
-      `
-    id,
-    title,
-    created_by:users(name),
-    priority,
-    status    
-    `,
-    )
-    .eq("project_id", projectId);
-
-  const transformedData = data?.map((task) => {
+  const transformedData = projectTasks.data?.map((task) => {
     return {
       ...task,
       created_by: task.created_by?.name!,
     };
   });
 
-  if (error) {
-    throw new Error(error.message);
+  if (projectTasks.error) {
+    throw new Error(projectTasks.error.message);
   }
 
   return <TasksTable data={transformedData!} columns={columns} />;

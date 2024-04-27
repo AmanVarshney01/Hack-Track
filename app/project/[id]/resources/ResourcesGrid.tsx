@@ -14,6 +14,7 @@ import DeleteResourceButton from "./DeleteResourceButton";
 import EmptyCard from "@/components/EmptyCard";
 import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { getProjectResources } from "@/server/queries";
 
 export default async function ResourcesGrid({
   projectId,
@@ -24,17 +25,7 @@ export default async function ResourcesGrid({
 }) {
   const supabase = createClient();
 
-  const resources = await supabase
-    .from("project_resources")
-    .select(
-      `
-    id,
-    name,
-    url,
-    created_by
-    `,
-    )
-    .eq("project_id", projectId);
+  const resources = await getProjectResources(projectId);
 
   if (resources.error) {
     throw new Error(resources.error.message);

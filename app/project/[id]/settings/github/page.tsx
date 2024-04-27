@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import GithubForm from "./GithubForm";
 import { createClient } from "@/utils/supabase/server";
 import EmptyCard from "@/components/EmptyCard";
+import { getGithubURL } from "@/server/queries";
 
 export default async function GithubPage({
   params,
@@ -18,11 +19,7 @@ export default async function GithubPage({
     return redirect("/login");
   }
 
-  const githubUrl = await supabase
-    .from("project_details")
-    .select("github_url")
-    .eq("project_id", params.id)
-    .single();
+  const githubUrl = await getGithubURL(params.id);
 
   if (githubUrl.error) {
     throw new Error(githubUrl.error.message);

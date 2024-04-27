@@ -16,7 +16,7 @@ import { Button } from "@/components/ui/button";
 import { githubFormSchema } from "@/utils/types";
 import { Input } from "@/components/ui/input";
 import { UpdateIcon } from "@radix-ui/react-icons";
-import { saveGithubUrl } from "@/lib/actions";
+import { saveGithubUrl } from "@/server/actions";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "sonner";
 

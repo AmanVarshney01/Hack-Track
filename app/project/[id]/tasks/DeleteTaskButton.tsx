@@ -9,7 +9,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { deleteTask } from "@/lib/actions";
+import { deleteTask } from "@/server/actions";
 import { TrashIcon } from "@radix-ui/react-icons";
 import { toast } from "sonner";
 

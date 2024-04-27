@@ -11,7 +11,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { deleteResource } from "@/lib/actions";
+import { deleteResource } from "@/server/actions";
 import { TrashIcon } from "@radix-ui/react-icons";
 import { toast } from "sonner";
 

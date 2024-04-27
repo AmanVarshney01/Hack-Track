@@ -7,8 +7,7 @@ export const insertFormSchema = z.object({
     try {
       const url = new URL(value);
       const response = await fetch(`https://api.github.com/repos${url.pathname}`);
-      const data = await response.json();
-      return response.ok && data;
+      return response.ok;
     } catch (error) {
       return false;
     }

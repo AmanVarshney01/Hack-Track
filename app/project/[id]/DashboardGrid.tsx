@@ -8,42 +8,14 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { createClient } from "@/utils/supabase/server";
+import { getProject } from "@/server/queries";
 
 export default async function DashboardGrid({
   projectId,
 }: {
   projectId: number;
 }) {
-  const supabase = createClient();
-
-  const project = await supabase
-    .from("projects")
-    .select(
-      `
-  name,
-  users (
-    name,
-    email
-  ),
-  project_details (
-    description,
-    start_date,
-    end_date,
-    status,
-    github_url
-  ),
-  project_members (
-    member_email,
-    users (
-      name
-    ),
-    role
-  )
-  `,
-    )
-    .eq("id", projectId)
-    .single();
+  const project = await getProject(projectId);
 
   if (project.error) {
     throw new Error(project.error.message);

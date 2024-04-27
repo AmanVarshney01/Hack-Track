@@ -26,7 +26,7 @@ import { Button } from "@/components/ui/button";
 import { resourceFormSchema } from "@/utils/types";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
-import { insertResource } from "@/lib/actions";
+import { insertResource } from "@/server/actions";
 import { UpdateIcon } from "@radix-ui/react-icons";
 import { toast } from "sonner";
 

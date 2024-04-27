@@ -24,7 +24,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { insertMembersFormSchema } from "@/utils/types";
-import { insertMembers } from "@/lib/actions";
+import { insertMembers } from "@/server/actions";
 import { toast } from "sonner";
 
 export default function InsertTeam({ projectId }: { projectId: number }) {

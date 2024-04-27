@@ -24,7 +24,7 @@ import { Button } from "@/components/ui/button";
 import { taskFormSchema } from "@/utils/types";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
-import { updateResource, updateTask } from "@/lib/actions";
+import { updateResource, updateTask } from "@/server/actions";
 import { Pencil2Icon, UpdateIcon } from "@radix-ui/react-icons";
 import { Tables } from "@/utils/database.types";
 import {

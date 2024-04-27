@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import ProjectsGridSkeleton from "@/components/skeletons/ProjectsGridSkeleton";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
-import JoinedProjectsGrid from "@/components/JoinedProjectsGrid";
+import JoinedProjectsGrid from "@/app/joined-projects/JoinedProjectsGrid";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
@@ -10,16 +10,6 @@ import { ArrowLeftIcon } from "@radix-ui/react-icons";
 import { Button } from "@/components/ui/button";
 
 export default async function JoinedProjectsPage() {
-  const supabase = createClient();
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user) {
-    return redirect("/login");
-  }
-
   return (
     <ScrollArea className="h-full w-full p-4">
       <div className=" mx-auto flex w-full max-w-7xl flex-col gap-4">
@@ -36,7 +26,7 @@ export default async function JoinedProjectsPage() {
           </CardHeader>
         </Card>
         <Suspense fallback={<ProjectsGridSkeleton />}>
-          <JoinedProjectsGrid user={user} />
+          <JoinedProjectsGrid />
         </Suspense>
       </div>
     </ScrollArea>

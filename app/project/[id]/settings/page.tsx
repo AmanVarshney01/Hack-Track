@@ -1,50 +1,22 @@
-import EmptyCard from "@/components/EmptyCard";
 import UpdateProject from "./UpdateProject";
-import DeleteProject from "./delete/DeleteProject";
-import { createClient } from "@/utils/supabase/server";
-import { redirect } from "next/navigation";
+import { getProjectDetails } from "@/server/queries";
 
 export default async function SettingsPage({
   params,
 }: {
   params: { id: number };
 }) {
-  const supabase = createClient();
+  const projectDetails = await getProjectDetails(params.id);
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user) {
-    return redirect("/login");
+  if (projectDetails.error) {
+    throw new Error(projectDetails.error.message);
   }
 
-  const project = await supabase
-    .from("projects")
-    .select(
-      `
-    name,
-    created_by,
-    project_details (
-      description,
-      start_date,
-      end_date,
-      status
-    )
-  `,
-    )
-    .eq("id", params.id)
-    .single();
+  // if (projectDetails.data.created_by !== user.id) {
+  //   return (
+  //     <EmptyCard message="You are not the owner of this projectDetails. Only the owner can update the projectDetails settings." />
+  //   );
+  // }
 
-  if (project.error) {
-    throw new Error(project.error.message);
-  }
-
-  if (project.data.created_by !== user.id) {
-    return (
-      <EmptyCard message="You are not the owner of this project. Only the owner can update the project settings." />
-    );
-  }
-
-  return <UpdateProject id={params.id} data={project.data} />;
+  return <UpdateProject id={params.id} data={projectDetails.data} />;
 }

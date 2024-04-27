@@ -1,5 +1,3 @@
-import { createClient } from "@/utils/supabase/server";
-import { redirect } from "next/navigation";
 import AddTaskButton from "./AddTaskButton";
 import TasksGrid from "./TasksGrid";
 import { Suspense } from "react";
@@ -11,16 +9,6 @@ export default async function TasksPage({
 }: {
   params: { id: number };
 }) {
-  const supabase = createClient();
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user) {
-    return redirect("/login");
-  }
-
   return (
     <div className="mx-auto flex max-w-6xl flex-col gap-4 p-4">
       <Card className=" border-0 ">

@@ -1,8 +1,15 @@
 import "server-only"
 import { createClient } from "@/utils/supabase/server";
+import { redirect } from "next/navigation";
 
 export async function getProject(projectId: number) {
     const supabase = createClient();
+
+    const { data: { user } } = await supabase.auth.getUser();
+
+    if (!user) {
+        return redirect("/login");
+    }
 
     const response = await supabase
         .from("projects")
@@ -38,12 +45,18 @@ export async function getProject(projectId: number) {
 export async function getProjectTasks(projectId: number) {
     const supabase = createClient();
 
+    const { data: { user } } = await supabase.auth.getUser();
+
+    if (!user) {
+        return redirect("/login");
+    }
+
     const response = await supabase
         .from("project_tasks")
         .select(
             `
-        id,
-        title,
+            id,
+            title,
             created_by:users(name),
             priority,
             status    
@@ -55,8 +68,69 @@ export async function getProjectTasks(projectId: number) {
 
 }
 
+export async function getMyProjects() {
+    const supabase = createClient();
+
+    const { data: { user } } = await supabase.auth.getUser();
+
+    if (!user) {
+        return redirect("/login");
+    }
+
+    const response = await supabase
+        .from("projects")
+        .select(
+            `
+            id,
+            name,
+            project_details (
+                status,
+                end_date   
+            )
+            `,
+        )
+        .eq("created_by", user.id);
+
+    return response
+}
+
+export async function getJoinedProjects() {
+    const supabase = createClient();
+
+    const { data: { user } } = await supabase.auth.getUser();
+
+    if (!user) {
+        return redirect("/login");
+    }
+
+    const response = await supabase
+        .from("project_members")
+        .select(
+            `
+            role,
+            projects (
+                id,
+                name,
+                project_details (
+                    status,
+                    end_date
+                )
+            )
+            `,
+        )
+        .eq("member_email", user.email!);
+
+    return response
+}
+
 export async function getMyProjectsCount(userId: string) {
     const supabase = createClient();
+
+    const { data: { user } } = await supabase.auth.getUser();
+
+    if (!user) {
+        return redirect("/login");
+    }
 
     const response = await supabase
         .from("projects")
@@ -68,6 +142,13 @@ export async function getMyProjectsCount(userId: string) {
 
 export async function getJoinedProjectsCount(email: string) {
     const supabase = createClient();
+
+    const { data: { user } } = await supabase.auth.getUser();
+
+    if (!user) {
+        return redirect("/login");
+    }
+
     const response = await supabase
         .from("project_members")
         .select("*", { count: "exact", head: true })
@@ -78,6 +159,13 @@ export async function getJoinedProjectsCount(email: string) {
 
 export async function getGithubURL(projectId: number) {
     const supabase = createClient();
+
+    const { data: { user } } = await supabase.auth.getUser();
+
+    if (!user) {
+        return redirect("/login");
+    }
+
     const response = await supabase
         .from("project_details")
         .select("github_url")
@@ -89,6 +177,13 @@ export async function getGithubURL(projectId: number) {
 
 export async function getProjectResources(projectId: number) {
     const supabase = createClient();
+
+    const { data: { user } } = await supabase.auth.getUser();
+
+    if (!user) {
+        return redirect("/login");
+    }
+
     const response = await supabase
         .from("project_resources")
         .select(
@@ -100,6 +195,58 @@ export async function getProjectResources(projectId: number) {
             `,
         )
         .eq("project_id", projectId);
+
+    return response
+}
+
+export async function getProjectMembers(projectId: number) {
+    const supabase = createClient();
+
+    const { data: { user } } = await supabase.auth.getUser();
+
+    if (!user) {
+        return redirect("/login");
+    }
+
+    const response = await supabase
+        .from("project_members")
+        .select(
+            `
+            id,
+            member_email,
+            role
+            `,
+        )
+        .eq("project_id", projectId);
+
+    return response
+}
+
+export async function getProjectDetails(projectId: number) {
+    const supabase = createClient();
+
+    const { data: { user } } = await supabase.auth.getUser();
+
+    if (!user) {
+        return redirect("/login");
+    }
+
+    const response = await supabase
+        .from("projects")
+        .select(
+            `
+            name,
+            created_by,
+            project_details (
+            description,
+            start_date,
+            end_date,
+            status
+            )
+            `,
+        )
+        .eq("id", projectId)
+        .single();
 
     return response
 }

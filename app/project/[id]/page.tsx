@@ -10,15 +10,15 @@ export default async function ProjectPage({
 }: {
   params: { id: number };
 }) {
-  const supabase = createClient();
+  // const supabase = createClient();
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  // const {
+  //   data: { user },
+  // } = await supabase.auth.getUser();
 
-  if (!user) {
-    return redirect("/login");
-  }
+  // if (!user) {
+  //   return redirect("/login");
+  // }
 
   return (
     <div className="mx-auto flex max-w-6xl flex-col gap-4 p-4">

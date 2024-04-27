@@ -1,5 +1,3 @@
-import { createClient } from "@/utils/supabase/server";
-import { redirect } from "next/navigation";
 import ResourcesGrid from "./ResourcesGrid";
 import AddResourceButton from "./AddResourceButton";
 import { Suspense } from "react";
@@ -11,15 +9,6 @@ export default async function ResourcesPage({
 }: {
   params: { id: number };
 }) {
-  const supabase = createClient();
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user) {
-    return redirect("/login");
-  }
   return (
     <div className="mx-auto flex max-w-6xl flex-col gap-4 p-4">
       <Card className=" border-0 ">
@@ -29,7 +18,7 @@ export default async function ResourcesPage({
         </CardHeader>
       </Card>
       <Suspense fallback={<ResourcesGridSkeleton />}>
-        <ResourcesGrid projectId={params.id} userId={user.id} />
+        <ResourcesGrid projectId={params.id} />
       </Suspense>
     </div>
   );

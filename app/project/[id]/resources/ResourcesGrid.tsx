@@ -6,25 +6,19 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { createClient } from "@/utils/supabase/server";
 import { ExternalLinkIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 import EditResourceButton from "./EditResourceButton";
 import DeleteResourceButton from "./DeleteResourceButton";
 import EmptyCard from "@/components/EmptyCard";
-import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { getProjectResources } from "@/server/queries";
 
 export default async function ResourcesGrid({
   projectId,
-  userId,
 }: {
   projectId: number;
-  userId: string;
 }) {
-  const supabase = createClient();
-
   const resources = await getProjectResources(projectId);
 
   if (resources.error) {
@@ -35,16 +29,6 @@ export default async function ResourcesGrid({
     return (
       <EmptyCard message="No resources found. Add a resource to get started." />
     );
-  }
-
-  const projectOwnerId = await supabase
-    .from("projects")
-    .select("created_by")
-    .eq("id", projectId)
-    .single();
-
-  if (projectOwnerId.error) {
-    throw new Error(projectOwnerId.error.message);
   }
 
   return (
@@ -72,17 +56,14 @@ export default async function ResourcesGrid({
               </CardDescription>
             </CardContent>
             <CardFooter className=" justify-end space-x-4">
-              {(resource.created_by === userId ||
-                projectOwnerId.data.created_by === userId) && (
-                <>
-                  <EditResourceButton
-                    id={resource.id}
-                    name={resource.name}
-                    url={resource.url}
-                  />
-                  <DeleteResourceButton id={resource.id} />
-                </>
-              )}
+              <>
+                <EditResourceButton
+                  id={resource.id}
+                  name={resource.name}
+                  url={resource.url}
+                />
+                <DeleteResourceButton id={resource.id} />
+              </>
               <Link href={resource.url} target="_blank">
                 <ExternalLinkIcon className=" text-blue-600" />
               </Link>

@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import MyProjectsGrid from "@/components/MyProjectsGrid";
+import MyProjectsGrid from "@/app/my-projects/MyProjectsGrid";
 import ProjectsGridSkeleton from "@/components/skeletons/ProjectsGridSkeleton";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
@@ -10,16 +10,6 @@ import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowLeftIcon } from "@radix-ui/react-icons";
 
 export default async function MyProjectsPage() {
-  const supabase = createClient();
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user) {
-    return redirect("/login");
-  }
-
   return (
     <ScrollArea className="h-full w-full p-4">
       <div className=" mx-auto flex w-full max-w-7xl flex-col gap-4">
@@ -41,7 +31,7 @@ export default async function MyProjectsPage() {
           </CardHeader>
         </Card>
         <Suspense fallback={<ProjectsGridSkeleton />}>
-          <MyProjectsGrid user={user} />
+          <MyProjectsGrid />
         </Suspense>
       </div>
     </ScrollArea>

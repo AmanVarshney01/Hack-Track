@@ -43,7 +43,7 @@ export default function ProjectCard({
         </div>
       </CardContent>
       <CardFooter className=" border-t p-2">
-        <Link className="w-full" href={`/project/${id}`}>
+        <Link className="w-full" href={`/project/${id}`} prefetch={false}>
           <Button
             variant={"ghost"}
             className="flex w-full flex-row items-center justify-end gap-2"

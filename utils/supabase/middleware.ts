@@ -2,7 +2,7 @@ import { createServerClient, type CookieOptions } from "@supabase/ssr";
 import { type NextRequest, NextResponse } from "next/server";
 import { Database } from "../database.types";
 
-export const updateSession = async (request: NextRequest) => {
+export const createClient = async (request: NextRequest) => {
   let response = NextResponse.next({
     request: {
       headers: request.headers,
@@ -59,7 +59,6 @@ export const updateSession = async (request: NextRequest) => {
 
   // This will refresh session if expired - required for Server Components
   // https://supabase.com/docs/guides/auth/server-side/nextjs
-  await supabase.auth.getUser();
 
-  return response;
+  return { supabase, response };
 };

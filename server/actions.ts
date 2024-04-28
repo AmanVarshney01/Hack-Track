@@ -5,7 +5,6 @@ import { insertFormSchema, insertMembersFormSchema, resourceFormSchema, taskForm
 import { z } from "zod";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
-import { isProjectOwner } from "./permissions";
 
 export async function createNewProject(
   values: z.infer<typeof insertFormSchema>,
@@ -156,15 +155,15 @@ export async function updateStatus(id: number, values: z.infer<typeof updateStat
 
 export async function deleteProject(id: number) {
 
-  const isProjectOwnerCheck = await isProjectOwner(id);
-
-  if (!isProjectOwnerCheck) {
-    throw new Error(
-      "You are not the owner of this project.",
-    );
-  }
-
   const supabase = createClient();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    return redirect("/login");
+  }
 
   const response = await supabase.from("projects").delete().eq("id", id);
 
@@ -386,10 +385,12 @@ export async function insertMembers(id: number, values: z.infer<typeof insertMem
 export async function deleteMember(id: number) {
   const supabase = createClient();
 
-  const isProjectOwnerCheck = await isProjectOwner(id);
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
-  if (!isProjectOwnerCheck) {
-    throw new Error("You are not the owner of this project.");
+  if (!user) {
+    return redirect("/login");
   }
 
   const response = await supabase.from("project_members").delete().eq("id", id);

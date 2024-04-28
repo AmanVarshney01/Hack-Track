@@ -1,5 +1,5 @@
 import ProjectCard from "../../_components/ProjectCard";
-import EmptyCard from "../../../components/EmptyCard";
+import EmptyCard from "../../../../components/EmptyCard";
 import { getMyProjects } from "@/server/queries";
 
 export default async function MyProjectsGrid() {

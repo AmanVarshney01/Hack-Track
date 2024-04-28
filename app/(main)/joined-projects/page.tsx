@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import ProjectsGridSkeleton from "@/components/skeletons/ProjectsGridSkeleton";
-import JoinedProjectsGrid from "@/app/joined-projects/_components/JoinedProjectsGrid";
+import JoinedProjectsGrid from "@/app/(main)/joined-projects/_components/JoinedProjectsGrid";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";

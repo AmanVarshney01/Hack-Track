@@ -10,14 +10,12 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { ChevronDownIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
-import { Button } from "../../components/ui/button";
-import ThemeToggle from "../../components/ThemeToggle";
+import { Button } from "@/components/ui/button";
+import ThemeToggle from "@/components/ThemeToggle";
+import { getUser } from "@/server/queries";
 
 export default async function AuthButton() {
-  const supabase = createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const user = await getUser();
 
   const signOut = async () => {
     "use server";
@@ -34,11 +32,11 @@ export default async function AuthButton() {
           <DropdownMenuTrigger className="flex items-center justify-center rounded-lg border p-2">
             <div className="flex min-w-0 max-w-48 flex-row items-center justify-between gap-2 ">
               <Avatar className="h-6 w-6">
-                <AvatarImage src={user.user_metadata.avatar_url} />
+                <AvatarImage src={user.avatarUrl} />
                 <AvatarFallback>DP</AvatarFallback>
               </Avatar>
               <span className=" line-clamp-1 hidden truncate text-sm md:block">
-                {user.user_metadata.full_name}
+                {user.name}
               </span>
               <ChevronDownIcon className="hidden h-4 w-4 md:block" />
             </div>

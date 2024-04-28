@@ -1,5 +1,5 @@
-import GithubCard from "@/app/project/[id]/_components/GithubCard";
-import StatusBadge from "@/app/_components/StatusBadge";
+import GithubCard from "@/app/(main)/project/[id]/_components/GithubCard";
+import StatusBadge from "@/app/(main)/_components/StatusBadge";
 import { Badge } from "@/components/ui/badge";
 import {
   Card,

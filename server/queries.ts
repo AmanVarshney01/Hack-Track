@@ -47,7 +47,7 @@ export async function getProject(projectId: number) {
         project_members (
             member_email,
             users (
-            name
+                name
             ),
             role
         )
@@ -255,10 +255,10 @@ export async function getProjectDetails(projectId: number) {
             name,
             created_by,
             project_details (
-            description,
-            start_date,
-            end_date,
-            status
+                description,
+                start_date,
+                end_date,
+                status
             )
             `,
         )

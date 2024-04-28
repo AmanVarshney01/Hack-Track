@@ -1,7 +1,5 @@
-import SettingsNavButton from "@/app/project/[id]/settings/_components/SettingsNavButton";
-import { Button } from "@/components/ui/button";
+import SettingsNavButton from "@/app/(main)/project/[id]/settings/_components/SettingsNavButton";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import Link from "next/link";
 
 export default function SettingsLayout({
   children,

@@ -2,10 +2,8 @@ import { Inter as FontSans } from "next/font/google";
 import "@/app/globals.css";
 import { cn } from "@/lib/utils";
 import type { Viewport } from "next";
-import Navbar from "@/app/_components/Navbar";
 import Providers from "@/components/providers";
 import { Analytics } from "@vercel/analytics/react";
-import { Toaster } from "sonner";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const viewport: Viewport = {
@@ -43,13 +41,7 @@ export default function RootLayout({
           fontSans.variable,
         )}
       >
-        <Providers>
-          <main className="flex h-svh w-full flex-col">
-            <Navbar />
-            {children}
-            <Toaster richColors />
-          </main>
-        </Providers>
+        <Providers>{children}</Providers>
         <Analytics />
         <SpeedInsights />
       </body>

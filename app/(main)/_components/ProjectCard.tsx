@@ -7,10 +7,10 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { ArrowRightIcon } from "@radix-ui/react-icons";
-import { Button } from "../../components/ui/button";
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import StatusBadge from "./StatusBadge";
-import { Badge } from "../../components/ui/badge";
+import { Badge } from "@/components/ui/badge";
 
 export default function ProjectCard({
   id,

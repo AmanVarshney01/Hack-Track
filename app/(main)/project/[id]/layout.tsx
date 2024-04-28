@@ -1,4 +1,4 @@
-import Sidebar from "@/app/project/[id]/_components/Sidebar";
+import Sidebar from "@/app/(main)/project/[id]/_components/Sidebar";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 export default function ProjectLayout({

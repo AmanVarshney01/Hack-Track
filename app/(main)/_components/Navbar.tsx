@@ -2,7 +2,7 @@ import Link from "next/link";
 import AuthButton from "./AuthButton";
 import MobileSidebar from "./MobileSidebar";
 import { Suspense } from "react";
-import AuthButtonSkeleton from "../../components/skeletons/AuthButtonSkeleton";
+import AuthButtonSkeleton from "@/components/skeletons/AuthButtonSkeleton";
 
 export default function Navbar() {
   return (

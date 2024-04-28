@@ -1,5 +1,5 @@
 import { VariantProps, cva } from "class-variance-authority";
-import { Badge } from "../../components/ui/badge";
+import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 
 const statusVariants = cva("rounded-full", {

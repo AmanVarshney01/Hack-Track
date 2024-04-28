@@ -18,7 +18,6 @@ export default async function Login({
   const supabase = createClient();
   const {
     data: { user },
-    error,
   } = await supabase.auth.getUser();
 
   if (user) {
@@ -26,7 +25,7 @@ export default async function Login({
   }
 
   return (
-    <section className="fixed left-0 top-0 flex min-h-svh w-full items-center justify-center bg-background p-4">
+    <section className="flex min-h-svh w-full items-center justify-center bg-background p-4">
       <Card>
         <CardHeader>
           <CardTitle className=" text-xl">GLA Project Tracker</CardTitle>

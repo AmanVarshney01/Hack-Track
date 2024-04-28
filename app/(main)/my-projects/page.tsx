@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import MyProjectsGrid from "@/app/my-projects/_components/MyProjectsGrid";
+import MyProjectsGrid from "@/app/(main)/my-projects/_components/MyProjectsGrid";
 import ProjectsGridSkeleton from "@/components/skeletons/ProjectsGridSkeleton";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";

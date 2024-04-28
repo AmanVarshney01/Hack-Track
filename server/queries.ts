@@ -2,6 +2,7 @@ import "server-only"
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 
+
 export async function getUser() {
     const supabase = createClient();
 
@@ -12,11 +13,34 @@ export async function getUser() {
     }
 
     return {
-        name: user?.user_metadata.full_name,
-        email: user?.email,
-        avatarUrl: user?.user_metadata.avatar_url,
+        id: user.id,
+        name: user.user_metadata.full_name,
+        email: user.email,
+        avatarUrl: user.user_metadata.avatar_url,
     }
 
+}
+
+export async function getProjectOwner(projectId: number) {
+    const supabase = createClient();
+
+    const { data: { user } } = await supabase.auth.getUser();
+
+    if (!user) {
+        return redirect("/login");
+    }
+
+    const response = await supabase
+        .from("projects")
+        .select("created_by")
+        .eq("id", projectId)
+        .single();
+
+    if (response.error) {
+        throw new Error(response.error.message)
+    }
+
+    return response
 }
 
 export async function getProject(projectId: number) {
@@ -56,6 +80,10 @@ export async function getProject(projectId: number) {
         .eq("id", projectId)
         .single();
 
+    if (response.error) {
+        throw new Error(response.error.message)
+    }
+
     return response
 }
 
@@ -80,6 +108,10 @@ export async function getProjectTasks(projectId: number) {
             `,
         )
         .eq("project_id", projectId);
+
+    if (response.error) {
+        throw new Error(response.error.message)
+    }
 
     return response
 
@@ -107,6 +139,10 @@ export async function getMyProjects() {
             `,
         )
         .eq("created_by", user.id);
+
+    if (response.error) {
+        throw new Error(response.error.message)
+    }
 
     return response
 }
@@ -137,6 +173,10 @@ export async function getJoinedProjects() {
         )
         .eq("member_email", user.email!);
 
+    if (response.error) {
+        throw new Error(response.error.message)
+    }
+
     return response
 }
 
@@ -153,6 +193,10 @@ export async function getMyProjectsCount() {
         .from("projects")
         .select("*", { count: "exact", head: true })
         .eq("created_by", user.id);
+
+    if (response.error) {
+        throw new Error(response.error.message)
+    }
 
     return response
 }
@@ -171,6 +215,10 @@ export async function getJoinedProjectsCount() {
         .select("*", { count: "exact", head: true })
         .eq("member_email", user.email!);
 
+    if (response.error) {
+        throw new Error(response.error.message)
+    }
+
     return response
 }
 
@@ -188,6 +236,10 @@ export async function getGithubURL(projectId: number) {
         .select("github_url")
         .eq("project_id", projectId)
         .single();
+
+    if (response.error) {
+        throw new Error(response.error.message)
+    }
 
     return response
 }
@@ -213,6 +265,10 @@ export async function getProjectResources(projectId: number) {
         )
         .eq("project_id", projectId);
 
+    if (response.error) {
+        throw new Error(response.error.message)
+    }
+
     return response
 }
 
@@ -235,6 +291,10 @@ export async function getProjectMembers(projectId: number) {
             `,
         )
         .eq("project_id", projectId);
+
+    if (response.error) {
+        throw new Error(response.error.message)
+    }
 
     return response
 }
@@ -264,6 +324,10 @@ export async function getProjectDetails(projectId: number) {
         )
         .eq("id", projectId)
         .single();
+
+    if (response.error) {
+        throw new Error(response.error.message)
+    }
 
     return response
 }

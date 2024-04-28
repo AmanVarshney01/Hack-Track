@@ -6,24 +6,27 @@ import {
   Pencil1Icon,
 } from "@radix-ui/react-icons";
 import NavButton from "../../../_components/NavButton";
+import { isProjectOwner } from "@/server/permissions";
 
-export default function Sidebar({ id }: { id: number }) {
+export default async function Sidebar({ projectId }: { projectId: number }) {
+  const isProjectOwnerCheck = await isProjectOwner(projectId);
+
   return (
     <aside className=" hidden h-full min-w-48 flex-col items-center justify-between border-r px-2 py-4 md:flex">
       <div className=" flex h-full w-full flex-col gap-2">
         <NavButton
           name="Dashboard"
-          href={`/project/${id}`}
+          href={`/project/${projectId}`}
           icon={<DashboardIcon />}
         />
         <NavButton
           name="Tasks"
-          href={`/project/${id}/tasks`}
+          href={`/project/${projectId}/tasks`}
           icon={<FileTextIcon />}
         />
         <NavButton
           name="Resources"
-          href={`/project/${id}/resources`}
+          href={`/project/${projectId}/resources`}
           icon={<FileIcon />}
         />
       </div>
@@ -33,11 +36,13 @@ export default function Sidebar({ id }: { id: number }) {
           href="https://forms.gle/mpREKPiNAApJ41er8"
           icon={<Pencil1Icon />}
         />
-        <NavButton
-          name="Project Settings"
-          href={`/project/${id}/settings`}
-          icon={<GearIcon />}
-        />
+        {isProjectOwnerCheck && (
+          <NavButton
+            name="Project Settings"
+            href={`/project/${projectId}/settings`}
+            icon={<GearIcon />}
+          />
+        )}
       </div>
     </aside>
   );

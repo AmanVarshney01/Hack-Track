@@ -21,7 +21,9 @@ export default async function Index() {
           <CardHeader className=" flex flex-row items-center gap-4">
             <Avatar className=" h-14 w-14">
               <AvatarImage src={user.avatarUrl} />
-              <AvatarFallback>DP</AvatarFallback>
+              <AvatarFallback>
+                {user.name.charAt(0).toUpperCase()}
+              </AvatarFallback>
             </Avatar>
             <div>
               <CardTitle className=" text-xl">

@@ -1,4 +1,4 @@
-import GithubCard from "@/app/(main)/project/[id]/_components/GithubCard";
+import GithubCard from "@/app/(main)/project/[projectId]/_components/GithubCard";
 import StatusBadge from "@/app/(main)/_components/StatusBadge";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -16,10 +16,6 @@ export default async function DashboardGrid({
   projectId: number;
 }) {
   const project = await getProject(projectId);
-
-  if (project.error) {
-    throw new Error(project.error.message);
-  }
 
   const isGithubConnected =
     project.data?.project_details[0].github_url !== null;

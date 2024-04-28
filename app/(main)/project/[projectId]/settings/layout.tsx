@@ -1,4 +1,4 @@
-import SettingsNavButton from "@/app/(main)/project/[id]/settings/_components/SettingsNavButton";
+import SettingsNavButton from "@/app/(main)/project/[projectId]/settings/_components/SettingsNavButton";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function SettingsLayout({
@@ -6,7 +6,7 @@ export default function SettingsLayout({
   params,
 }: {
   children: React.ReactNode;
-  params: { id: number };
+  params: { projectId: number };
 }) {
   return (
     <section className="mx-auto flex max-w-6xl flex-col gap-4 p-4">
@@ -18,19 +18,19 @@ export default function SettingsLayout({
           <div className=" flex w-min flex-row gap-2">
             <SettingsNavButton
               name="General"
-              href={`/project/${params.id}/settings`}
+              href={`/project/${params.projectId}/settings`}
             />
             <SettingsNavButton
               name="Team"
-              href={`/project/${params.id}/settings/team`}
+              href={`/project/${params.projectId}/settings/team`}
             />
             <SettingsNavButton
               name="Github"
-              href={`/project/${params.id}/settings/github`}
+              href={`/project/${params.projectId}/settings/github`}
             />
             <SettingsNavButton
               name="Delete"
-              href={`/project/${params.id}/settings/delete`}
+              href={`/project/${params.projectId}/settings/delete`}
             />
           </div>
         </CardContent>

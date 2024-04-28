@@ -33,7 +33,9 @@ export default async function AuthButton() {
             <div className="flex min-w-0 max-w-48 flex-row items-center justify-between gap-2 ">
               <Avatar className="h-6 w-6">
                 <AvatarImage src={user.avatarUrl} />
-                <AvatarFallback>DP</AvatarFallback>
+                <AvatarFallback>
+                  {user.name.charAt(0).toUpperCase()}
+                </AvatarFallback>
               </Avatar>
               <span className=" line-clamp-1 hidden truncate text-sm md:block">
                 {user.name}
@@ -47,7 +49,7 @@ export default async function AuthButton() {
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem className=" p-0">
-              <Link href="/project/new" className="w-full">
+              <Link href="/project/new" className="w-full" prefetch={false}>
                 <Button variant={"secondary"} className=" w-full">
                   Create Project
                 </Button>

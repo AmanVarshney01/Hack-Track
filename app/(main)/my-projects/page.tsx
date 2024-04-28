@@ -14,7 +14,7 @@ export default async function MyProjectsPage() {
         <Card className="border-0">
           <CardHeader className="flex flex-row items-center justify-between gap-4 p-2 md:p-6">
             <div className="flex flex-row items-center gap-2">
-              <Link href={"/"}>
+              <Link href={"/"} prefetch={false}>
                 <Button variant={"ghost"}>
                   <ArrowLeftIcon />
                 </Button>

@@ -12,9 +12,5 @@ export default async function TasksGrid({ projectId }: { projectId: number }) {
     };
   });
 
-  if (projectTasks.error) {
-    throw new Error(projectTasks.error.message);
-  }
-
   return <TasksTable data={transformedData!} columns={columns} />;
 }

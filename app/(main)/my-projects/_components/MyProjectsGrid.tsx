@@ -5,10 +5,6 @@ import { getMyProjects } from "@/server/queries";
 export default async function MyProjectsGrid() {
   const myProjects = await getMyProjects();
 
-  if (myProjects.error) {
-    throw new Error(myProjects.error.message);
-  }
-
   return (
     <section className=" grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-3">
       {myProjects.data.length !== 0 ? (

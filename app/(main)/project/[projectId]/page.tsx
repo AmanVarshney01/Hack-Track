@@ -6,7 +6,7 @@ import { Card, CardTitle, CardHeader } from "@/components/ui/card";
 export default async function ProjectPage({
   params,
 }: {
-  params: { id: number };
+  params: { projectId: number };
 }) {
   return (
     <div className="mx-auto flex max-w-6xl flex-col gap-4 p-4">
@@ -16,7 +16,7 @@ export default async function ProjectPage({
         </CardHeader>
       </Card>
       <Suspense fallback={<DashboardGridSkeleton />}>
-        <DashboardGrid projectId={params.id} />
+        <DashboardGrid projectId={params.projectId} />
       </Suspense>
     </div>
   );

@@ -7,18 +7,18 @@ import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 export default async function ResourcesPage({
   params,
 }: {
-  params: { id: number };
+  params: { projectId: number };
 }) {
   return (
     <div className="mx-auto flex max-w-6xl flex-col gap-4 p-4">
       <Card className=" border-0 ">
         <CardHeader className=" flex flex-row items-center justify-between ">
           <CardTitle className=" text-2xl font-semibold">Resources</CardTitle>
-          <AddResourceButton id={params.id} />
+          <AddResourceButton id={params.projectId} />
         </CardHeader>
       </Card>
       <Suspense fallback={<ResourcesGridSkeleton />}>
-        <ResourcesGrid projectId={params.id} />
+        <ResourcesGrid projectId={params.projectId} />
       </Suspense>
     </div>
   );

@@ -21,10 +21,6 @@ export default async function ResourcesGrid({
 }) {
   const resources = await getProjectResources(projectId);
 
-  if (resources.error) {
-    throw new Error(resources.error.message);
-  }
-
   if (!resources.data || resources.data?.length === 0) {
     return (
       <EmptyCard message="No resources found. Add a resource to get started." />

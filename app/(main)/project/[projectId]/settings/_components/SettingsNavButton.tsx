@@ -17,7 +17,7 @@ export default function SettingsNavButton({
     path.includes(href.split("/")[4]) || path[4] === href.split("/")[4];
 
   return (
-    <Link href={href} prefetch={false}>
+    <Link href={href}>
       <Button variant={isActive ? "secondary" : "ghost"}>{name}</Button>
     </Link>
   );

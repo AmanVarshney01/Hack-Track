@@ -13,7 +13,7 @@ export default async function JoinedProjectsPage() {
       <div className=" mx-auto flex w-full max-w-7xl flex-col gap-4">
         <Card className="border-0">
           <CardHeader className="flex flex-row items-center gap-4 p-2 md:p-6">
-            <Link href={"/"} prefetch={false}>
+            <Link href={"/"}>
               <Button variant={"ghost"}>
                 <ArrowLeftIcon />
               </Button>

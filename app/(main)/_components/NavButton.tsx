@@ -19,7 +19,7 @@ export default function NavButton({
     path.includes(href.split("/")[3]) || path[3] === href.split("/")[3];
 
   return (
-    <Link href={href} prefetch={false}>
+    <Link href={href}>
       <Button
         className={"w-full justify-start gap-2 text-base"}
         variant={isActive ? "secondary" : "ghost"}

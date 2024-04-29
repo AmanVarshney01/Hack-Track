@@ -30,7 +30,7 @@ export default async function HomeGrid() {
           </div>
         </CardContent>
         <CardFooter className=" border-t p-2">
-          <Link className="w-full" href={`/my-projects`} prefetch={false}>
+          <Link className="w-full" href={`/my-projects`}>
             <Button
               variant={"ghost"}
               className="flex w-full flex-row items-center justify-end gap-2"
@@ -54,7 +54,7 @@ export default async function HomeGrid() {
           </div>
         </CardContent>
         <CardFooter className=" border-t p-2">
-          <Link className="w-full" href={`/joined-projects`} prefetch={false}>
+          <Link className="w-full" href={`/joined-projects`}>
             <Button
               variant={"ghost"}
               className="flex w-full flex-row items-center justify-end gap-2"
@@ -72,7 +72,7 @@ export default async function HomeGrid() {
         </CardHeader>
         <CardContent></CardContent>
         <CardFooter className=" border-t p-2">
-          {/* <Link className="w-full" href={`/joined-projects`} prefetch={false}> */}
+          {/* <Link className="w-full" href={`/joined-projects`} > */}
           <Button
             variant={"ghost"}
             disabled

@@ -1,4 +1,4 @@
-import { ScrollArea } from "@/components/ui/scroll-area";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import {
   Card,
   CardDescription,
@@ -15,7 +15,7 @@ export default async function Index() {
   const user = await getUser();
 
   return (
-    <ScrollArea className="h-full w-full p-4">
+    <ScrollArea className="h-full w-full p-2">
       <div className=" mx-auto flex w-full max-w-7xl flex-col gap-4">
         <Card className=" border-0">
           <CardHeader className=" flex flex-row items-center gap-4">
@@ -37,6 +37,7 @@ export default async function Index() {
           <HomeGrid />
         </Suspense>
       </div>
+      <ScrollBar orientation="horizontal" />
     </ScrollArea>
   );
 }

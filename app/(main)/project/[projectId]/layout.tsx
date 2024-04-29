@@ -1,5 +1,5 @@
 import Sidebar from "@/app/(main)/project/[projectId]/_components/Sidebar";
-import { ScrollArea } from "@/components/ui/scroll-area";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 
 export default function ProjectLayout({
   children,
@@ -11,7 +11,10 @@ export default function ProjectLayout({
   return (
     <section className=" h-full overflow-clip md:flex md:flex-row">
       <Sidebar projectId={params.projectId} />
-      <ScrollArea className=" h-full w-full">{children}</ScrollArea>
+      <ScrollArea className=" h-full w-full">
+        {children}
+        <ScrollBar orientation="horizontal" />
+      </ScrollArea>
     </section>
   );
 }

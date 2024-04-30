@@ -13,16 +13,25 @@ import {
 } from "@/components/ui/sheet";
 import { deleteResource } from "@/server/actions";
 import { TrashIcon } from "@radix-ui/react-icons";
+import { useState } from "react";
 import { toast } from "sonner";
 
-export default function DeleteResourceButton({ id }: { id: number }) {
+export default function DeleteResourceButton({
+  projectId,
+  resourceId,
+}: {
+  projectId: number;
+  resourceId: number;
+}) {
+  const [open, setOpen] = useState(false);
+
   async function onSubmit() {
-    await deleteResource(id);
+    await deleteResource(projectId, resourceId);
     toast.success("Resource deleted successfully");
   }
 
   return (
-    <Sheet>
+    <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
         <TrashIcon className=" cursor-pointer text-red-600" />
       </SheetTrigger>

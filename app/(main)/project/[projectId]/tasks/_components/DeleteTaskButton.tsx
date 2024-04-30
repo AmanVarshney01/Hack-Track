@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -12,15 +14,24 @@ import {
 import { deleteTask } from "@/server/actions";
 import { TrashIcon } from "@radix-ui/react-icons";
 import { toast } from "sonner";
+import { useState } from "react";
 
-export default function DeleteTaskButton({ id }: { id: number }) {
+export default function DeleteTaskButton({
+  projectId,
+  taskId,
+}: {
+  projectId: number;
+  taskId: number;
+}) {
+  const [open, setOpen] = useState(false);
+
   async function onSubmit() {
-    await deleteTask(id);
+    await deleteTask(projectId, taskId);
     toast.success("Task deleted successfully");
   }
 
   return (
-    <Sheet>
+    <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
         <Button className="w-full gap-2" variant={"destructive"}>
           <TrashIcon />

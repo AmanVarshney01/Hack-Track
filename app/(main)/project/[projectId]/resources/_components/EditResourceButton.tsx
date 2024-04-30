@@ -14,7 +14,6 @@ import {
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -29,11 +28,13 @@ import { Pencil2Icon, UpdateIcon } from "@radix-ui/react-icons";
 import { toast } from "sonner";
 
 export default function EditResourceButton({
-  id,
+  projectId,
+  resourceId,
   name,
   url,
 }: {
-  id: number;
+  projectId: number;
+  resourceId: number;
   name: string;
   url: string;
 }) {
@@ -48,7 +49,7 @@ export default function EditResourceButton({
   });
 
   async function onSubmit(values: z.infer<typeof resourceFormSchema>) {
-    await updateResource(id, values);
+    await updateResource(projectId, resourceId, values);
     toast.success("Resource updated successfully");
     setOpen(false);
   }

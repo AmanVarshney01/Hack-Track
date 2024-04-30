@@ -14,7 +14,7 @@ export default async function TasksPage({
       <Card className=" border-0 ">
         <CardHeader className=" flex flex-row items-center justify-between ">
           <CardTitle className=" text-2xl font-semibold">Tasks</CardTitle>
-          <AddTaskButton id={params.projectId} />
+          <AddTaskButton projectId={params.projectId} />
         </CardHeader>
       </Card>
       <Suspense fallback={<TasksGridSkeleton />}>

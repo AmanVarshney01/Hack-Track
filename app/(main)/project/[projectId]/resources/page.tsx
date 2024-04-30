@@ -14,7 +14,7 @@ export default async function ResourcesPage({
       <Card className=" border-0 ">
         <CardHeader className=" flex flex-row items-center justify-between ">
           <CardTitle className=" text-2xl font-semibold">Resources</CardTitle>
-          <AddResourceButton id={params.projectId} />
+          <AddResourceButton projectId={params.projectId} />
         </CardHeader>
       </Card>
       <Suspense fallback={<ResourcesGridSkeleton />}>

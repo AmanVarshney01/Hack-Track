@@ -17,16 +17,19 @@ import {
 } from "@/components/ui/sheet";
 import NavButton from "./NavButton";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 
 export default function MobileSidebar() {
+  const [open, setOpen] = useState(false);
   const path = usePathname().split("/");
   const isProject = path[1] === "project";
   if (!isProject) {
     return;
   }
   const id = path[2];
+
   return (
-    <Sheet>
+    <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger className=" block md:hidden">
         <HamburgerMenuIcon />
       </SheetTrigger>
@@ -40,16 +43,19 @@ export default function MobileSidebar() {
               name="Dashboard"
               href={`/project/${id}`}
               icon={<DashboardIcon />}
+              onClick={() => setOpen(false)}
             />
             <NavButton
               name="Tasks"
               href={`/project/${id}/tasks`}
               icon={<FileTextIcon />}
+              onClick={() => setOpen(false)}
             />
             <NavButton
               name="Resources"
               href={`/project/${id}/resources`}
               icon={<FileIcon />}
+              onClick={() => setOpen(false)}
             />
           </div>
           <SheetFooter className="mt-auto">
@@ -57,6 +63,7 @@ export default function MobileSidebar() {
               name="Project Settings"
               href={`/project/${id}/settings`}
               icon={<GearIcon />}
+              onClick={() => setOpen(false)}
             />
           </SheetFooter>
         </div>

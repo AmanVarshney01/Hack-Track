@@ -7,7 +7,11 @@ export default async function TasksGrid({ projectId }: { projectId: number }) {
 
   const transformedData = projectTasks.data?.map((task) => {
     return {
-      ...task,
+      projectId: projectId,
+      taskId: task.id,
+      title: task.title,
+      status: task.status,
+      priority: task.priority,
       created_by: task.created_by?.name!,
     };
   });

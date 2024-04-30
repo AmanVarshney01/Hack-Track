@@ -176,7 +176,7 @@ export async function deleteProject(id: number) {
 
 }
 
-export async function insertResource(id: number, values: z.infer<typeof resourceFormSchema>) {
+export async function insertResource(projectId: number, values: z.infer<typeof resourceFormSchema>) {
   const supabase = createClient();
   const {
     data: { user },
@@ -187,7 +187,7 @@ export async function insertResource(id: number, values: z.infer<typeof resource
   }
 
   const response = await supabase.from("project_resources").insert({
-    project_id: id,
+    project_id: projectId,
     name: values.resourceName,
     url: values.resourceUrl,
     created_by: user?.id,
@@ -197,10 +197,10 @@ export async function insertResource(id: number, values: z.infer<typeof resource
     throw new Error(response.error.message);
   }
 
-  revalidatePath(`/project/${id}/resources`)
+  revalidatePath(`/project/${projectId}/resources`)
 }
 
-export async function updateResource(id: number, values: z.infer<typeof resourceFormSchema>) {
+export async function updateResource(projectId: number, resourceId: number, values: z.infer<typeof resourceFormSchema>) {
   const supabase = createClient();
   const {
     data: { user },
@@ -213,16 +213,16 @@ export async function updateResource(id: number, values: z.infer<typeof resource
   const response = await supabase.from("project_resources").update({
     name: values.resourceName,
     url: values.resourceUrl,
-  }).eq("id", id);
+  }).eq("id", resourceId);
 
   if (response.error) {
     throw new Error(response.error.message);
   }
 
-  revalidatePath(`/project/${id}/resources`)
+  revalidatePath(`/project/${projectId}/resources`)
 }
 
-export async function deleteResource(id: number) {
+export async function deleteResource(projectId: number, resourceId: number) {
   const supabase = createClient();
   const {
     data: { user },
@@ -232,16 +232,16 @@ export async function deleteResource(id: number) {
     return redirect("/login");
   }
 
-  const response = await supabase.from("project_resources").delete().eq("id", id);
+  const response = await supabase.from("project_resources").delete().eq("id", resourceId);
 
   if (response.error) {
     throw new Error(response.error.message);
   }
 
-  revalidatePath(`/project/${id}/resources`)
+  revalidatePath(`/project/${projectId}/resources`)
 }
 
-export async function insertTask(id: number, values: z.infer<typeof taskFormSchema>) {
+export async function insertTask(projectId: number, values: z.infer<typeof taskFormSchema>) {
   const supabase = createClient();
   const {
     data: { user },
@@ -252,7 +252,7 @@ export async function insertTask(id: number, values: z.infer<typeof taskFormSche
   }
 
   const response = await supabase.from("project_tasks").insert({
-    project_id: id,
+    project_id: projectId,
     title: values.taskTitle,
     priority: values.priority,
     status: values.status,
@@ -263,10 +263,10 @@ export async function insertTask(id: number, values: z.infer<typeof taskFormSche
     throw new Error(response.error.message);
   }
 
-  revalidatePath(`/project/${id}/tasks`)
+  revalidatePath(`/project/${projectId}/tasks`)
 }
 
-export async function deleteTask(id: number) {
+export async function deleteTask(projectId: number, taskId: number) {
   const supabase = createClient();
   const {
     data: { user },
@@ -276,16 +276,16 @@ export async function deleteTask(id: number) {
     return redirect("/login");
   }
 
-  const response = await supabase.from("project_tasks").delete().eq("id", id);
+  const response = await supabase.from("project_tasks").delete().eq("id", taskId);
 
   if (response.error) {
     throw new Error(response.error.message);
   }
 
-  revalidatePath(`/project/${id}/tasks`)
+  revalidatePath(`/project/${projectId}/tasks`)
 }
 
-export async function updateTask(id: number, values: z.infer<typeof taskFormSchema>) {
+export async function updateTask(projectId: number, taskId: number, values: z.infer<typeof taskFormSchema>) {
   const supabase = createClient();
   const {
     data: { user },
@@ -299,13 +299,13 @@ export async function updateTask(id: number, values: z.infer<typeof taskFormSche
     title: values.taskTitle,
     priority: values.priority,
     status: values.status,
-  }).eq("id", id);
+  }).eq("id", taskId);
 
   if (response.error) {
     throw new Error(response.error.message);
   }
 
-  revalidatePath(`/project/${id}/tasks`)
+  revalidatePath(`/project/${projectId}/tasks`)
 }
 
 export async function saveGithubUrl(id: number, url: string) {

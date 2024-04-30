@@ -8,10 +8,12 @@ export default function NavButton({
   name,
   href,
   icon,
+  onClick,
 }: {
   name: string;
   href: string;
   icon: React.ReactNode;
+  onClick?: () => void;
 }) {
   const path = usePathname().split("/");
 
@@ -23,6 +25,7 @@ export default function NavButton({
       <Button
         className={"w-full justify-start gap-2 text-base"}
         variant={isActive ? "secondary" : "ghost"}
+        onClick={onClick}
       >
         {icon}
         {name}

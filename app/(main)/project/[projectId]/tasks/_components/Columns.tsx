@@ -13,7 +13,8 @@ import DeleteTaskButton from "./DeleteTaskButton";
 import EditTaskButton from "./EditTaskButton";
 
 export type Tasks = {
-  id: number;
+  projectId: number;
+  taskId: number;
   title: string;
   created_by: string;
   priority: "high" | "medium" | "low";
@@ -62,7 +63,7 @@ export const columns: ColumnDef<Tasks>[] = [
   {
     id: "actions",
     cell: ({ row }) => {
-      const { id, title, status, priority } = row.original;
+      const { projectId, taskId, title, status, priority } = row.original;
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -73,14 +74,14 @@ export const columns: ColumnDef<Tasks>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <EditTaskButton
-              id={id}
+              projectId={projectId}
+              taskId={taskId}
               title={title}
               status={status}
               priority={priority}
             />
-            {/* <DropdownMenuSeparator /> */}
             <DropdownMenuSeparator />
-            <DeleteTaskButton id={id} />
+            <DeleteTaskButton projectId={projectId} taskId={taskId} />
           </DropdownMenuContent>
         </DropdownMenu>
       );

@@ -21,7 +21,6 @@ import {
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -35,7 +34,7 @@ import { UpdateIcon } from "@radix-ui/react-icons";
 import { insertTask } from "@/server/actions";
 import { toast } from "sonner";
 
-export default function AddTaskButton({ id }: { id: number }) {
+export default function AddTaskButton({ projectId }: { projectId: number }) {
   const [open, setOpen] = useState(false);
 
   const form = useForm<z.infer<typeof taskFormSchema>>({
@@ -48,14 +47,14 @@ export default function AddTaskButton({ id }: { id: number }) {
   });
 
   async function onSubmit(values: z.infer<typeof taskFormSchema>) {
-    await insertTask(id, values);
+    await insertTask(projectId, values);
     toast.success("Task added successfully");
     form.reset();
     setOpen(false);
   }
 
   return (
-    <Sheet>
+    <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
         <Button>Add Task</Button>
       </SheetTrigger>

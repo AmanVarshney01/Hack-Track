@@ -54,11 +54,15 @@ export default async function ResourcesGrid({
             <CardFooter className=" justify-end space-x-4">
               <>
                 <EditResourceButton
-                  id={resource.id}
+                  projectId={projectId}
+                  resourceId={resource.id}
                   name={resource.name}
                   url={resource.url}
                 />
-                <DeleteResourceButton id={resource.id} />
+                <DeleteResourceButton
+                  projectId={projectId}
+                  resourceId={resource.id}
+                />
               </>
               <Link href={resource.url} target="_blank">
                 <ExternalLinkIcon className=" text-blue-600" />

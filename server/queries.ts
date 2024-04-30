@@ -117,6 +117,22 @@ export async function getProjectTasks(projectId: number) {
 
 }
 
+export async function getProjectTaskOwner(taskId: number) {
+    const supabase = createClient();
+
+    const response = await supabase
+        .from("project_tasks")
+        .select("created_by")
+        .eq("id", taskId)
+        .single();
+
+    if (response.error) {
+        throw new Error(response.error.message)
+    }
+
+    return response
+}
+
 export async function getMyProjects() {
     const supabase = createClient();
 

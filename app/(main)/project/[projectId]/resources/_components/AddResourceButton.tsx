@@ -6,9 +6,7 @@ import { z } from "zod";
 
 import {
   Sheet,
-  SheetClose,
   SheetContent,
-  SheetFooter,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
@@ -16,7 +14,6 @@ import {
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -30,7 +27,11 @@ import { insertResource } from "@/server/actions";
 import { UpdateIcon } from "@radix-ui/react-icons";
 import { toast } from "sonner";
 
-export default function AddResourceButton({ id }: { id: number }) {
+export default function AddResourceButton({
+  projectId,
+}: {
+  projectId: number;
+}) {
   const [open, setOpen] = useState(false);
 
   const form = useForm<z.infer<typeof resourceFormSchema>>({
@@ -42,7 +43,7 @@ export default function AddResourceButton({ id }: { id: number }) {
   });
 
   async function onSubmit(values: z.infer<typeof resourceFormSchema>) {
-    await insertResource(id, values);
+    await insertResource(projectId, values);
     toast.success("Resource added successfully");
     form.reset();
     setOpen(false);

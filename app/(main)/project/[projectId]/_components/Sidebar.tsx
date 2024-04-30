@@ -3,7 +3,6 @@ import {
   FileIcon,
   FileTextIcon,
   GearIcon,
-  Pencil1Icon,
 } from "@radix-ui/react-icons";
 import NavButton from "../../../_components/NavButton";
 import { isProjectOwner } from "@/server/permissions";
@@ -31,11 +30,6 @@ export default async function Sidebar({ projectId }: { projectId: number }) {
         />
       </div>
       <div className="flex  w-full flex-col gap-2">
-        <NavButton
-          name="Feedback"
-          href="https://forms.gle/mpREKPiNAApJ41er8"
-          icon={<Pencil1Icon />}
-        />
         {isProjectOwnerCheck && (
           <NavButton
             name="Project Settings"

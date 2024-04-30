@@ -57,6 +57,18 @@ export default async function AuthButton() {
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem className=" p-0">
+              <Link
+                href="https://forms.gle/mpREKPiNAApJ41er8"
+                className="w-full"
+                target="_blank"
+              >
+                <Button variant={"secondary"} className=" w-full">
+                  Feedback
+                </Button>
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem className=" p-0">
               <ThemeToggle />
             </DropdownMenuItem>
             <DropdownMenuSeparator />

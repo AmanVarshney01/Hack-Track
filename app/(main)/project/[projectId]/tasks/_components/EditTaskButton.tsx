@@ -14,7 +14,6 @@ import {
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -24,7 +23,7 @@ import { Button } from "@/components/ui/button";
 import { taskFormSchema } from "@/utils/types";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
-import { updateResource, updateTask } from "@/server/actions";
+import { updateTask } from "@/server/actions";
 import { Pencil2Icon, UpdateIcon } from "@radix-ui/react-icons";
 import { Tables } from "@/utils/database.types";
 import {
@@ -37,12 +36,14 @@ import {
 import { toast } from "sonner";
 
 export default function EditTaskButton({
-  id,
+  projectId,
+  taskId,
   status,
   title,
   priority,
 }: {
-  id: number;
+  projectId: number;
+  taskId: number;
   status: Tables<"project_tasks">["status"];
   title: string;
   priority: Tables<"project_tasks">["priority"];
@@ -59,13 +60,13 @@ export default function EditTaskButton({
   });
 
   async function onSubmit(values: z.infer<typeof taskFormSchema>) {
-    await updateTask(id, values);
+    await updateTask(projectId, taskId, values);
     toast.success("Task updated successfully");
     setOpen(false);
   }
 
   return (
-    <Sheet>
+    <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
         <Button className="w-full gap-2" variant={"secondary"}>
           <Pencil2Icon />

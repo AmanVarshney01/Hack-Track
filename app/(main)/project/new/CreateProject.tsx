@@ -56,7 +56,7 @@ export default function CreateProject() {
   }
 
   return (
-    <Card className=" h-full w-full border-0">
+    <Card className=" h-full w-full border-0 bg-background shadow-none">
       <CardHeader className="p-2">
         <CardTitle className="text-2xl font-semibold">
           Create a new project

@@ -17,7 +17,7 @@ export default async function Index() {
   return (
     <ScrollArea className="h-full w-full p-2">
       <div className=" mx-auto flex w-full max-w-7xl flex-col gap-4">
-        <Card className=" border-0">
+        <Card className=" border-0 bg-background shadow-none">
           <CardHeader className=" flex flex-row items-center gap-4">
             <Avatar className=" h-14 w-14">
               <AvatarImage src={user.avatarUrl} />

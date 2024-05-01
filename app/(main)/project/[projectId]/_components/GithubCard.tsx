@@ -30,11 +30,11 @@ export default async function GithubCard({
             Connect a Github repository to view more details
           </CardDescription>
         </CardHeader>
-        <CardContent className="space-y-3">
+        {/* <CardContent className="space-y-3">
           <Link href={`/project/${projectId}/settings/github`}>
             <Button>Connect Github</Button>
           </Link>
-        </CardContent>
+        </CardContent> */}
       </Card>
     );
   }

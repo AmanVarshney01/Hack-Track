@@ -72,7 +72,7 @@ export default async function DashboardGrid({
             <CardTitle className=" text-xl">Team Members</CardTitle>
           </CardHeader>
           <CardContent className=" space-y-4">
-            <div className=" flex flex-row items-center justify-between gap-4">
+            <div className=" flex flex-row items-center justify-between gap-2">
               <div className=" flex flex-col">
                 <span className="">{project.data?.users?.name}</span>
                 <span className=" text-sm text-muted-foreground">
@@ -83,7 +83,7 @@ export default async function DashboardGrid({
             </div>
             {project.data?.project_members.map((member) => (
               <div
-                className=" flex flex-row items-center justify-between gap-4"
+                className=" flex flex-row items-center justify-between gap-2"
                 key={member.member_email}
               >
                 <div className=" flex flex-col">

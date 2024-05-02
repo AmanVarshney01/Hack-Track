@@ -11,6 +11,12 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import {
+  Tooltip,
+  TooltipProvider,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { deleteResource } from "@/server/actions";
 import { TrashIcon } from "@radix-ui/react-icons";
 import { useState } from "react";
@@ -33,7 +39,16 @@ export default function DeleteResourceButton({
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
-        <TrashIcon className=" cursor-pointer text-red-600" />
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button size={"icon"} variant={"ghost"}>
+                <TrashIcon className=" cursor-pointer text-red-600" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>Delete</TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
       </SheetTrigger>
       <SheetContent>
         <SheetHeader className="pb-8">

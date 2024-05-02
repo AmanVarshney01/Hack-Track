@@ -15,7 +15,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import NavButton from "./NavButton";
+import NavButton from "../../../_components/NavButton";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
@@ -26,7 +26,7 @@ export default function MobileSidebar() {
   if (!isProject) {
     return;
   }
-  const id = path[2];
+  const projectId = path[2];
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -41,19 +41,19 @@ export default function MobileSidebar() {
           <div className=" flex w-full flex-col gap-4 ">
             <NavButton
               name="Dashboard"
-              href={`/project/${id}`}
+              href={`/project/${projectId}`}
               icon={<DashboardIcon />}
               onClick={() => setOpen(false)}
             />
             <NavButton
               name="Tasks"
-              href={`/project/${id}/tasks`}
+              href={`/project/${projectId}/tasks`}
               icon={<FileTextIcon />}
               onClick={() => setOpen(false)}
             />
             <NavButton
               name="Resources"
-              href={`/project/${id}/resources`}
+              href={`/project/${projectId}/resources`}
               icon={<FileIcon />}
               onClick={() => setOpen(false)}
             />
@@ -61,7 +61,7 @@ export default function MobileSidebar() {
           <SheetFooter className="mt-auto">
             <NavButton
               name="Project Settings"
-              href={`/project/${id}/settings`}
+              href={`/project/${projectId}/settings`}
               icon={<GearIcon />}
               onClick={() => setOpen(false)}
             />

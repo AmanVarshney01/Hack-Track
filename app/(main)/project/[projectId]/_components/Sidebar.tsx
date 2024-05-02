@@ -1,15 +1,10 @@
-import {
-  DashboardIcon,
-  FileIcon,
-  FileTextIcon,
-  GearIcon,
-} from "@radix-ui/react-icons";
+import { DashboardIcon, FileIcon, FileTextIcon } from "@radix-ui/react-icons";
 import NavButton from "../../../_components/NavButton";
-import { isProjectOwner } from "@/server/permissions";
+import ProjectSettingsButton from "./ProjectSettingsButton";
+import { Suspense } from "react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default async function Sidebar({ projectId }: { projectId: number }) {
-  const isProjectOwnerCheck = await isProjectOwner(projectId);
-
   return (
     <aside className=" hidden h-full min-w-48 flex-col items-center justify-between border-r px-2 py-4 md:flex">
       <div className=" flex h-full w-full flex-col gap-2">
@@ -30,13 +25,9 @@ export default async function Sidebar({ projectId }: { projectId: number }) {
         />
       </div>
       <div className="flex  w-full flex-col gap-2">
-        {isProjectOwnerCheck && (
-          <NavButton
-            name="Project Settings"
-            href={`/project/${projectId}/settings`}
-            icon={<GearIcon />}
-          />
-        )}
+        <Suspense fallback={<Skeleton className="h-10 w-full" />}>
+          <ProjectSettingsButton projectId={projectId} />
+        </Suspense>
       </div>
     </aside>
   );

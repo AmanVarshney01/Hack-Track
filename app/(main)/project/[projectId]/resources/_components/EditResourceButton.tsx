@@ -26,6 +26,12 @@ import { useState } from "react";
 import { updateResource } from "@/server/actions";
 import { Pencil2Icon, UpdateIcon } from "@radix-ui/react-icons";
 import { toast } from "sonner";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 export default function EditResourceButton({
   projectId,
@@ -57,7 +63,16 @@ export default function EditResourceButton({
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
-        <Pencil2Icon className=" cursor-pointer" />
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button size={"icon"} variant={"ghost"}>
+                <Pencil2Icon className=" cursor-pointer" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>Edit</TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
       </SheetTrigger>
       <SheetContent>
         <SheetHeader className=" pb-8">

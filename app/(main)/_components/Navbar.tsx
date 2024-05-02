@@ -1,6 +1,6 @@
 import Link from "next/link";
 import AuthButton from "./AuthButton";
-import MobileSidebar from "./MobileSidebar";
+import MobileSidebar from "../project/[projectId]/_components/MobileSidebar";
 import { Suspense } from "react";
 import AuthButtonSkeleton from "@/components/skeletons/AuthButtonSkeleton";
 

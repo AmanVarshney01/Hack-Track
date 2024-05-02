@@ -13,13 +13,7 @@ import DeleteResourceButton from "./DeleteResourceButton";
 import EmptyCard from "@/components/EmptyCard";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { getProjectResources } from "@/server/queries";
-import {
-  TooltipProvider,
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { Button } from "@/components/ui/button";
+import TooltipIcon from "@/components/TooltipIcon";
 
 export default async function ResourcesGrid({
   projectId,
@@ -69,18 +63,12 @@ export default async function ResourcesGrid({
                 projectId={projectId}
                 resourceId={resource.id}
               />
-              <TooltipProvider>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Link href={resource.url} target="_blank">
-                      <Button size={"icon"} variant={"ghost"}>
-                        <ExternalLinkIcon className=" text-blue-600" />
-                      </Button>
-                    </Link>
-                  </TooltipTrigger>
-                  <TooltipContent>Open</TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
+              <Link href={resource.url} target="_blank">
+                <TooltipIcon
+                  content="Open"
+                  icon={<ExternalLinkIcon className=" text-blue-600" />}
+                />
+              </Link>
             </CardFooter>
           </Card>
         );

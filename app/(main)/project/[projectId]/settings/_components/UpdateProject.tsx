@@ -135,7 +135,7 @@ export default function UpdateProject({
   return (
     <section className="flex flex-col space-y-4">
       <Card>
-        <CardContent className=" pt-6">
+        <CardContent className="pt-6">
           <Form {...titleForm}>
             <form
               onSubmit={titleForm.handleSubmit(onUpdateTitleSubmit)}
@@ -156,8 +156,8 @@ export default function UpdateProject({
               />
               <Button type="submit" disabled={titleForm.formState.isSubmitting}>
                 {titleForm.formState.isSubmitting ? (
-                  <div className=" flex flex-row items-center justify-center gap-2">
-                    <UpdateIcon className=" animate-spin" />
+                  <div className="flex flex-row items-center justify-center gap-2">
+                    <UpdateIcon className="animate-spin" />
                     <span>Loading</span>
                   </div>
                 ) : (
@@ -170,7 +170,7 @@ export default function UpdateProject({
       </Card>
 
       <Card>
-        <CardContent className=" pt-6">
+        <CardContent className="pt-6">
           <Form {...descriptionForm}>
             <form
               onSubmit={descriptionForm.handleSubmit(onUpdateDescriptionSubmit)}
@@ -194,8 +194,8 @@ export default function UpdateProject({
                 disabled={descriptionForm.formState.isSubmitting}
               >
                 {descriptionForm.formState.isSubmitting ? (
-                  <div className=" flex flex-row items-center justify-center gap-2">
-                    <UpdateIcon className=" animate-spin" />
+                  <div className="flex flex-row items-center justify-center gap-2">
+                    <UpdateIcon className="animate-spin" />
                     <span>Loading</span>
                   </div>
                 ) : (
@@ -208,7 +208,7 @@ export default function UpdateProject({
       </Card>
       <div className="flex flex-col gap-4 md:flex-row">
         <Card>
-          <CardContent className=" pt-6">
+          <CardContent className="pt-6">
             <Form {...statusForm}>
               <form
                 onSubmit={statusForm.handleSubmit(onUpdateStatusSubmit)}
@@ -243,8 +243,8 @@ export default function UpdateProject({
                   disabled={statusForm.formState.isSubmitting}
                 >
                   {statusForm.formState.isSubmitting ? (
-                    <div className=" flex flex-row items-center justify-center gap-2">
-                      <UpdateIcon className=" animate-spin" />
+                    <div className="flex flex-row items-center justify-center gap-2">
+                      <UpdateIcon className="animate-spin" />
                       <span>Loading</span>
                     </div>
                   ) : (
@@ -256,7 +256,7 @@ export default function UpdateProject({
           </CardContent>
         </Card>
         <Card>
-          <CardContent className=" pt-6">
+          <CardContent className="pt-6">
             <Form {...startDateForm}>
               <form
                 onSubmit={startDateForm.handleSubmit(onUpdateStartDateSubmit)}
@@ -274,7 +274,7 @@ export default function UpdateProject({
                             <Button
                               variant={"outline"}
                               className={cn(
-                                " flex w-[240px] pl-3",
+                                "flex w-[240px] pl-3",
                                 !field.value && "text-muted-foreground",
                               )}
                             >
@@ -304,8 +304,8 @@ export default function UpdateProject({
                   disabled={startDateForm.formState.isSubmitting}
                 >
                   {startDateForm.formState.isSubmitting ? (
-                    <div className=" flex flex-row items-center justify-center gap-2">
-                      <UpdateIcon className=" animate-spin" />
+                    <div className="flex flex-row items-center justify-center gap-2">
+                      <UpdateIcon className="animate-spin" />
                       <span>Loading</span>
                     </div>
                   ) : (
@@ -318,7 +318,7 @@ export default function UpdateProject({
         </Card>
 
         <Card>
-          <CardContent className=" pt-6">
+          <CardContent className="pt-6">
             <Form {...endDateForm}>
               <form
                 onSubmit={endDateForm.handleSubmit(onUpdateEndDateSubmit)}
@@ -336,7 +336,7 @@ export default function UpdateProject({
                             <Button
                               variant={"outline"}
                               className={cn(
-                                " flex w-[240px] pl-3",
+                                "flex w-[240px] pl-3",
                                 !field.value && "text-muted-foreground",
                               )}
                             >
@@ -366,8 +366,8 @@ export default function UpdateProject({
                   disabled={endDateForm.formState.isSubmitting}
                 >
                   {endDateForm.formState.isSubmitting ? (
-                    <div className=" flex flex-row items-center justify-center gap-2">
-                      <UpdateIcon className=" animate-spin" />
+                    <div className="flex flex-row items-center justify-center gap-2">
+                      <UpdateIcon className="animate-spin" />
                       <span>Loading</span>
                     </div>
                   ) : (

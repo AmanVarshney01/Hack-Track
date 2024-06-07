@@ -29,20 +29,20 @@ export default function ProjectCard({
 
   return (
     <Card className="w-full">
-      <CardHeader className=" space-y-2">
-        <CardTitle className=" line-clamp-1 text-xl">{name}</CardTitle>
-        <div className=" flex flex-row gap-2">
+      <CardHeader className="space-y-2">
+        <CardTitle className="line-clamp-1 text-xl">{name}</CardTitle>
+        <div className="flex flex-row gap-2">
           <StatusBadge variant={status} />
-          {role && <Badge className=" w-min rounded-full">{role}</Badge>}
+          {role && <Badge className="w-min rounded-full">{role}</Badge>}
         </div>
       </CardHeader>
-      <CardContent className=" text-sm text-muted-foreground">
-        <div className=" flex flex-col">
+      <CardContent className="text-sm text-muted-foreground">
+        <div className="flex flex-col">
           <span>End Date</span>
           <span>{formattedEndDate}</span>
         </div>
       </CardContent>
-      <CardFooter className=" border-t p-2">
+      <CardFooter className="border-t p-2">
         <Link className="w-full" href={`/project/${id}`}>
           <Button
             variant={"ghost"}

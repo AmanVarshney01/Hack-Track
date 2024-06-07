@@ -6,8 +6,8 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export default async function Sidebar({ projectId }: { projectId: number }) {
   return (
-    <aside className=" hidden h-full min-w-48 flex-col items-center justify-between border-r px-2 py-4 md:flex">
-      <div className=" flex h-full w-full flex-col gap-2">
+    <aside className="hidden h-full min-w-48 flex-col items-center justify-between border-r px-2 py-4 md:flex">
+      <div className="flex h-full w-full flex-col gap-2">
         <NavButton
           name="Dashboard"
           href={`/project/${projectId}`}
@@ -24,7 +24,7 @@ export default async function Sidebar({ projectId }: { projectId: number }) {
           icon={<FileIcon />}
         />
       </div>
-      <div className="flex  w-full flex-col gap-2">
+      <div className="flex w-full flex-col gap-2">
         <Suspense fallback={<Skeleton className="h-10 w-full" />}>
           <ProjectSettingsButton projectId={projectId} />
         </Suspense>

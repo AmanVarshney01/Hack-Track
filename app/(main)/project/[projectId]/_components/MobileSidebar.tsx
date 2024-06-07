@@ -30,15 +30,15 @@ export default function MobileSidebar() {
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
-      <SheetTrigger className=" block md:hidden">
+      <SheetTrigger className="block md:hidden">
         <HamburgerMenuIcon />
       </SheetTrigger>
-      <SheetContent className="w-60 " side={"left"}>
+      <SheetContent className="w-60" side={"left"}>
         <SheetHeader>
           <SheetTitle>Menu</SheetTitle>
         </SheetHeader>
-        <div className=" flex h-full flex-col justify-between py-4">
-          <div className=" flex w-full flex-col gap-4 ">
+        <div className="flex h-full flex-col justify-between py-4">
+          <div className="flex w-full flex-col gap-4">
             <NavButton
               name="Dashboard"
               href={`/project/${projectId}`}

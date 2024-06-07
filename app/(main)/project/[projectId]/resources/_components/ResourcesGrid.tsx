@@ -29,30 +29,30 @@ export default async function ResourcesGrid({
   }
 
   return (
-    <section className=" grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-3">
+    <section className="grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-3">
       {resources.data?.map((resource) => {
         const faviconUrl = new URL(resource.url).origin + "/favicon.ico";
         return (
-          <Card key={resource.id} className=" flex flex-col justify-between">
+          <Card key={resource.id} className="flex flex-col justify-between">
             <CardHeader>
               <Link href={resource.url} target="_blank">
                 <CardTitle className="flex flex-row items-center gap-2">
-                  <Avatar className=" h-6 w-6 border-2 border-foreground">
-                    <AvatarImage className=" bg-white" src={faviconUrl} />
+                  <Avatar className="h-6 w-6 border-2 border-foreground">
+                    <AvatarImage className="bg-white" src={faviconUrl} />
                     <AvatarFallback>
                       {resource.name.charAt(0).toUpperCase()}
                     </AvatarFallback>
                   </Avatar>
-                  <span className=" capitalize">{resource.name}</span>
+                  <span className="capitalize">{resource.name}</span>
                 </CardTitle>
               </Link>
             </CardHeader>
             <CardContent>
-              <CardDescription className=" line-clamp-2">
+              <CardDescription className="line-clamp-2">
                 {resource.url}
               </CardDescription>
             </CardContent>
-            <CardFooter className=" justify-end space-x-4 px-6 pb-4 pt-0">
+            <CardFooter className="justify-end space-x-4 px-6 pb-4 pt-0">
               <EditResourceButton
                 projectId={projectId}
                 resourceId={resource.id}
@@ -66,7 +66,7 @@ export default async function ResourcesGrid({
               <Link href={resource.url} target="_blank">
                 <TooltipIcon
                   content="Open"
-                  icon={<ExternalLinkIcon className=" text-blue-600" />}
+                  icon={<ExternalLinkIcon className="text-blue-600" />}
                 />
               </Link>
             </CardFooter>

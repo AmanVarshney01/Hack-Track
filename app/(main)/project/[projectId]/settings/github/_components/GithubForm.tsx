@@ -56,8 +56,8 @@ export default function GithubForm({ id, url }: { id: number; url: string }) {
 
             <Button type="submit" disabled={form.formState.isSubmitting}>
               {form.formState.isSubmitting ? (
-                <div className=" flex flex-row items-center justify-center gap-2">
-                  <UpdateIcon className=" animate-spin" />
+                <div className="flex flex-row items-center justify-center gap-2">
+                  <UpdateIcon className="animate-spin" />
                   <span>Loading</span>
                 </div>
               ) : (

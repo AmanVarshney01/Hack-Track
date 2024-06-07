@@ -37,7 +37,7 @@ export default function DeleteResourceButton({
         <div>
           <TooltipIcon
             content="Delete"
-            icon={<TrashIcon className=" cursor-pointer text-red-600" />}
+            icon={<TrashIcon className="cursor-pointer text-red-600" />}
           />
         </div>
       </SheetTrigger>

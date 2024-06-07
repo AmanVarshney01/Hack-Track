@@ -9,17 +9,17 @@ export default function ThemeToggle() {
 
   return (
     <Button
-      className=" w-full"
+      className="w-full"
       variant={"secondary"}
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
     >
       {theme === "dark" ? (
-        <div className=" flex flex-row items-center justify-center gap-2">
+        <div className="flex flex-row items-center justify-center gap-2">
           <SunIcon />
           <span>Light Mode</span>
         </div>
       ) : (
-        <div className=" flex flex-row items-center justify-center gap-2">
+        <div className="flex flex-row items-center justify-center gap-2">
           <MoonIcon />
           <span>Dark Mode</span>
         </div>

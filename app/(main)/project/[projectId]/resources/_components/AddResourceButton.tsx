@@ -55,7 +55,7 @@ export default function AddResourceButton({
         <Button>Add Resource</Button>
       </SheetTrigger>
       <SheetContent>
-        <SheetHeader className=" pb-8">
+        <SheetHeader className="pb-8">
           <SheetTitle>Add Resource</SheetTitle>
         </SheetHeader>
         <Form {...form}>
@@ -89,8 +89,8 @@ export default function AddResourceButton({
 
             <Button type="submit" disabled={form.formState.isSubmitting}>
               {form.formState.isSubmitting ? (
-                <div className=" flex flex-row items-center justify-center gap-2">
-                  <UpdateIcon className=" animate-spin" />
+                <div className="flex flex-row items-center justify-center gap-2">
+                  <UpdateIcon className="animate-spin" />
                   <span>Loading</span>
                 </div>
               ) : (

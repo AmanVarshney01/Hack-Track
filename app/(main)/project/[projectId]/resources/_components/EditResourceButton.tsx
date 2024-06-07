@@ -61,12 +61,12 @@ export default function EditResourceButton({
         <div>
           <TooltipIcon
             content="Edit"
-            icon={<Pencil2Icon className=" cursor-pointer" />}
+            icon={<Pencil2Icon className="cursor-pointer" />}
           />
         </div>
       </SheetTrigger>
       <SheetContent>
-        <SheetHeader className=" pb-8">
+        <SheetHeader className="pb-8">
           <SheetTitle>Edit Resource</SheetTitle>
         </SheetHeader>
         <Form {...form}>
@@ -100,8 +100,8 @@ export default function EditResourceButton({
 
             <Button type="submit" disabled={form.formState.isSubmitting}>
               {form.formState.isSubmitting ? (
-                <div className=" flex flex-row items-center justify-center gap-2">
-                  <UpdateIcon className=" animate-spin" />
+                <div className="flex flex-row items-center justify-center gap-2">
+                  <UpdateIcon className="animate-spin" />
                   <span>Loading</span>
                 </div>
               ) : (

@@ -17,11 +17,11 @@ export default function Error({
   }, [error]);
 
   return (
-    <div className=" flex h-full w-full items-center justify-center bg-destructive p-10 text-destructive-foreground">
-      <div className=" flex flex-col items-center justify-center gap-4">
+    <div className="flex h-full w-full items-center justify-center bg-destructive p-10 text-destructive-foreground">
+      <div className="flex flex-col items-center justify-center gap-4">
         <Image src={cat} alt="Fast Typing Cat" />
-        <h2 className=" text-xl">😭 I am working hard to fix this!</h2>
-        <p className=" text-sm">Error Code: {error.digest}</p>
+        <h2 className="text-xl">😭 I am working hard to fix this!</h2>
+        <p className="text-sm">Error Code: {error.digest}</p>
         <Button className="w-full" onClick={() => reset()}>
           Try again
         </Button>

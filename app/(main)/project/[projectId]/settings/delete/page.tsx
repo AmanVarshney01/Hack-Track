@@ -12,5 +12,5 @@ export default async function DeletePage({
     throw new Error("You are not the owner of this project.");
   }
 
-  return <DeleteProject id={params.projectId} />;
+  return <DeleteProject projectId={params.projectId} />;
 }

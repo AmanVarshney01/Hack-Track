@@ -50,7 +50,7 @@ export async function createNewProject(
   }
 }
 
-export async function updateTitle(id: number, values: z.infer<typeof updateTitleFormSchema>) {
+export async function updateTitle(projectId: number, values: z.infer<typeof updateTitleFormSchema>) {
   const supabase = createClient()
   const {
     data: { user },
@@ -62,15 +62,15 @@ export async function updateTitle(id: number, values: z.infer<typeof updateTitle
 
   const updateProject = await supabase.from("projects").update({
     name: values.projectTitle,
-  }).eq("id", id);
+  }).eq("id", projectId);
 
   if (updateProject.error) {
     throw new Error(updateProject.error.message);
   }
-  revalidatePath(`/project/${id}`)
+  revalidatePath(`/project/${projectId}`)
 }
 
-export async function updateDescription(id: number, values: z.infer<typeof updateDescriptionFormSchema>) {
+export async function updateDescription(projectId: number, values: z.infer<typeof updateDescriptionFormSchema>) {
   const supabase = createClient()
   const {
     data: { user },
@@ -82,15 +82,15 @@ export async function updateDescription(id: number, values: z.infer<typeof updat
 
   const updateProject = await supabase.from("project_details").update({
     description: values.projectDescription
-  }).eq("project_id", id)
+  }).eq("project_id", projectId)
 
   if (updateProject.error) {
     throw new Error(updateProject.error.message);
   }
-  revalidatePath(`/project/${id}`)
+  revalidatePath(`/project/${projectId}`)
 }
 
-export async function updateStartDate(id: number, values: z.infer<typeof updateStartDateFormSchema>) {
+export async function updateStartDate(projectId: number, values: z.infer<typeof updateStartDateFormSchema>) {
   const supabase = createClient()
   const {
     data: { user },
@@ -102,16 +102,16 @@ export async function updateStartDate(id: number, values: z.infer<typeof updateS
 
   const updateProject = await supabase.from("project_details").update({
     start_date: values.startDate?.toDateString()
-  }).eq("project_id", id)
+  }).eq("project_id", projectId)
 
   if (updateProject.error) {
     throw new Error(updateProject.error.message);
   }
 
-  revalidatePath(`/project/${id}`)
+  revalidatePath(`/project/${projectId}`)
 }
 
-export async function updateEndDate(id: number, values: z.infer<typeof updateEndDateFormSchema>) {
+export async function updateEndDate(projectId: number, values: z.infer<typeof updateEndDateFormSchema>) {
   const supabase = createClient()
   const {
     data: { user },
@@ -123,16 +123,16 @@ export async function updateEndDate(id: number, values: z.infer<typeof updateEnd
 
   const updateProject = await supabase.from("project_details").update({
     end_date: values.endDate?.toDateString()
-  }).eq("project_id", id)
+  }).eq("project_id", projectId)
 
   if (updateProject.error) {
     throw new Error(updateProject.error.message);
   }
 
-  revalidatePath(`/project/${id}`)
+  revalidatePath(`/project/${projectId}`)
 }
 
-export async function updateStatus(id: number, values: z.infer<typeof updateStatusFormSchema>) {
+export async function updateStatus(projectId: number, values: z.infer<typeof updateStatusFormSchema>) {
   const supabase = createClient()
   const {
     data: { user },
@@ -144,16 +144,16 @@ export async function updateStatus(id: number, values: z.infer<typeof updateStat
 
   const updateProject = await supabase.from("project_details").update({
     status: values.status
-  }).eq("project_id", id)
+  }).eq("project_id", projectId)
 
   if (updateProject.error) {
     throw new Error(updateProject.error.message);
   }
 
-  revalidatePath(`/project/${id}`)
+  revalidatePath(`/project/${projectId}`)
 }
 
-export async function deleteProject(id: number) {
+export async function deleteProject(projectId: number) {
 
   const supabase = createClient();
 
@@ -165,7 +165,7 @@ export async function deleteProject(id: number) {
     return redirect("/login");
   }
 
-  const response = await supabase.from("projects").delete().eq("id", id);
+  const response = await supabase.from("projects").delete().eq("id", projectId);
 
   if (response.error) {
     throw new Error(response.error.message);

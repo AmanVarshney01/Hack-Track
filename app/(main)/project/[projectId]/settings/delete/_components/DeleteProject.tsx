@@ -15,7 +15,6 @@ import { z } from "zod";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -25,22 +24,24 @@ import { Input } from "@/components/ui/input";
 import { UpdateIcon } from "@radix-ui/react-icons";
 import { toast } from "sonner";
 
-export default function DeleteProject({ id }: { id: number }) {
+export default function DeleteProject({ projectId }: { projectId: number }) {
   const formSchema = z.object({
     deleteConfirmation: z
       .string()
-      .refine((value) => value === `DELETE-PROJECT-ID-${id}`, {
+      .refine((value) => value === `DELETE-PROJECT-ID-${projectId}`, {
         message: "Confirmation does not match",
       }),
   });
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       deleteConfirmation: "",
     },
   });
+
   async function onSubmit() {
-    await deleteProject(id);
+    await deleteProject(projectId);
     toast.success("Project deleted successfully");
     form.reset();
   }
@@ -64,7 +65,9 @@ export default function DeleteProject({ id }: { id: number }) {
                 <FormItem>
                   <FormLabel>
                     Type{" "}
-                    <span className="text-red-500">DELETE-PROJECT-ID-{id}</span>{" "}
+                    <span className="text-red-500">
+                      DELETE-PROJECT-ID-{projectId}
+                    </span>{" "}
                     to confirm
                   </FormLabel>
                   <FormControl>

@@ -1,4 +1,4 @@
-import SignInWithGoogle from "@/components/SignInWithGoogle";
+import SignInWithGithub from "@/components/SignInWithGithub";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import {
@@ -28,21 +28,20 @@ export default async function Login({
     <section className="flex min-h-svh w-full items-center justify-center bg-background p-4">
       <Card>
         <CardHeader>
-          <CardTitle className=" text-xl">GLA Project Tracker</CardTitle>
-          <CardDescription className=" max-w-80">
-            Streamlining project collaboration for students and mentors at GLA
-            University.
+          <CardTitle className="text-xl">Hack Track</CardTitle>
+          <CardDescription className="max-w-80">
+            Own it. Team it. Track it. Your projects, simplified.
           </CardDescription>
         </CardHeader>
         <CardContent>
           <p>
             {searchParams.message
               ? searchParams.message
-              : "Sign in with Google to get started."}
+              : "Sign in with Github to get started."}
           </p>
         </CardContent>
         <CardFooter>
-          <SignInWithGoogle />
+          <SignInWithGithub />
         </CardFooter>
       </Card>
     </section>

@@ -10,7 +10,7 @@ export default function Navbar() {
       <div className="flex flex-row items-center justify-center gap-4">
         <MobileSidebar />
         <Link href="/">
-          <h1 className="text-lg font-semibold">GLA Project Tracker</h1>
+          <h1 className="text-lg font-semibold">Hack Track</h1>
         </Link>
       </div>
       <Suspense fallback={<AuthButtonSkeleton />}>

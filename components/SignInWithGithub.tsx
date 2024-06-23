@@ -1,24 +1,20 @@
 import { Button } from "@/components/ui/button";
 import { createClient } from "@/utils/supabase/server";
-import googleLogo from "@/public/googleLogo.svg";
+import githubLogo from "@/public/github-mark.svg";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 import { headers } from "next/headers";
 
-export default async function SignInWithGoogle() {
-  const signInWithGoogle = async () => {
+export default async function SignInWithGithub() {
+  const signInWithGithub = async () => {
     "use server";
 
     const supabase = createClient();
     const origin = headers().get("origin");
     const { error, data } = await supabase.auth.signInWithOAuth({
-      provider: "google",
+      provider: "github",
       options: {
         redirectTo: `${origin}/auth/callback`,
-        queryParams: {
-          access_type: "offline",
-          prompt: "consent",
-        },
       },
     });
 
@@ -30,10 +26,10 @@ export default async function SignInWithGoogle() {
   };
 
   return (
-    <form action={signInWithGoogle} className="w-full">
+    <form action={signInWithGithub} className="w-full">
       <Button className="w-full" type="submit">
-        <Image className="mr-2" src={googleLogo} alt="Google Logo" />
-        Sign in with Google
+        <Image className="mr-2" src={githubLogo} alt="Github Logo" width={20} height={20} />
+        Sign in with Github
       </Button>
     </form>
   );

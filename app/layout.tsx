@@ -25,7 +25,7 @@ const defaultUrl = process.env.VERCEL_URL
 export const metadata = {
   metadataBase: new URL(defaultUrl),
   title: "Hack Track",
-  description: "A project tracker for GLA students",
+  description: "Own it. Team it. Track it. Your projects, simplified.",
 };
 
 export default function RootLayout({

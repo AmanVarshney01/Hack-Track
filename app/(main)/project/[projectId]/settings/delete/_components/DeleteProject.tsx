@@ -43,7 +43,6 @@ export default function DeleteProject({ projectId }: { projectId: number }) {
   async function onSubmit() {
     await deleteProject(projectId);
     toast.success("Project deleted successfully");
-    form.reset();
   }
 
   return (

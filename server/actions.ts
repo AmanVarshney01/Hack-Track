@@ -171,7 +171,6 @@ export async function deleteProject(projectId: number) {
     throw new Error(response.error.message);
   }
 
-  revalidatePath(`/`)
   return redirect("/");
 
 }

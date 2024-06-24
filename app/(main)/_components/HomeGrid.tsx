@@ -10,6 +10,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { getJoinedProjectsCount, getMyProjectsCount } from "@/server/queries";
+import ToastWrapper from "@/components/ToastWrapper";
 
 export default async function HomeGrid() {
   const myProjectsCount = await getMyProjectsCount();
@@ -21,7 +22,7 @@ export default async function HomeGrid() {
         <CardHeader>
           <CardTitle className="text-xl">My Projects</CardTitle>
           <CardDescription>
-            Manage your projects, create new projects and more
+            Manage your projects, create new projects, and more
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -68,7 +69,7 @@ export default async function HomeGrid() {
       <Card className="flex w-full flex-col justify-between">
         <CardHeader>
           <CardTitle className="text-xl">Hackathons</CardTitle>
-          <CardDescription>Coming Soon ...</CardDescription>
+          <CardDescription>Coming Soon...</CardDescription>
         </CardHeader>
         <CardContent></CardContent>
         <CardFooter className="border-t p-2">
@@ -84,6 +85,13 @@ export default async function HomeGrid() {
           {/* </Link> */}
         </CardFooter>
       </Card>
+      {myProjectsCount.count! === 0 && (
+        <ToastWrapper
+          message="Start by creating a new project"
+          label="Create Project"
+          goto="/project/new"
+        />
+      )}
     </div>
   );
 }

@@ -1,6 +1,4 @@
 import SignInWithGithub from "@/components/SignInWithGithub";
-import { createClient } from "@/utils/supabase/server";
-import { redirect } from "next/navigation";
 import {
   Card,
   CardContent,
@@ -9,16 +7,15 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { getUser } from "@/server/queries";
+import { redirect } from "next/navigation";
 
 export default async function Login({
   searchParams,
 }: {
   searchParams: { message: string };
 }) {
-  const supabase = createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const user = await getUser();
 
   if (user) {
     redirect("/");

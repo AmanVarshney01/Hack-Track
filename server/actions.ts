@@ -2,17 +2,17 @@
 
 import { createClient } from "@/utils/supabase/server";
 import { insertFormSchema, insertMembersFormSchema, resourceFormSchema, taskFormSchema, updateDescriptionFormSchema, updateEndDateFormSchema, updateMembersFormSchema, updateStartDateFormSchema, updateStatusFormSchema, updateTitleFormSchema } from "@/utils/types";
-import { z } from "zod";
-import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
+import { z } from "zod";
+import { getUser } from "./queries";
 
 export async function createNewProject(
   values: z.infer<typeof insertFormSchema>,
 ) {
   const supabase = createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const user = await getUser();
+
 
   if (!user) {
     return redirect("/login");
@@ -52,9 +52,8 @@ export async function createNewProject(
 
 export async function updateTitle(projectId: number, values: z.infer<typeof updateTitleFormSchema>) {
   const supabase = createClient()
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const user = await getUser();
+
 
   if (!user) {
     return redirect("/login");
@@ -72,9 +71,8 @@ export async function updateTitle(projectId: number, values: z.infer<typeof upda
 
 export async function updateDescription(projectId: number, values: z.infer<typeof updateDescriptionFormSchema>) {
   const supabase = createClient()
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const user = await getUser();
+
 
   if (!user) {
     return redirect("/login");
@@ -92,9 +90,8 @@ export async function updateDescription(projectId: number, values: z.infer<typeo
 
 export async function updateStartDate(projectId: number, values: z.infer<typeof updateStartDateFormSchema>) {
   const supabase = createClient()
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const user = await getUser();
+
 
   if (!user) {
     return redirect("/login");
@@ -113,9 +110,8 @@ export async function updateStartDate(projectId: number, values: z.infer<typeof 
 
 export async function updateEndDate(projectId: number, values: z.infer<typeof updateEndDateFormSchema>) {
   const supabase = createClient()
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const user = await getUser();
+
 
   if (!user) {
     return redirect("/login");
@@ -134,9 +130,8 @@ export async function updateEndDate(projectId: number, values: z.infer<typeof up
 
 export async function updateStatus(projectId: number, values: z.infer<typeof updateStatusFormSchema>) {
   const supabase = createClient()
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const user = await getUser();
+
 
   if (!user) {
     return redirect("/login");
@@ -157,9 +152,8 @@ export async function deleteProject(projectId: number) {
 
   const supabase = createClient();
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const user = await getUser();
+
 
   if (!user) {
     return redirect("/login");
@@ -177,9 +171,8 @@ export async function deleteProject(projectId: number) {
 
 export async function insertResource(projectId: number, values: z.infer<typeof resourceFormSchema>) {
   const supabase = createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const user = await getUser();
+
 
   if (!user) {
     return redirect("/login");
@@ -201,9 +194,8 @@ export async function insertResource(projectId: number, values: z.infer<typeof r
 
 export async function updateResource(projectId: number, resourceId: number, values: z.infer<typeof resourceFormSchema>) {
   const supabase = createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const user = await getUser();
+
 
   if (!user) {
     return redirect("/login");
@@ -223,9 +215,8 @@ export async function updateResource(projectId: number, resourceId: number, valu
 
 export async function deleteResource(projectId: number, resourceId: number) {
   const supabase = createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const user = await getUser();
+
 
   if (!user) {
     return redirect("/login");
@@ -242,9 +233,8 @@ export async function deleteResource(projectId: number, resourceId: number) {
 
 export async function insertTask(projectId: number, values: z.infer<typeof taskFormSchema>) {
   const supabase = createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const user = await getUser();
+
 
   if (!user) {
     return redirect("/login");
@@ -267,9 +257,8 @@ export async function insertTask(projectId: number, values: z.infer<typeof taskF
 
 export async function deleteTask(projectId: number, taskId: number) {
   const supabase = createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const user = await getUser();
+
 
   if (!user) {
     return redirect("/login");
@@ -286,9 +275,8 @@ export async function deleteTask(projectId: number, taskId: number) {
 
 export async function updateTask(projectId: number, taskId: number, values: z.infer<typeof taskFormSchema>) {
   const supabase = createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const user = await getUser();
+
 
   if (!user) {
     return redirect("/login");
@@ -309,9 +297,8 @@ export async function updateTask(projectId: number, taskId: number, values: z.in
 
 export async function saveGithubUrl(id: number, url: string) {
   const supabase = createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const user = await getUser();
+
 
   if (!user) {
     return redirect("/login");
@@ -329,9 +316,8 @@ export async function saveGithubUrl(id: number, url: string) {
 
 export async function updateMembers(id: number, values: z.infer<typeof updateMembersFormSchema>) {
   const supabase = createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const user = await getUser();
+
 
   if (!user) {
     return redirect("/login");
@@ -353,9 +339,8 @@ export async function updateMembers(id: number, values: z.infer<typeof updateMem
 
 export async function insertMembers(id: number, values: z.infer<typeof insertMembersFormSchema>) {
   const supabase = createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const user = await getUser();
+
 
   if (!user) {
     return redirect("/login");
@@ -384,9 +369,8 @@ export async function insertMembers(id: number, values: z.infer<typeof insertMem
 export async function deleteMember(id: number) {
   const supabase = createClient();
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const user = await getUser();
+
 
   if (!user) {
     return redirect("/login");

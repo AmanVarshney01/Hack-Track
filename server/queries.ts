@@ -1,9 +1,9 @@
-import "server-only"
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
+import { cache } from "react";
+import "server-only";
 
-
-export async function getUser() {
+export const getUser = cache(async () => {
     const supabase = createClient();
 
     const { data: { user } } = await supabase.auth.getUser();
@@ -18,13 +18,12 @@ export async function getUser() {
         email: user.email,
         avatarUrl: user.user_metadata.avatar_url,
     }
+});
 
-}
-
-export async function getProjectOwner(projectId: number) {
+export const getProjectOwner = cache(async (projectId: number) => {
     const supabase = createClient();
 
-    const { data: { user } } = await supabase.auth.getUser();
+    const user = await getUser();
 
     if (!user) {
         return redirect("/login");
@@ -40,13 +39,13 @@ export async function getProjectOwner(projectId: number) {
         throw new Error(response.error.message)
     }
 
-    return response
-}
+    return response;
+});
 
-export async function getProject(projectId: number) {
+export const getProject = cache(async (projectId: number) => {
     const supabase = createClient();
 
-    const { data: { user } } = await supabase.auth.getUser();
+    const user = await getUser();
 
     if (!user) {
         return redirect("/login");
@@ -56,26 +55,26 @@ export async function getProject(projectId: number) {
         .from("projects")
         .select(
             `
-        name,
-        users (
             name,
-            email
-        ),
-        project_details (
-            description,
-            start_date,
-            end_date,
-            status,
-            github_url
-        ),
-        project_members (
-            member_email,
             users (
-                name
+                name,
+                email
             ),
-            role
-        )
-        `,
+            project_details (
+                description,
+                start_date,
+                end_date,
+                status,
+                github_url
+            ),
+            project_members (
+                member_email,
+                users (
+                    name
+                ),
+                role
+            )
+            `,
         )
         .eq("id", projectId)
         .single();
@@ -84,13 +83,13 @@ export async function getProject(projectId: number) {
         throw new Error(response.error.message)
     }
 
-    return response
-}
+    return response;
+});
 
-export async function getProjectTasks(projectId: number) {
+export const getProjectTasks = cache(async (projectId: number) => {
     const supabase = createClient();
 
-    const { data: { user } } = await supabase.auth.getUser();
+    const user = await getUser();
 
     if (!user) {
         return redirect("/login");
@@ -113,12 +112,17 @@ export async function getProjectTasks(projectId: number) {
         throw new Error(response.error.message)
     }
 
-    return response
+    return response;
+});
 
-}
-
-export async function getProjectTaskOwner(taskId: number) {
+export const getProjectTaskOwner = cache(async (taskId: number) => {
     const supabase = createClient();
+
+    const user = await getUser();
+
+    if (!user) {
+        return redirect("/login");
+    }
 
     const response = await supabase
         .from("project_tasks")
@@ -130,13 +134,13 @@ export async function getProjectTaskOwner(taskId: number) {
         throw new Error(response.error.message)
     }
 
-    return response
-}
+    return response;
+});
 
-export async function getMyProjects() {
+export const getMyProjects = cache(async () => {
     const supabase = createClient();
 
-    const { data: { user } } = await supabase.auth.getUser();
+    const user = await getUser();
 
     if (!user) {
         return redirect("/login");
@@ -160,13 +164,13 @@ export async function getMyProjects() {
         throw new Error(response.error.message)
     }
 
-    return response
-}
+    return response;
+});
 
-export async function getJoinedProjects() {
+export const getJoinedProjects = cache(async () => {
     const supabase = createClient();
 
-    const { data: { user } } = await supabase.auth.getUser();
+    const user = await getUser();
 
     if (!user) {
         return redirect("/login");
@@ -193,13 +197,13 @@ export async function getJoinedProjects() {
         throw new Error(response.error.message)
     }
 
-    return response
-}
+    return response;
+});
 
-export async function getMyProjectsCount() {
+export const getMyProjectsCount = cache(async () => {
     const supabase = createClient();
 
-    const { data: { user } } = await supabase.auth.getUser();
+    const user = await getUser();
 
     if (!user) {
         return redirect("/login");
@@ -214,13 +218,13 @@ export async function getMyProjectsCount() {
         throw new Error(response.error.message)
     }
 
-    return response
-}
+    return response;
+});
 
-export async function getJoinedProjectsCount() {
+export const getJoinedProjectsCount = cache(async () => {
     const supabase = createClient();
 
-    const { data: { user } } = await supabase.auth.getUser();
+    const user = await getUser();
 
     if (!user) {
         return redirect("/login");
@@ -235,13 +239,13 @@ export async function getJoinedProjectsCount() {
         throw new Error(response.error.message)
     }
 
-    return response
-}
+    return response;
+});
 
-export async function getGithubURL(projectId: number) {
+export const getGithubURL = cache(async (projectId: number) => {
     const supabase = createClient();
 
-    const { data: { user } } = await supabase.auth.getUser();
+    const user = await getUser();
 
     if (!user) {
         return redirect("/login");
@@ -257,13 +261,13 @@ export async function getGithubURL(projectId: number) {
         throw new Error(response.error.message)
     }
 
-    return response
-}
+    return response;
+});
 
-export async function getProjectResources(projectId: number) {
+export const getProjectResources = cache(async (projectId: number) => {
     const supabase = createClient();
 
-    const { data: { user } } = await supabase.auth.getUser();
+    const user = await getUser();
 
     if (!user) {
         return redirect("/login");
@@ -285,13 +289,13 @@ export async function getProjectResources(projectId: number) {
         throw new Error(response.error.message)
     }
 
-    return response
-}
+    return response;
+});
 
-export async function getProjectMembers(projectId: number) {
+export const getProjectMembers = cache(async (projectId: number) => {
     const supabase = createClient();
 
-    const { data: { user } } = await supabase.auth.getUser();
+    const user = await getUser();
 
     if (!user) {
         return redirect("/login");
@@ -312,13 +316,13 @@ export async function getProjectMembers(projectId: number) {
         throw new Error(response.error.message)
     }
 
-    return response
-}
+    return response;
+});
 
-export async function getProjectDetails(projectId: number) {
+export const getProjectDetails = cache(async (projectId: number) => {
     const supabase = createClient();
 
-    const { data: { user } } = await supabase.auth.getUser();
+    const user = await getUser();
 
     if (!user) {
         return redirect("/login");
@@ -345,5 +349,5 @@ export async function getProjectDetails(projectId: number) {
         throw new Error(response.error.message)
     }
 
-    return response
-}
+    return response;
+});

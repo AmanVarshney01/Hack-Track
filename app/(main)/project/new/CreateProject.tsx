@@ -5,6 +5,8 @@ import { useFieldArray, useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Form,
   FormControl,
@@ -14,8 +16,11 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { createNewProject } from "@/server/actions";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import {
   Select,
   SelectContent,
@@ -23,16 +28,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { CalendarIcon, TrashIcon, UpdateIcon } from "@radix-ui/react-icons";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { cn } from "@/lib/utils";
-import { Calendar } from "@/components/ui/calendar";
 import { Textarea } from "@/components/ui/textarea";
+import { cn } from "@/lib/utils";
+import { createNewProject } from "@/server/actions";
 import { insertFormSchema } from "@/utils/types";
+import { CalendarIcon, TrashIcon, UpdateIcon } from "@radix-ui/react-icons";
 import { toast } from "sonner";
 
 export default function CreateProject() {
@@ -51,12 +51,12 @@ export default function CreateProject() {
 
   async function onSubmit(values: z.infer<typeof insertFormSchema>) {
     await createNewProject(values);
-    toast.success("Project created successfully");
     form.reset();
+    toast.success("Project created successfully");
   }
 
   return (
-    <Card className=" h-full w-full border-0 bg-background shadow-none">
+    <Card className="h-full w-full border-0 bg-background shadow-none">
       <CardHeader className="p-2">
         <CardTitle className="text-2xl font-semibold">
           Create a new project
@@ -91,7 +91,7 @@ export default function CreateProject() {
                 </FormItem>
               )}
             />
-            <div className=" flex flex-col gap-4 md:flex-row">
+            <div className="flex flex-col gap-4 md:flex-row">
               <FormField
                 control={form.control}
                 name="githubUrl"
@@ -121,7 +121,7 @@ export default function CreateProject() {
                           <Button
                             variant={"outline"}
                             className={cn(
-                              " flex w-[240px] pl-3",
+                              "flex w-[240px] pl-3",
                               !field.value && "text-muted-foreground",
                             )}
                           >
@@ -158,7 +158,7 @@ export default function CreateProject() {
                           <Button
                             variant={"outline"}
                             className={cn(
-                              " flex w-[240px] pl-3",
+                              "flex w-[240px] pl-3",
                               !field.value && "text-muted-foreground",
                             )}
                           >
@@ -176,7 +176,9 @@ export default function CreateProject() {
                           mode="single"
                           selected={field.value}
                           onSelect={field.onChange}
-                          disabled={(date) => date < new Date()}
+                          disabled={(date) =>
+                            date < form.getValues("startDate")
+                          }
                           initialFocus
                         />
                       </PopoverContent>
@@ -185,8 +187,8 @@ export default function CreateProject() {
                 )}
               />
             </div>
-            <div className=" flex flex-row items-center justify-between pt-4 ">
-              <h4 className=" font-semibold leading-none tracking-tight">
+            <div className="flex flex-row items-center justify-between pt-4">
+              <h4 className="font-semibold leading-none tracking-tight">
                 Add Members
               </h4>
               <Button
@@ -205,13 +207,13 @@ export default function CreateProject() {
               fields.map((field, index) => (
                 <div
                   key={field.id}
-                  className=" flex flex-col justify-center gap-4 md:flex-row"
+                  className="flex flex-col justify-center gap-4 md:flex-row"
                 >
                   <FormField
                     name={`members.${index}.email`}
                     control={form.control}
                     render={({ field }) => (
-                      <FormItem className=" w-full min-w-40">
+                      <FormItem className="w-full min-w-40">
                         <FormLabel>Email</FormLabel>
                         <FormControl>
                           <Input placeholder="Email" {...field} />
@@ -223,7 +225,7 @@ export default function CreateProject() {
                     name={`members.${index}.role`}
                     control={form.control}
                     render={({ field }) => (
-                      <FormItem className=" w-full  max-w-36">
+                      <FormItem className="w-full max-w-36">
                         <FormLabel>Role</FormLabel>
                         <Select
                           onValueChange={field.onChange}
@@ -260,8 +262,8 @@ export default function CreateProject() {
               disabled={form.formState.isSubmitting}
             >
               {form.formState.isSubmitting ? (
-                <div className=" flex flex-row items-center justify-center gap-2">
-                  <UpdateIcon className=" animate-spin" />
+                <div className="flex flex-row items-center justify-center gap-2">
+                  <UpdateIcon className="animate-spin" />
                   <span>Loading</span>
                 </div>
               ) : (

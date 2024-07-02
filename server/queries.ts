@@ -1,7 +1,8 @@
+import "server-only";
+
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import { cache } from "react";
-import "server-only";
 
 export const getUser = cache(async () => {
     const supabase = createClient();

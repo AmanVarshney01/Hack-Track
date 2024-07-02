@@ -7,20 +7,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { getUser } from "@/server/queries";
-import { redirect } from "next/navigation";
 
 export default async function Login({
   searchParams,
 }: {
   searchParams: { message: string };
 }) {
-  const user = await getUser();
-
-  if (user) {
-    redirect("/");
-  }
-
   return (
     <section className="flex min-h-svh w-full items-center justify-center bg-background p-4">
       <Card>

@@ -1,9 +1,9 @@
 import { Button } from "@/components/ui/button";
-import { createClient } from "@/utils/supabase/server";
 import githubLogo from "@/public/github-mark.svg";
+import { createClient } from "@/utils/supabase/server";
+import { headers } from "next/headers";
 import Image from "next/image";
 import { redirect } from "next/navigation";
-import { headers } from "next/headers";
 
 export default async function SignInWithGithub() {
   const signInWithGithub = async () => {
@@ -28,7 +28,13 @@ export default async function SignInWithGithub() {
   return (
     <form action={signInWithGithub} className="w-full">
       <Button className="w-full" type="submit">
-        <Image className="mr-2" src={githubLogo} alt="Github Logo" width={20} height={20} />
+        <Image
+          className="mr-2 invert dark:invert-0"
+          src={githubLogo}
+          alt="Github Logo"
+          width={20}
+          height={20}
+        />
         Sign in with Github
       </Button>
     </form>

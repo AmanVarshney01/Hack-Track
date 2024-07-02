@@ -1,15 +1,5 @@
 "use client";
 
-import {
-  ColumnDef,
-  flexRender,
-  SortingState,
-  getCoreRowModel,
-  useReactTable,
-  ColumnFiltersState,
-  getFilteredRowModel,
-  getSortedRowModel,
-} from "@tanstack/react-table";
 import { Card, CardContent } from "@/components/ui/card";
 import {
   Table,
@@ -19,10 +9,20 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import {
+  ColumnDef,
+  ColumnFiltersState,
+  SortingState,
+  flexRender,
+  getCoreRowModel,
+  getFilteredRowModel,
+  getSortedRowModel,
+  useReactTable,
+} from "@tanstack/react-table";
 
 import { Input } from "@/components/ui/input";
-import { useState } from "react";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { useState } from "react";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -58,12 +58,11 @@ export default function TasksTable<TData, TValue>({
           onChange={(event) =>
             table.getColumn("title")?.setFilterValue(event.target.value)
           }
-          className=" w-min max-w-sm"
+          className="w-min max-w-sm"
         />
       </div>
-      {/* FIXME fix overflowing card */}
-      <ScrollArea className=" h-full w-[92vw] self-center rounded-md border md:w-[calc(95vw-12rem)] lg:w-full ">
-        <Card className=" border-0">
+      <ScrollArea className="h-full w-[92vw] self-center rounded-md border md:w-[calc(95vw-12rem)] lg:w-full">
+        <Card className="border-0">
           <CardContent className="p-2">
             <Table className="whitespace-nowrap">
               <TableHeader>

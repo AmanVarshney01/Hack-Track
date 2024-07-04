@@ -2,6 +2,13 @@
 # working directory name when running `supabase init`.
 project_id = "gla-project-tracker"
 
+[auth.external.github]
+enabled = true
+client_id = "env(SUPABASE_AUTH_GITHUB_CLIENT_ID)"
+secret = "env(SUPABASE_AUTH_GITHUB_SECRET)"
+redirect_uri = "http://127.0.0.1:54321/auth/v1/callback"
+
+
 [api]
 enabled = true
 # Port to use for the API URL.
